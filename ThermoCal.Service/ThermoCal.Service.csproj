@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ThermoCal.Repository\ThermoCal.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
