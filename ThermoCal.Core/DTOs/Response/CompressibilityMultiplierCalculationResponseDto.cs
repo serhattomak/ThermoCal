@@ -1,6 +1,6 @@
 ﻿namespace ThermoCal.Core.DTOs;
 
-public class CompressibiltyMultiplierCalculationResponseDto
+public class CompressibilityMultiplierCalculationResponseDto
 {
     public double Z { get; set; }
     public double P { get; set; }
