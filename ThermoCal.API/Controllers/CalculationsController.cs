@@ -59,7 +59,7 @@ namespace ThermoCal.API.Controllers
         private readonly IReducedPressureAndTemperatureService _reducedPressureAndTemperatureService;
         private readonly IRefrigeratorCalculationService _refrigeratorCalculationService;
         private readonly IRefrigeratorEfficiencyService _refrigeratorEfficiencyService;
-        private readonly IReversibleContinousFlowCalculationService _reversibleContinousFlowCalculationService;
+        private readonly IReversibleContinuousFlowCalculationService _reversibleContinousFlowCalculationService;
         private readonly IReversibleWorkCalculationService _reversibleWorkCalculationService;
         private readonly ISpindleWorkService _spindleWorkService;
         private readonly ISpringWorkService _springWorkService;
@@ -110,7 +110,7 @@ namespace ThermoCal.API.Controllers
             IIrreversibilityCalculationService irreversibilityCalculationService,
             IIsentropicPhaseChangeOfPerfectGasesApproximateService
                 isentropicPhaseChangeOfPerfectGasesApproximateService,
-            IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService, IMechanicalWorkService mechanicalWorkService, IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, ISurroundWorkCalculationService surroundWorkCalculationService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService)
+            IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService, IMechanicalWorkService mechanicalWorkService, IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinuousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, ISurroundWorkCalculationService surroundWorkCalculationService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService)
         {
             _accelerationWorkService = accelerationWorkService;
             _adiabaticEfficiencyNozzleService = adiabaticEfficiencyNozzleService;
@@ -510,7 +510,7 @@ namespace ThermoCal.API.Controllers
             return Ok(response);
         }
         [HttpPost]
-        public IActionResult CalculateReversibleContinousFlow([FromBody] ReversibleContinousFlowCalculationRequestDto request)
+        public IActionResult CalculateReversibleContinousFlow([FromBody] ReversibleContinuousFlowCalculationRequestDto request)
         {
             var response = _reversibleContinousFlowCalculationService.Calculate(request);
             return Ok(response);

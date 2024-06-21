@@ -1,6 +1,6 @@
 ﻿namespace ThermoCal.Core.DTOs;
 
-public class ReversibleContinousFlowCalculationResponseDto
+public class ReversibleContinuousFlowCalculationResponseDto
 {
     public double WTr { get; set; }
     public double VSpecific { get; set; }

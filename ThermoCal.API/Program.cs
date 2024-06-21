@@ -61,7 +61,7 @@ builder.Services.AddScoped<IPumpCalculationService, PumpCalculationService>();
 builder.Services.AddScoped<IReducedPressureAndTemperatureService, ReducedPressureAndTemperatureService>();
 builder.Services.AddScoped<IRefrigeratorCalculationService, RefrigeratorCalculationService>();
 builder.Services.AddScoped<IRefrigeratorEfficiencyService, RefrigeratorEfficiencyService>();
-builder.Services.AddScoped<IReversibleContinousFlowCalculationService, ReversibleContinousFlowCalculationService>();
+builder.Services.AddScoped<IReversibleContinuousFlowCalculationService, ReversibleContinuousFlowCalculationService>();
 builder.Services.AddScoped<IReversibleWorkCalculationService, ReversibleWorkCalculationService>();
 builder.Services.AddScoped<ISpindleWorkService, SpindleWorkService>();
 builder.Services.AddScoped<ISpringWorkService, SpringWorkService>();

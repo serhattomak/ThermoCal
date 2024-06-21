@@ -1,0 +1,107 @@
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">İvme İşi</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">İvme İşi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingPressure" placeholder="Basınç">
+                                    <label for="floatingPressure">Basınç(kPa)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingTemperature" placeholder="Sıcaklık">
+                                    <label for="floatingTemperature">Sıcaklık(°C)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingVolumeFluid" placeholder="Özgül Hacim - Sıvı">
+                                    <label for="floatingVolumeFluid">Özgül Hacim - Sıvı(m³/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingVolumeVapor" placeholder="Özgül Hacim - Buhar">
+                                    <label for="floatingVolumeVapor">Özgül Hacim - Buhar(m³/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInternalEnergyFluid" placeholder="İç Enerji - Sıvı">
+                                    <label for="floatingInternalEnergyFluid">İç Enerji - Sıvı(kJ/kg)</label>
+                                </div>
+                            </div><div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInternalEnergyEvap" placeholder="İç Enerji - Buharlaşma">
+                                    <label for="floatingInternalEnergyEvap">İç Enerji - Buharlaşma(kJ/kg)</label>
+                                </div>
+                            </div><div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInternalEnergyVapor" placeholder="İç Enerji - Buhar">
+                                    <label for="floatingInternalEnergyVapor">İç Enerji - Buhar(kJ/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEnthalpyFluid" placeholder="Entalpi - Sıvı">
+                                    <label for="floatingEnthalpyFluid">Entalpi - Sıvı(kJ/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEnthalpyEvap" placeholder="Entalpi - Buharlaşma">
+                                    <label for="floatingEnthalpyEvap">Entalpi - Buharlaşma(kJ/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEnthalpyVapor" placeholder="Entalpi - Buhar">
+                                    <label for="floatingEnthalpyVapor">Entalpi - Buhar(kJ/kg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEntropyFluid" placeholder="Entropi - Sıvı">
+                                    <label for="floatingEntropyFluid">Entropi - Sıvı(kJ/kg.K)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEntropyEvap" placeholder="Entropi - Buharlaşma">
+                                    <label for="floatingEntropyEvap">Entropi - Buharlaşma(kJ/kg.K)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingEntropyVapor" placeholder="Entropi - Buhar">
+                                    <label for="floatingEntropyVapor">Entropi - Buhar(kJ/kg.K)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
