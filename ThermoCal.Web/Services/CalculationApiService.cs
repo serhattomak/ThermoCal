@@ -11,10 +11,10 @@ public class CalculationApiService
         _httpClient = httpClient;
     }
 
-    public async Task<AccelerationWorkResponseDto> CalculateAccelerationWork(AccelerationWorkRequestDto request)
+    public async Task<CustomResponseDto<AccelerationWorkResponseDto>> CalculateAccelerationWork(AccelerationWorkRequestDto request)
     {
         var response = await _httpClient.PostAsJsonAsync("api/calculation", request);
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<AccelerationWorkResponseDto>();
+        return await response.Content.ReadFromJsonAsync<CustomResponseDto<AccelerationWorkResponseDto>>();
     }
 }

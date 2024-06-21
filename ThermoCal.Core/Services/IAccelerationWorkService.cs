@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IAccelerationWorkService
 {
-    AccelerationWorkResponseDto CalculateAccelerationWork(AccelerationWorkRequestDto request);
+    Task<CustomResponseDto<AccelerationWorkResponseDto>> CalculateAccelerationWorkAsync(AccelerationWorkRequestDto request);
 }

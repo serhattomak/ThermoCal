@@ -63,23 +63,333 @@
                 </a>
                 <ul id="calculations-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a asp-controller="Calculation" asp-action="SaturatedWaterTemperature">
-                            <i class="bi bi-circle"></i><span>Doymuş Su - Sıcaklık Hesapları</span>
+                        <a asp-controller="Calculation" asp-action="AccelerationWork">
+                            <i class="bi bi-circle"></i><span>İvme İşi Hesaplama</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="Calculation" asp-action="SaturatedWaterPressure">
-                            <i class="bi bi-circle"></i><span>Doymuş Su - Basınç Hesapları</span>
+                        <a asp-controller="Calculation" asp-action="AdiabaticEfficiencyNozzle">
+                            <i class="bi bi-circle"></i><span>Adyabatik Lüle Verimi Hesaplama</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="Calculation" asp-action="SaturatedR134ATemperature">
-                            <i class="bi bi-circle"></i><span>R134a - Sıcaklık Hesapları</span>
+                        <a asp-controller="Calculation" asp-action="AdiabaticEfficiencyOfCompressor">
+                            <i class="bi bi-circle"></i><span>Adyabatik Kompresör Verimi Hesaplama</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="Calculation" asp-action="SaturatedR134APressure">
-                            <i class="bi bi-circle"></i><span>R134a - Basınç Hesapları</span>
+                        <a asp-controller="Calculation" asp-action="AdiabaticEfficiencyOfPump">
+                            <i class="bi bi-circle"></i><span>Adyabatik Pompa Verimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="AdiabaticEfficiencyOfTurbine">
+                            <i class="bi bi-circle"></i><span>Adyabatik Türbin Verimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="AdiabaticExponent">
+                            <i class="bi bi-circle"></i><span>Adyabatik Üs Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="AdiabaticPhaseChange">
+                            <i class="bi bi-circle"></i><span>Adyabatik Hal Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="CarnotHeatPump">
+                            <i class="bi bi-circle"></i><span>Carnot Isı Pompası Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="CarnotRefrigerator">
+                            <i class="bi bi-circle"></i><span>Carnot Soğutma Makinesi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="CompressibilityMultiplier">
+                            <i class="bi bi-circle"></i><span>Sıkıştırılabilme Çarpanı Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Compressor">
+                            <i class="bi bi-circle"></i><span>Kompresör Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ConstantPressurePhaseChange">
+                            <i class="bi bi-circle"></i><span>Sabit Basınçlı Hal Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ConstantVolumePhaseChange">
+                            <i class="bi bi-circle"></i><span>Sabit Hacimli Hal Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="DegreeOfDryness">
+                            <i class="bi bi-circle"></i><span>Kuruluk Derecesi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Diffuser">
+                            <i class="bi bi-circle"></i><span>Yayıcı Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ElectricalWork">
+                            <i class="bi bi-circle"></i><span>Elektrik İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyBalanceForClosedSystem">
+                            <i class="bi bi-circle"></i><span>Kapalı Sistemler için Entropi Dengesi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyBalanceForControlVolume">
+                            <i class="bi bi-circle"></i><span>Kontrol Hacmi için Entropi Dengesi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyCalculationForSteadyFlowOpenSystem">
+                            <i class="bi bi-circle"></i><span>Düzgün Akışlı Açık Sistemler için Entropi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyCalculationForUniformFlowBalancedOpenSystem">
+                            <i class="bi bi-circle"></i><span>Uniform Akışlı Dengeli Açık Sistemler için Entropi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Entropy">
+                            <i class="bi bi-circle"></i><span>Entropi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyChangeOfLiquid">
+                            <i class="bi bi-circle"></i><span>Sıvılar için Entropi Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyChangeOfPerfectGasesApproximate">
+                            <i class="bi bi-circle"></i><span>Mükemmel Gazlar için Entropi Değişimi Hesaplama - Yaklaşık Çözüm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyChangeOfPerfectGasesExact">
+                            <i class="bi bi-circle"></i><span>Mükemmel Gazlar için Entropi Değişimi Hesaplama - Tam Çözüm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyChangeOfPure">
+                            <i class="bi bi-circle"></i><span>Saf Maddeler için Entropi Değişimini Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="EntropyChangeOfSolid">
+                            <i class="bi bi-circle"></i><span>Katılar için Entropi Değişimini Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Exergy">
+                            <i class="bi bi-circle"></i><span>Ekserji Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="FlexibleRodWork">
+                            <i class="bi bi-circle"></i><span>Esnek Çubuklar için İş Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="FlowCalculationInDuct">
+                            <i class="bi bi-circle"></i><span>Kanal Akışlarında Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="FlowCalculationInPipe">
+                            <i class="bi bi-circle"></i><span>Boru Akışlarında Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="FlowWork">
+                            <i class="bi bi-circle"></i><span>Akış İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="GibbsEquation">
+                            <i class="bi bi-circle"></i><span>Gibbs Denklemlerinde Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="GravityWork">
+                            <i class="bi bi-circle"></i><span>Yerçekimi İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="HeatAndHeatTransfer">
+                            <i class="bi bi-circle"></i><span>Isı ve Isı Transferi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="HeatEngine">
+                            <i class="bi bi-circle"></i><span>Isı Makineleri için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="HeatExchangers">
+                            <i class="bi bi-circle"></i><span>Isı Değiştiricileri için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="HeatPumpEfficiency">
+                            <i class="bi bi-circle"></i><span>Isı Pompasında Verim Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="IdealGas">
+                            <i class="bi bi-circle"></i><span>İdeal Gaz Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Irreversibility">
+                            <i class="bi bi-circle"></i><span>Tersinirlik Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="IsentropicPhaseChangeOfPerfectGasesApproximate">
+                            <i class="bi bi-circle"></i><span>Mükemmel Gazlar için İzantropik Hal Değişimi Hesaplama - Yaklaşık Çözüm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="IsentropicPhaseChangeOfPerfectGasesExact">
+                            <i class="bi bi-circle"></i><span>Mükemmel Gazlar için İzantropik Hal Değişimi Hesaplama - Tam Çözüm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="IsothermalPhaseChange">
+                            <i class="bi bi-circle"></i><span>İzotermal Hal Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="MassFlow">
+                            <i class="bi bi-circle"></i><span>Kütlesel Debi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="MechanicalWork">
+                            <i class="bi bi-circle"></i><span>Mekanik İş Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="MinimizeCompressorWork">
+                            <i class="bi bi-circle"></i><span>Kompresör İşini En Aza İndirme Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="MixingChamber">
+                            <i class="bi bi-circle"></i><span>Karışma Odaları için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Nozzle">
+                            <i class="bi bi-circle"></i><span>Lüle Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="PolytropicPhaseChange">
+                            <i class="bi bi-circle"></i><span>Politropik Hal Değişimi Hesaplama</span>
+                        </a>
+                    </li>
+                <li>
+                        <a asp-controller="Calculation" asp-action="Pressure">
+                            <i class="bi bi-circle"></i><span>Basınç Hesaplama</span>
+                    </a>
+                </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Pump">
+                            <i class="bi bi-circle"></i><span>Pompa Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ReducedPressureAndTemperature">
+                            <i class="bi bi-circle"></i><span>İndirgenmiş Basınç ve Sıcaklık Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Refrigerator">
+                            <i class="bi bi-circle"></i><span>Soğutma Makinesi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="RefrigeratorEfficiency">
+                            <i class="bi bi-circle"></i><span>Soğutma Makineleri için Verim Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ReversibleContinuousFlow">
+                            <i class="bi bi-circle"></i><span>Tersinir Sürekli Akışlar için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ReversibleWork">
+                            <i class="bi bi-circle"></i><span>Tersinir İş Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="SpindleWork">
+                            <i class="bi bi-circle"></i><span>Mil İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="SpringWork">
+                            <i class="bi bi-circle"></i><span>Yay İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="SteadyFlow">
+                            <i class="bi bi-circle"></i><span>Düzgün Akışlar için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="StressCalculationOfLiquidSurface">
+                            <i class="bi bi-circle"></i><span>Sıvı Yüzeyler için Gerilme Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="SurroundWork">
+                            <i class="bi bi-circle"></i><span>Çevre İşi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="ThrottleValve">
+                            <i class="bi bi-circle"></i><span>Kısılma Vanası için Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="Turbine">
+                            <i class="bi bi-circle"></i><span>Türbin Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="UsefulWork">
+                            <i class="bi bi-circle"></i><span>Yararlı İş Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="VolumetricFlow">
+                            <i class="bi bi-circle"></i><span>Hacimsel Debi Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="WorkConsumingDeviceEfficiency">
+                            <i class="bi bi-circle"></i><span>İş Tüketen Makineler için Verim Hesaplama</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Calculation" asp-action="WorkProducingDeviceEfficiency">
+                            <i class="bi bi-circle"></i><span>İş Üreten Makineler için Verim Hesaplama</span>
                         </a>
                     </li>
                 </ul>

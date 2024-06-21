@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ThermoCal.Core.DTOs;
 using ThermoCal.Web.Services;
 
 namespace ThermoCal.Web.Controllers
@@ -12,9 +13,22 @@ namespace ThermoCal.Web.Controllers
             _calculationApiService = calculationApiService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> AccelerationWork()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AccelerationWork([FromBody] AccelerationWorkRequestDto request)
+        {
+            var response = await _calculationApiService.CalculateAccelerationWork(request);
+
+            if (response.StatusCode == 200)
+            {
+                return Ok(response);
+            }
+
+            return StatusCode(response.StatusCode, response.Errors);
         }
     }
 }

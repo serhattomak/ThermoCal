@@ -187,10 +187,10 @@ namespace ThermoCal.API.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CalculateAccelerationWork([FromBody] AccelerationWorkRequestDto request)
+        public async Task<IActionResult> CalculateAccelerationWork([FromBody] AccelerationWorkRequestDto request)
         {
-            var response = _accelerationWorkService.CalculateAccelerationWork(request);
-            return Ok(response);
+            var response = await _accelerationWorkService.CalculateAccelerationWorkAsync(request);
+            return StatusCode(response.StatusCode, response);
         }
         [HttpPost]
         public IActionResult CalculateAdiabaticEfficiencyNozzle([FromBody] AdiabaticEfficiencyNozzleRequestDto request)
