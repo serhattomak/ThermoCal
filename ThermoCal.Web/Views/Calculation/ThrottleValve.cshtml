@@ -1,5 +1,79 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Kısılma Vanası için Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kısılma Vanası için Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="throttleValveCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="uFirst" name="UFirst" placeholder="İlk İç Enerji (UFirst)">
+                                    <label for="uFirst">İlk İç Enerji (UFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="uSecond" name="USecond" placeholder="İkinci İç Enerji (USecond)">
+                                    <label for="uSecond">İkinci İç Enerji (USecond)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (PFirst)">
+                                    <label for="pFirst">İlk Basınç (PFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (PSecond)">
+                                    <label for="pSecond">İkinci Basınç (PSecond)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
+                                    <label for="vSpecificFirst">İlk Özgül Hacim (VSpecificFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
+                                    <label for="vSpecificSecond">İkinci Özgül Hacim (VSpecificSecond)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (HFirst)">
+                                    <label for="hFirst">İlk Entalpi (HFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (HSecond)">
+                                    <label for="hSecond">İkinci Entalpi (HSecond)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

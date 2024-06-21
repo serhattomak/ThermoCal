@@ -1,5 +1,73 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Elektrik İşi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Elektrik İşi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="work" placeholder="İş (W)">
+                                    <label for="work">W (İş)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="heat" placeholder="Isı (Q)">
+                                    <label for="heat">Isı (Q)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="volt" placeholder="Volt (V)">
+                                    <label for="volt">Volt (V)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="current" placeholder="Akım (i)">
+                                    <label for="current">Akım (i)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="resistance" placeholder="Direnç (R)">
+                                    <label for="resistance">Direnç (R)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="timeFirst" placeholder="İlk Hız">
+                                    <label for="timeFirst">İlk Zaman(t1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="timeSecond" placeholder="Son Hız">
+                                    <label for="timeSecond">Son Zaman(t2)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,5 +1,109 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Kanal Akışlarında Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kanal Akışlarında Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="flowCalculationInDuctForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qDot" name="QDot" placeholder="Isı Transfer Oranı (Q̇)">
+                                    <label for="qDot">Isı Transfer Oranı (Q̇)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wDot" name="WDot" placeholder="İş Transfer Oranı (Ẇ)">
+                                    <label for="wDot">İş Transfer Oranı (Ẇ)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mDot" name="MDot" placeholder="Kütlesel Debi (ṁ)">
+                                    <label for="mDot">Kütlesel Debi (ṁ)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Enthalpi (H1)">
+                                    <label for="hFirst">İlk Enthalpi (H1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Enthalpi (H2)">
+                                    <label for="hSecond">İkinci Enthalpi (H2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="volumeDot" name="VolumeDot" placeholder="Hacim Debisi (V̇)">
+                                    <label for="volumeDot">Hacim Debisi (V̇)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="volumeSpecific" name="VolumeSpecific" placeholder="Özgül Hacim (v)">
+                                    <label for="volumeSpecific">Özgül Hacim (v)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cp" name="Cp" placeholder="Özgül Isı (Cp)">
+                                    <label for="cp">Özgül Isı (Cp)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tFirst" name="TFirst" placeholder="İlk Sıcaklık (T1)">
+                                    <label for="tFirst">İlk Sıcaklık (T1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tSecond" name="TSecond" placeholder="İkinci Sıcaklık (T2)">
+                                    <label for="tSecond">İkinci Sıcaklık (T2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (P1)">
+                                    <label for="pFirst">İlk Basınç (P1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (P2)">
+                                    <label for="pSecond">İkinci Basınç (P2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="r" name="R" placeholder="Gaz Sabiti (R)">
+                                    <label for="r">Gaz Sabiti (R)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

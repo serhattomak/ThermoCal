@@ -1,5 +1,127 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Entropi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Entropi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wB" placeholder="Bileşik Sistem İşi (Wb)">
+                                    <label for="wB">Bileşik Sistem İşi (Wb)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="temperature" placeholder="T">
+                                    <label for="temperature">T</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="temperatureZero" placeholder="T0">
+                                    <label for="temperatureZero">T0</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="temperatureL" placeholder="Tl">
+                                    <label for="temperatureL">Tl</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="temperatureH" placeholder="Th">
+                                    <label for="temperatureH">Th</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="temperatureR" placeholder="Tr">
+                                    <label for="temperatureR">Tr</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="heatL" placeholder="Ql">
+                                    <label for="heatL">Ql</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="heatH" placeholder="Qh">
+                                    <label for="heatH">Qh</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="heatR" placeholder="Qr">
+                                    <label for="heatR">Qr</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="heatNet" placeholder="Qnet">
+                                    <label for="heatNet">Qnet</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="entrophy" placeholder="Entropi (S)">
+                                    <label for="entrophy">Entropi (S)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sFirst" placeholder="Entropi (S1)">
+                                    <label for="sFirst">Entropi (S1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sSecond" placeholder="Entropi (S2)">
+                                    <label for="sSecond">Entropi (S2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="efficiency" placeholder="Verimlilik">
+                                    <label for="efficiency">Verimlilik</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mass" placeholder="Kütle (m)">
+                                    <label for="mass">Kütle (m)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cV" placeholder="Özgül Isı (Cv)">
+                                    <label for="cV">Özgül Isı (Cv)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

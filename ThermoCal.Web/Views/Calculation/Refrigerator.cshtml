@@ -1,5 +1,121 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Soğutma Makinesi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Soğutma Makinesi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="refrigeratorCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik (Efficiency)">
+                                    <label for="efficiency">Verimlilik (Efficiency)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="copHeat" name="COPHeat" placeholder="Isı Pompası COP (COPHeat)">
+                                    <label for="copHeat">Isı Pompası COP (COPHeat)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="copRef" name="COPRef" placeholder="Soğutma COP (COPRef)">
+                                    <label for="copRef">Soğutma COP (COPRef)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
+                                    <label for="q">Isı (Q)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
+                                    <label for="w">İş (W)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qh" name="Qh" placeholder="Yüksek Sıcaklıktaki Isı (Qh)">
+                                    <label for="qh">Yüksek Sıcaklıktaki Isı (Qh)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="ql" name="Ql" placeholder="Düşük Sıcaklıktaki Isı (Ql)">
+                                    <label for="ql">Düşük Sıcaklıktaki Isı (Ql)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="th" name="Th" placeholder="Yüksek Sıcaklık (Th)">
+                                    <label for="th">Yüksek Sıcaklık (Th)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tl" name="Tl" placeholder="Düşük Sıcaklık (Tl)">
+                                    <label for="tl">Düşük Sıcaklık (Tl)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wIn" name="WIn" placeholder="Giren İş (WIn)">
+                                    <label for="wIn">Giren İş (WIn)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wOut" name="WOut" placeholder="Çıkan İş (WOut)">
+                                    <label for="wOut">Çıkan İş (WOut)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wNet" name="WNet" placeholder="Net İş (WNet)">
+                                    <label for="wNet">Net İş (WNet)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qIn" name="QIn" placeholder="Giren Isı (QIn)">
+                                    <label for="qIn">Giren Isı (QIn)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qOut" name="QOut" placeholder="Çıkan Isı (QOut)">
+                                    <label for="qOut">Çıkan Isı (QOut)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qNet" name="QNet" placeholder="Net Isı (QNet)">
+                                    <label for="qNet">Net Isı (QNet)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

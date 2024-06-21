@@ -1,5 +1,73 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Çevre İşi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Çevre İşi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="surroundWorkCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wSur" name="WSur" placeholder="Çevre İşi (WSur)">
+                                    <label for="wSur">Çevre İşi (WSur)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
+                                    <label for="m">Kütle (M)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="p0" name="P0" placeholder="Başlangıç Basıncı (P0)">
+                                    <label for="p0">Başlangıç Basıncı (P0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (VFirst)">
+                                    <label for="vFirst">İlk Hacim (VFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (VSecond)">
+                                    <label for="vSecond">İkinci Hacim (VSecond)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
+                                    <label for="vSpecificFirst">İlk Özgül Hacim (VSpecificFirst)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
+                                    <label for="vSpecificSecond">İkinci Özgül Hacim (VSpecificSecond)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

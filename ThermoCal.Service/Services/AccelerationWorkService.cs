@@ -7,7 +7,7 @@ public class AccelerationWorkService: IAccelerationWorkService
 {
     public Task<CustomResponseDto<AccelerationWorkResponseDto>> CalculateAccelerationWorkAsync(AccelerationWorkRequestDto request)
     {
-        double work = CalculateAccelerationWork(request);
+        var work = CalculateAccelerationWork(request);
 
         var responseDto = new AccelerationWorkResponseDto
         {

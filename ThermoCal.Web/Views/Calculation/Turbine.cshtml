@@ -1,5 +1,103 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Türbin Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Türbin Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="turbineCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wmDot" name="WMDot" placeholder="Kütlesel Akış İş Oranı (Ẇ/ṁ)">
+                                    <label for="wmDot">Kütlesel Akış İş Oranı (Ẇ/ṁ)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mDot" name="MDot" placeholder="Kütlesel Akış Oranı (ṁ)">
+                                    <label for="mDot">Kütlesel Akış Oranı (ṁ)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mDotFirst" name="MDotFirst" placeholder="İlk Kütlesel Akış Oranı (ṁ1)">
+                                    <label for="mDotFirst">İlk Kütlesel Akış Oranı (ṁ1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mDotSecond" name="MDotSecond" placeholder="İkinci Kütlesel Akış Oranı (ṁ2)">
+                                    <label for="mDotSecond">İkinci Kütlesel Akış Oranı (ṁ2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="densityFirst" name="DensityFirst" placeholder="İlk Yoğunluk (ρ1)">
+                                    <label for="densityFirst">İlk Yoğunluk (ρ1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="densitySecond" name="DensitySecond" placeholder="İkinci Yoğunluk (ρ2)">
+                                    <label for="densitySecond">İkinci Yoğunluk (ρ2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="aFirst" name="AFirst" placeholder="İlk Alan (A1)">
+                                    <label for="aFirst">İlk Alan (A1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="aSecond" name="ASecond" placeholder="İkinci Alan (A2)">
+                                    <label for="aSecond">İkinci Alan (A2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
+                                    <label for="vFirst">İlk Hacim (V1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
+                                    <label for="vSecond">İkinci Hacim (V2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (H1)">
+                                    <label for="hFirst">İlk Entalpi (H1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (H2)">
+                                    <label for="hSecond">İkinci Entalpi (H2)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

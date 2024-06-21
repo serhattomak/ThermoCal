@@ -6,11 +6,13 @@ namespace ThermoCal.Web.Controllers
 {
     public class CalculationController : Controller
     {
+        private readonly ILogger<CalculationController> _logger;
         private readonly CalculationApiService _calculationApiService;
 
-        public CalculationController(CalculationApiService calculationApiService)
+        public CalculationController(CalculationApiService calculationApiService, ILogger<CalculationController> logger)
         {
             _calculationApiService = calculationApiService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> AccelerationWork()
@@ -21,14 +23,23 @@ namespace ThermoCal.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AccelerationWork([FromBody] AccelerationWorkRequestDto request)
         {
-            var response = await _calculationApiService.CalculateAccelerationWork(request);
-
-            if (response.StatusCode == 200)
+            try
             {
-                return Ok(response);
-            }
+                var response = await _calculationApiService.CalculateAccelerationWork(request);
 
-            return StatusCode(response.StatusCode, response.Errors);
+                if (response.StatusCode == 200)
+                {
+                    return Ok(response);
+                }
+
+                return StatusCode(response.StatusCode, response.Errors);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while calculating acceleration work.");
+
+                return StatusCode(500, e.Message);
+            }
         }
     }
 }

@@ -4,8 +4,11 @@ using ThermoCal.Core.Services;
 
 namespace ThermoCal.API.Controllers
 {
-    public class CalculationsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CalculationController : Controller
     {
+        private readonly ILogger<CalculationController> _logger;
         private readonly IAccelerationWorkService _accelerationWorkService;
         private readonly IAdiabaticEfficiencyNozzleService _adiabaticEfficiencyNozzleService;
         private readonly IAdiabaticEfficiencyOfCompressorService _adiabaticEfficiencyOfCompressorService;
@@ -73,7 +76,7 @@ namespace ThermoCal.API.Controllers
         private readonly IWorkConsumingDeviceEfficiencyService _workConsumingDeviceEfficiencyService;
         private readonly IWorkProducingDeviceEfficiencyService _workProducingDeviceEfficiencyService;
 
-        public CalculationsController(IAccelerationWorkService accelerationWorkService,
+        public CalculationController(IAccelerationWorkService accelerationWorkService,
             IAdiabaticEfficiencyNozzleService adiabaticEfficiencyNozzleService,
             IAdiabaticEfficiencyOfCompressorService adiabaticEfficiencyOfCompressorService,
             IAdiabaticEfficiencyOfPumpService adiabaticEfficiencyOfPumpService,
@@ -110,7 +113,7 @@ namespace ThermoCal.API.Controllers
             IIrreversibilityCalculationService irreversibilityCalculationService,
             IIsentropicPhaseChangeOfPerfectGasesApproximateService
                 isentropicPhaseChangeOfPerfectGasesApproximateService,
-            IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService, IMechanicalWorkService mechanicalWorkService, IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinuousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, ISurroundWorkCalculationService surroundWorkCalculationService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService)
+            IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService, IMechanicalWorkService mechanicalWorkService, IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinuousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, ISurroundWorkCalculationService surroundWorkCalculationService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService, ILogger<CalculationController> logger)
         {
             _accelerationWorkService = accelerationWorkService;
             _adiabaticEfficiencyNozzleService = adiabaticEfficiencyNozzleService;
@@ -180,17 +183,26 @@ namespace ThermoCal.API.Controllers
             _volumetricFlowService = volumetricFlowService;
             _workConsumingDeviceEfficiencyService = workConsumingDeviceEfficiencyService;
             _workProducingDeviceEfficiencyService = workProducingDeviceEfficiencyService;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("accelerationwork")]
         public async Task<IActionResult> CalculateAccelerationWork([FromBody] AccelerationWorkRequestDto request)
         {
-            var response = await _accelerationWorkService.CalculateAccelerationWorkAsync(request);
-            return StatusCode(response.StatusCode, response);
+            try
+            {
+                var response = await _accelerationWorkService.CalculateAccelerationWorkAsync(request);
+                return StatusCode(response.StatusCode, response);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred while calculating acceleration work.");
+                return StatusCode(500, e.Message);
+            }
         }
         [HttpPost]
         public IActionResult CalculateAdiabaticEfficiencyNozzle([FromBody] AdiabaticEfficiencyNozzleRequestDto request)

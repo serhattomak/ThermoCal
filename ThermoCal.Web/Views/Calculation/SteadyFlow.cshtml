@@ -1,5 +1,121 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Sabit Akış Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sabit Akış Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="steadyFlowCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
+                                    <label for="q">Isı (Q)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
+                                    <label for="w">İş (W)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="eFirst" name="EFirst" placeholder="İlk Enerji (E1)">
+                                    <label for="eFirst">İlk Enerji (E1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="eSecond" name="ESecond" placeholder="İkinci Enerji (E2)">
+                                    <label for="eSecond">İkinci Enerji (E2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mFirst" name="MFirst" placeholder="İlk Kütle (M1)">
+                                    <label for="mFirst">İlk Kütle (M1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mSecond" name="MSecond" placeholder="İkinci Kütle (M2)">
+                                    <label for="mSecond">İkinci Kütle (M2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hIn" name="HIn" placeholder="Giriş Entalpisi (Hin)">
+                                    <label for="hIn">Giriş Entalpisi (Hin)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="hOut" name="HOut" placeholder="Çıkış Entalpisi (Hout)">
+                                    <label for="hOut">Çıkış Entalpisi (Hout)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vIn" name="VIn" placeholder="Giriş Hacmi (Vin)">
+                                    <label for="vIn">Giriş Hacmi (Vin)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vOut" name="VOut" placeholder="Çıkış Hacmi (Vout)">
+                                    <label for="vOut">Çıkış Hacmi (Vout)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="zIn" name="ZIn" placeholder="Giriş Yüksekliği (Zin)">
+                                    <label for="zIn">Giriş Yüksekliği (Zin)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="zOut" name="ZOut" placeholder="Çıkış Yüksekliği (Zout)">
+                                    <label for="zOut">Çıkış Yüksekliği (Zout)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="g" name="G" placeholder="Yerçekimi İvmesi (G)">
+                                    <label for="g">Yerçekimi İvmesi (G)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mIn" name="MIn" placeholder="Giriş Kütlesi (Min)">
+                                    <label for="mIn">Giriş Kütlesi (Min)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="mOut" name="MOut" placeholder="Çıkış Kütlesi (Mout)">
+                                    <label for="mOut">Çıkış Kütlesi (Mout)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

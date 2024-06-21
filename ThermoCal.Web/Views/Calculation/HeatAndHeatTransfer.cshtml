@@ -1,5 +1,187 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Isı ve Isı Transferi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Isı ve Isı Transferi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="heatAndHeatTransferForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
+                                    <label for="q">Isı (Q)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qConduction" name="QConduction" placeholder="İletim Isısı (QConduction)">
+                                    <label for="qConduction">İletim Isısı (QConduction)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qConductionDot" name="QConductionDot" placeholder="İletim Isısı Oranı (Q̇Conduction)">
+                                    <label for="qConductionDot">İletim Isısı Oranı (Q̇Conduction)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qConvection" name="QConvection" placeholder="Konveksiyon Isısı (QConvection)">
+                                    <label for="qConvection">Konveksiyon Isısı (QConvection)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qConvectionDot" name="QConvectionDot" placeholder="Konveksiyon Isısı Oranı (Q̇Convection)">
+                                    <label for="qConvectionDot">Konveksiyon Isısı Oranı (Q̇Convection)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qRadiation" name="QRadiation" placeholder="Radyasyon Isısı (QRadiation)">
+                                    <label for="qRadiation">Radyasyon Isısı (QRadiation)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qRadiationDot" name="QRadiationDot" placeholder="Radyasyon Isısı Oranı (Q̇Radiation)">
+                                    <label for="qRadiationDot">Radyasyon Isısı Oranı (Q̇Radiation)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qDot" name="QDot" placeholder="Isı Transfer Oranı (Q̇)">
+                                    <label for="qDot">Isı Transfer Oranı (Q̇)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
+                                    <label for="m">Kütle (M)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="k" name="K" placeholder="Isıl İletkenlik (k)">
+                                    <label for="k">Isıl İletkenlik (k)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sigma" name="Sigma" placeholder="Stefan-Boltzmann Sabiti (σ)">
+                                    <label for="sigma">Stefan-Boltzmann Sabiti (σ)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="epsilon" name="Epsilon" placeholder="Emissivity (ε)">
+                                    <label for="epsilon">Emissivity (ε)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="a" name="A" placeholder="Alan (A)">
+                                    <label for="a">Alan (A)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="time" name="Time" placeholder="Zaman (t)">
+                                    <label for="time">Zaman (t)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="timeFirst" name="TimeFirst" placeholder="İlk Zaman (t1)">
+                                    <label for="timeFirst">İlk Zaman (t1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="timeSecond" name="TimeSecond" placeholder="İkinci Zaman (t2)">
+                                    <label for="timeSecond">İkinci Zaman (t2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
+                                    <label for="t">Sıcaklık (T)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tFirst" name="TFirst" placeholder="İlk Sıcaklık (T1)">
+                                    <label for="tFirst">İlk Sıcaklık (T1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tSecond" name="TSecond" placeholder="İkinci Sıcaklık (T2)">
+                                    <label for="tSecond">İkinci Sıcaklık (T2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tSurface" name="TSurface" placeholder="Yüzey Sıcaklığı (Tsurface)">
+                                    <label for="tSurface">Yüzey Sıcaklığı (Tsurface)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tEnvironment" name="TEnvironment" placeholder="Çevre Sıcaklığı (Tenvironment)">
+                                    <label for="tEnvironment">Çevre Sıcaklığı (Tenvironment)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tFluid" name="TFluid" placeholder="Akışkan Sıcaklığı (Tfluid)">
+                                    <label for="tFluid">Akışkan Sıcaklığı (Tfluid)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tAbsolute" name="TAbsolute" placeholder="Mutlak Sıcaklık (Tabs)">
+                                    <label for="tAbsolute">Mutlak Sıcaklık (Tabs)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="x" name="X" placeholder="Mesafe (x)">
+                                    <label for="x">Mesafe (x)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="xFirst" name="XFirst" placeholder="İlk Mesafe (x1)">
+                                    <label for="xFirst">İlk Mesafe (x1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="xSecond" name="XSecond" placeholder="İkinci Mesafe (x2)">
+                                    <label for="xSecond">İkinci Mesafe (x2)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,5 +1,109 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Katılar için Entropi Değişimini Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Katılar için Entropi Değişimini Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="entropyChangeSolidForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="c" name="C" placeholder="C">
+                                    <label for="c">C</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cAverage" name="CAverage" placeholder="Ortalama C">
+                                    <label for="cAverage">Ortalama C</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cv" name="Cv" placeholder="Cv">
+                                    <label for="cv">Cv</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cp" name="Cp" placeholder="Cp">
+                                    <label for="cp">Cp</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
+                                    <label for="t">Sıcaklık (T)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tFirst" name="TFirst" placeholder="İlk Sıcaklık (T1)">
+                                    <label for="tFirst">İlk Sıcaklık (T1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tSecond" name="TSecond" placeholder="İkinci Sıcaklık (T2)">
+                                    <label for="tSecond">İkinci Sıcaklık (T2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="s" name="S" placeholder="Entropi (S)">
+                                    <label for="s">Entropi (S)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sFirst" name="SFirst" placeholder="İlk Entropi (S1)">
+                                    <label for="sFirst">İlk Entropi (S1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sSecond" name="SSecond" placeholder="İkinci Entropi (S2)">
+                                    <label for="sSecond">İkinci Entropi (S2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="u" name="U" placeholder="İç Enerji (U)">
+                                    <label for="u">İç Enerji (U)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="uFirst" name="UFirst" placeholder="İlk İç Enerji (U1)">
+                                    <label for="uFirst">İlk İç Enerji (U1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="uSecond" name="USecond" placeholder="İkinci İç Enerji (U2)">
+                                    <label for="uSecond">İkinci İç Enerji (U2)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -3,7 +3,10 @@ using ThermoCal.Web.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddHttpClient<CalculationApiService>();
+builder.Services.AddHttpClient<CalculationApiService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7228/");
+});
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

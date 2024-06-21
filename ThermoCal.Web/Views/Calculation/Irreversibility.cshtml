@@ -1,5 +1,139 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Tersinirlik Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tersinirlik Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="irreversibilityCalculationForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="i" name="I" placeholder="Geri Dönüşsüzlük (I)">
+                                    <label for="i">Geri Dönüşsüzlük (I)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="iDot" name="IDot" placeholder="Geri Dönüşsüzlük Oranı (Į)">
+                                    <label for="iDot">Geri Dönüşsüzlük Oranı (Į)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wRev" name="WRev" placeholder="Reversible Work (WRev)">
+                                    <label for="wRev">Reversible Work (WRev)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="wSur" name="WSur" placeholder="Surroundings Work (WSur)">
+                                    <label for="wSur">Surroundings Work (WSur)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="exergy" name="Exergy" placeholder="Ekserji (Exergy)">
+                                    <label for="exergy">Ekserji (Exergy)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="u" name="U" placeholder="İç Enerji (U)">
+                                    <label for="u">İç Enerji (U)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="u0" name="U0" placeholder="Referans İç Enerji (U0)">
+                                    <label for="u0">Referans İç Enerji (U0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="t0" name="T0" placeholder="Referans Sıcaklık (T0)">
+                                    <label for="t0">Referans Sıcaklık (T0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="s" name="S" placeholder="Entropi (S)">
+                                    <label for="s">Entropi (S)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="s0" name="S0" placeholder="Referans Entropi (S0)">
+                                    <label for="s0">Referans Entropi (S0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="p0" name="P0" placeholder="Referans Basınç (P0)">
+                                    <label for="p0">Referans Basınç (P0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="v" name="V" placeholder="Hacim (V)">
+                                    <label for="v">Hacim (V)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="v0" name="V0" placeholder="Referans Hacim (V0)">
+                                    <label for="v0">Referans Hacim (V0)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
+                                    <label for="m">Kütle (M)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
+                                    <label for="vFirst">İlk Hacim (V1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
+                                    <label for="vSecond">İkinci Hacim (V2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (v1)">
+                                    <label for="vSpecificFirst">İlk Özgül Hacim (v1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (v2)">
+                                    <label for="vSpecificSecond">İkinci Özgül Hacim (v2)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

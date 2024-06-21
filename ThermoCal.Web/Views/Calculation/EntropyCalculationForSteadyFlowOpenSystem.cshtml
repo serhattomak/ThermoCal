@@ -1,6 +1,127 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Düzgün Akışlı Açık Sistemler için Entropi Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Düzgün Akışlı Açık Sistemler için Entropi Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="calculationForm">
+                            <!-- Common Fields -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sGenDot" name="SGenDot" placeholder="Entropi Jenerasyonu Oranı (ṠGen)">
+                                    <label for="sGenDot">Entropi Jenerasyonu Oranı (ṠGen)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sGen" name="SGen" placeholder="Entropi Jenerasyonu (SGen)">
+                                    <label for="sGen">Entropi Jenerasyonu (SGen)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sGenCV" name="SGenCV" placeholder="Entropi Jenerasyonu (SGenCV)">
+                                    <label for="sGenCV">Entropi Jenerasyonu (SGenCV)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sGenCVDot" name="SGenCVDot" placeholder="Entropi Jenerasyonu Oranı (ṠGenCV)">
+                                    <label for="sGenCVDot">Entropi Jenerasyonu Oranı (ṠGenCV)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sIn" name="SIn" placeholder="Entropi (S,giren)">
+                                    <label for="sIn">Entropi (S,giren)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sOut" name="SOut" placeholder="Entropi (S,çıkan)">
+                                    <label for="sOut">Entropi (S,çıkan)</label>
+                                </div>
+                            </div>
+
+                            <!-- Fields Specific to EntropyCalculationForSteadyFlowOpenSystemRequestDto -->
+                            <div class="entropy-steady-flow-fields">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="mdot" name="MDot" placeholder="Kütlesel Debi (ṁ)">
+                                        <label for="mdot">Kütlesel Debi (ṁ)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="minDot" name="MInDot" placeholder="Kütlesel Debi Giriş (ṁ,in)">
+                                        <label for="minDot">Kütlesel Debi Giriş (ṁ,in)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="moutDot" name="MOutDot" placeholder="Kütlesel Debi Çıkış (ṁ,out)">
+                                        <label for="moutDot">Kütlesel Debi Çıkış (ṁ,out)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="qrDot" name="QrDot" placeholder="Isı (Q̇r)">
+                                        <label for="qrDot">Isı (Q̇r)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="qinDot" name="QInDot" placeholder="Isı Giriş (Q̇in)">
+                                        <label for="qinDot">Isı Giriş (Q̇in)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="qoutDot" name="QOutDot" placeholder="Isı Çıkış (Q̇out)">
+                                        <label for="qoutDot">Isı Çıkış (Q̇out)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="tr" name="Tr" placeholder="Sıcaklık (Tr)">
+                                        <label for="tr">Sıcaklık (Tr)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="tout" name="TOut" placeholder="Sıcaklık Çıkış (Tout)">
+                                        <label for="tout">Sıcaklık Çıkış (Tout)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="tsur" name="TSur" placeholder="Sıcaklık Çevre (Tsur)">
+                                        <label for="tsur">Sıcaklık Çevre (Tsur)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

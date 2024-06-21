@@ -1,5 +1,79 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">İndirgenmiş Basınç ve Sıcaklık Hesaplama</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">İndirgenmiş Basınç ve Sıcaklık Hesaplama</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="reducedPressureAndTemperatureForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="p" name="P" placeholder="Basınç (P)">
+                                    <label for="p">Basınç (P)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pr" name="Pr" placeholder="İndirgenmiş Basınç (Pr)">
+                                    <label for="pr">İndirgenmiş Basınç (Pr)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pCr" name="PCr" placeholder="Kritik Basınç (PCr)">
+                                    <label for="pCr">Kritik Basınç (PCr)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
+                                    <label for="t">Sıcaklık (T)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tr" name="Tr" placeholder="İndirgenmiş Sıcaklık (Tr)">
+                                    <label for="tr">İndirgenmiş Sıcaklık (Tr)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tCr" name="TCr" placeholder="Kritik Sıcaklık (TCr)">
+                                    <label for="tCr">Kritik Sıcaklık (TCr)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificR" name="VSpecificR" placeholder="İndirgenmiş Özgül Hacim (vR)">
+                                    <label for="vSpecificR">İndirgenmiş Özgül Hacim (vR)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificActual" name="VSpecificActual" placeholder="Gerçek Özgül Hacim (v)">
+                                    <label for="vSpecificActual">Gerçek Özgül Hacim (v)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

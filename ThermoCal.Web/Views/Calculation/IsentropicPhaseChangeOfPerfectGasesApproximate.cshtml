@@ -1,5 +1,139 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Hesaplama</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item">Hesaplama</li>
+                <li class="breadcrumb-item active">Mükemmel Gazların İzentropik Faz Değişimi Hesaplama - Yaklaşık</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mükemmel Gazların İzsentropik Faz Değişimi Hesaplama - Yaklaşık</h5>
+
+                        <!-- Floating Labels Form -->
+                        <form class="row g-3" id="isentropicPhaseChangeApproximateForm">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
+                                    <label for="t">Sıcaklık (T)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tFirst" name="TFirst" placeholder="İlk Sıcaklık (T1)">
+                                    <label for="tFirst">İlk Sıcaklık (T1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="tSecond" name="TSecond" placeholder="İkinci Sıcaklık (T2)">
+                                    <label for="tSecond">İkinci Sıcaklık (T2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="p" name="P" placeholder="Basınç (P)">
+                                    <label for="p">Basınç (P)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (P1)">
+                                    <label for="pFirst">İlk Basınç (P1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (P2)">
+                                    <label for="pSecond">İkinci Basınç (P2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="v" name="V" placeholder="Hacim (V)">
+                                    <label for="v">Hacim (V)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecific" name="VSpecific" placeholder="Özgül Hacim (v)">
+                                    <label for="vSpecific">Özgül Hacim (v)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (v1)">
+                                    <label for="vSpecificFirst">İlk Özgül Hacim (v1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (v2)">
+                                    <label for="vSpecificSecond">İkinci Özgül Hacim (v2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="r" name="R" placeholder="Gaz Sabiti (R)">
+                                    <label for="r">Gaz Sabiti (R)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="k" name="K" placeholder="İzotermal Sıkışabilirlik (k)">
+                                    <label for="k">İzotermal Sıkışabilirlik (k)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="s" name="S" placeholder="Entropi (S)">
+                                    <label for="s">Entropi (S)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sFirst" name="SFirst" placeholder="İlk Entropi (S1)">
+                                    <label for="sFirst">İlk Entropi (S1)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="sSecond" name="SSecond" placeholder="İkinci Entropi (S2)">
+                                    <label for="sSecond">İkinci Entropi (S2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cvAverage" name="CvAverage" placeholder="Ortalama İzokorik Isı Kapasitesi (Cv,avg)">
+                                    <label for="cvAverage">Ortalama İzokorik Isı Kapasitesi (Cv,avg)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cvZero" name="CvZero" placeholder="İzokorik Isı Kapasitesi (Cv)">
+                                    <label for="cvZero">İzokorik Isı Kapasitesi (Cv)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cpZero" name="CpZero" placeholder="İzobarik Isı Kapasitesi (Cp)">
+                                    <label for="cpZero">İzobarik Isı Kapasitesi (Cp)</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
+                                <button type="reset" class="btn btn-secondary">Sıfırla</button>
+                            </div>
+                        </form><!-- End floating Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
