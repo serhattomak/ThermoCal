@@ -3,7 +3,7 @@
 public class AdiabaticEfficiencyNozzleResponseDto
 {
     public double Efficiency { get; set; }
-    public double VelocityFirst { get; set; }
+    public double VelocitySecond { get; set; }
     public double VelocitySecondS { get; set; }
     public double HFirst { get; set; }
     public double HSecond { get; set; }

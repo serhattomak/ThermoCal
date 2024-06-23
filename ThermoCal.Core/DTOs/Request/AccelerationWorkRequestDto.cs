@@ -1,11 +1,21 @@
-﻿namespace ThermoCal.Core.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ThermoCal.Core.DTOs;
 
 public class AccelerationWorkRequestDto
 {
-    public double W { get; set; }
-    public double F { get; set; }
+    [Required]
     public double M { get; set; }
+
+    [Required]
     public double A { get; set; }
+
+    [Required]
+    public double F { get; set; }
+
+    [Required]
     public double VFirst { get; set; }
+
+    [Required]
     public double VSecond { get; set; }
 }

@@ -66,35 +66,53 @@
     </section>
 </main>
 
-<script>
-    document.getElementById("calculate").addEventListener("click", function () {
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            M: document.getElementById("mass").value,
-            A: document.getElementById("acceleration").value,
-            F: document.getElementById("force").value,
-            VFirst: document.getElementById("velocityFirst").value,
-            VSecond: document.getElementById("velocitySecond").value
+            M: parseFloat(document.getElementById("mass").value),
+            A: parseFloat(document.getElementById("acceleration").value),
+            F: parseFloat(document.getElementById("force").value),
+            VFirst: parseFloat(document.getElementById("velocityFirst").value),
+            VSecond: parseFloat(document.getElementById("velocitySecond").value)
         };
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/Calculation/AccelerationWork", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        console.log("Form Data:", formData);
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                try {
-                    var result = JSON.parse(xhr.responseText);
-                    if (xhr.status === 200) {
-                        document.getElementById("work").value = result.data.w;
-                    } else {
-                        alert("Error: " + result.errors.join(", "));
-                    }
-                } catch (e) {
-                    alert("An unexpected error occurred. Please try again later.");
-                }
+        try {
+            const response = await fetch('/Calculation/AccelerationWork', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
             }
-        };
 
-        xhr.send(JSON.stringify(formData));
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.w !== undefined) {
+                document.getElementById("work").value = result.data.w;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
     });
 </script>

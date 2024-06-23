@@ -29,7 +29,7 @@ public class AccelerationWorkService: IAccelerationWorkService
         double force = request.F;
         double velocityFirst = request.VFirst;
         double velocitySecond = request.VSecond;
-        double work = 0.5*mass*(velocitySecond*velocitySecond-velocityFirst*velocityFirst);
+        double work = 0.5 * mass * (velocitySecond * velocitySecond - velocityFirst * velocityFirst);
 
         return work;
     }

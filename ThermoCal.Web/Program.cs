@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpClient<CalculationApiService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7228/");
+    client.BaseAddress = new Uri("https://localhost:7194/");
 });
 builder.Services.AddControllersWithViews();
 
