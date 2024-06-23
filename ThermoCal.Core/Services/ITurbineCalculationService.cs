@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ITurbineCalculationService
 {
-    TurbineCalculationResponseDto Calculate(TurbineCalculationRequestDto request);
+    Task<CustomResponseDto<TurbineCalculationResponseDto>> CalculateTurbineAsync(TurbineCalculationRequestDto request);
 }

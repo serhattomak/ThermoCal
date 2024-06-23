@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IMixingChamberCalculationService
 {
-    MixingChamberCalculationResponseDto Calculate(MixingChamberCalculationRequestDto request);
+    Task<CustomResponseDto<MixingChamberCalculationResponseDto>> CalculateMixingChamberAsync(MixingChamberCalculationRequestDto request);
 }

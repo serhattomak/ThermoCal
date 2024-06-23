@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ISurroundWorkCalculationService
 {
-    SurroundWorkCalculationResponseDto Calculate(SurroundWorkCalculationRequestDto request);
+    Task<CustomResponseDto<SurroundWorkCalculationResponseDto>> CalculateSurroundWorkAsync(SurroundWorkCalculationRequestDto request);
 }

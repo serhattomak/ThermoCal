@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ISpindleWorkService
 {
-    SpindleWorkResponseDto CalculateSpindleWork(SpindleWorkRequestDto spindleWorkRequestDto);
+    Task<CustomResponseDto<SpindleWorkResponseDto>> CalculateSpindleWorkAsync(SpindleWorkRequestDto spindleWorkRequestDto);
 }

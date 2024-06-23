@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface INozzleCalculationService
 {
-    NozzleCalculationResponseDto Calculate(NozzleCalculationRequestDto request);
+    Task<CustomResponseDto<NozzleCalculationResponseDto>> CalculateNozzleAsync(NozzleCalculationRequestDto request);
 }

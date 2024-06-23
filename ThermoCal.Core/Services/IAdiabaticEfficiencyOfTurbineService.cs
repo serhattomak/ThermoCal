@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IAdiabaticEfficiencyOfTurbineService
 {
-    AdiabaticEfficiencyOfTurbineResponseDto CalculateAdiabaticEfficiencyOfTurbine(AdiabaticEfficiencyOfTurbineRequestDto request);
+    Task<CustomResponseDto<AdiabaticEfficiencyOfTurbineResponseDto>> CalculateAdiabaticEfficiencyOfTurbineAsync(AdiabaticEfficiencyOfTurbineRequestDto request);
 }

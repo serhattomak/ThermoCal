@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ICarnotRefrigeratorCalculationService
 {
-    CarnotRefrigeratorCalculationResponseDto CalculateCarnotRefrigerator(CarnotRefrigeratorCalculationRequestDto request);
+    Task<CustomResponseDto<CarnotRefrigeratorCalculationResponseDto>> CalculateCarnotRefrigeratorAsync(CarnotRefrigeratorCalculationRequestDto request);
 }

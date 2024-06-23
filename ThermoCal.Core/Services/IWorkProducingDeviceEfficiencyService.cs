@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IWorkProducingDeviceEfficiencyService
 {
-    WorkProducingDeviceEfficiencyResponseDto CalculateEfficiency(WorkProducingDeviceEfficiencyRequestDto request);
+    Task<CustomResponseDto<WorkProducingDeviceEfficiencyResponseDto>> CalculateWorkProducingDeviceEfficiencyAsync(WorkProducingDeviceEfficiencyRequestDto request);
 }

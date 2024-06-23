@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IElectricalWorkService
 {
-    ElectricalWorkResponseDto CalculateElectricalWork(ElectricalWorkRequestDto request);
+    Task<CustomResponseDto<ElectricalWorkResponseDto>> CalculateElectricalWorkAsync(ElectricalWorkRequestDto request);
 }

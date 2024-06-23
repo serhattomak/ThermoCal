@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IHeatExchangersCalculationService
 {
-    HeatExchangersCalculationResponseDto CalculateHeatExchangers(HeatExchangersCalculationRequestDto request);
+    Task<CustomResponseDto<HeatExchangersCalculationResponseDto>> CalculateHeatExchangersAsync(HeatExchangersCalculationRequestDto request);
 }

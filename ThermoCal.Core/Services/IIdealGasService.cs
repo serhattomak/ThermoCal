@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IIdealGasService
 {
-    IdealGasResponseDto CalculateIdealGas(IdealGasRequestDto request);
+    Task<CustomResponseDto<IdealGasResponseDto>> CalculateIdealGasAsync(IdealGasRequestDto request);
 }

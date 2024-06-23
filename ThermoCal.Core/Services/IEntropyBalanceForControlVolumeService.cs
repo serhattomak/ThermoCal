@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyBalanceForControlVolumeService
 {
-    EntropyBalanceForControlVolumeResponseDto CalculateEntropyBalanceForControlVolume(EntropyBalanceForControlVolumeRequestDto request);
+    Task<CustomResponseDto<EntropyBalanceForControlVolumeResponseDto>> CalculateEntropyBalanceForControlVolumeAsync(EntropyBalanceForControlVolumeRequestDto request);
 }

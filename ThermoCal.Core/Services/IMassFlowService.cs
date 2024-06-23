@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IMassFlowService
 {
-    MassFlowResponseDto CalculateMassFlow(MassFlowRequestDto request);
+    Task<CustomResponseDto<MassFlowResponseDto>> CalculateMassFlowAsync(MassFlowRequestDto request);
 }

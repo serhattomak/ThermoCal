@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ICompressorCalculationService
 {
-    CompressorCalculationResponseDto CalculateCompressorCalculation(CompressorCalculationRequestDto request);
+    Task<CustomResponseDto<CompressorCalculationResponseDto>> CalculateCompressorCalculationAsync(CompressorCalculationRequestDto request);
 }

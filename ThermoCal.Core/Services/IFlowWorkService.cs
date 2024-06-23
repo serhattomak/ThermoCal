@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IFlowWorkService
 {
-    FlowWorkResponseDto CalculateFlowWork(FlowWorkRequestDto request);
+    Task<CustomResponseDto<FlowWorkResponseDto>> CalculateFlowWorkAsync(FlowWorkRequestDto request);
 }

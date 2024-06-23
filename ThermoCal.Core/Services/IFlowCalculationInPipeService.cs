@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IFlowCalculationInPipeService
 {
-    FlowCalculationInPipeResponseDto CalculateFlowCalculationInPipe(FlowCalculationInPipeRequestDto request);
+    Task<CustomResponseDto<FlowCalculationInPipeResponseDto>> CalculateFlowCalculationInPipeAsync(FlowCalculationInPipeRequestDto request);
 }

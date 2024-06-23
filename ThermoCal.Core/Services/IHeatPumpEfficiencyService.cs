@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IHeatPumpEfficiencyService
 {
-    HeatPumpEfficiencyResponseDto CalculateHeatPumpEfficiency(HeatPumpEfficiencyRequestDto request);
+    Task<CustomResponseDto<HeatPumpEfficiencyResponseDto>> CalculateHeatPumpEfficiencyAsync(HeatPumpEfficiencyRequestDto request);
 }

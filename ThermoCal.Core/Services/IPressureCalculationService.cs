@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IPressureCalculationService
 {
-    PressureCalculationResponseDto Calculate(PressureCalculationRequestDto request);
+    Task<CustomResponseDto<PressureCalculationResponseDto>> CalculatePressureAsync(PressureCalculationRequestDto request);
 }

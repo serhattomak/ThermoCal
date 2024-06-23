@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ISteadyFlowCalculationService
 {
-    SteadyFlowCalculationResponseDto Calculate(SteadyFlowCalculationRequestDto request);
+    Task<CustomResponseDto<SteadyFlowCalculationResponseDto>> CalculateSteadyFlowAsync(SteadyFlowCalculationRequestDto request);
 }

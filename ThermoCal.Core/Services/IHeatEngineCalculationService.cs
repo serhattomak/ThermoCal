@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IHeatEngineCalculationService
 {
-    HeatEngineCalculationResponseDto CalculateHeatEngine(HeatEngineCalculationRequestDto request);
+    Task<CustomResponseDto<HeatEngineCalculationResponseDto>> CalculateHeatEngineAsync(HeatEngineCalculationRequestDto request);
 }

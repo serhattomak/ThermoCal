@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ICompressibilityMultiplierCalculationService
 {
-    CompressibilityMultiplierCalculationResponseDto CalculateCompressibilityMultiplier(CompressibilityMultiplierCalculationRequestDto request);
+    Task<CustomResponseDto<CompressibilityMultiplierCalculationResponseDto>> CalculateCompressibilityMultiplierAsync(CompressibilityMultiplierCalculationRequestDto request);
 }

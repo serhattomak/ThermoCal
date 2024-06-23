@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IIrreversibilityCalculationService
 {
-    IrreversibilityCalculationResponseDto CalculateIrreversibility(IrreversibilityCalculationRequestDto request);
+    Task<CustomResponseDto<IrreversibilityCalculationResponseDto>> CalculateIrreversibilityAsync(IrreversibilityCalculationRequestDto request);
 }

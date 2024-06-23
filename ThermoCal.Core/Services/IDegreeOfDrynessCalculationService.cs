@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IDegreeOfDrynessCalculationService
 {
-    DegreeOfDrynessCalculationResponseDto CalculateDegreeOfDryness(DegreeOfDrynessCalculationRequestDto request);
+    Task<CustomResponseDto<DegreeOfDrynessCalculationResponseDto>> CalculateDegreeOfDrynessAsync(DegreeOfDrynessCalculationRequestDto request);
 }

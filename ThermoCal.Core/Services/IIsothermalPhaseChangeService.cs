@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IIsothermalPhaseChangeService
 {
-    IsothermalPhaseChangeResponseDto CalculateIsothermalPhaseChange(IsothermalPhaseChangeRequestDto request);
+    Task<CustomResponseDto<IsothermalPhaseChangeResponseDto>> CalculateIsothermalPhaseChangeAsync(IsothermalPhaseChangeRequestDto request);
 }

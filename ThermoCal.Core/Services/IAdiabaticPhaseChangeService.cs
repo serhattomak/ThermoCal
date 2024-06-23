@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IAdiabaticPhaseChangeService
 {
-    AdiabaticPhaseChangeResponseDto CalculateAdiabaticPhaseChange(AdiabaticPhaseChangeRequestDto request);
+    Task<CustomResponseDto<AdiabaticPhaseChangeResponseDto>> CalculateAdiabaticPhaseChangeAsync(AdiabaticPhaseChangeRequestDto request);
 }

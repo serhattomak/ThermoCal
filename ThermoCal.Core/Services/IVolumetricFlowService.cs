@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IVolumetricFlowService
 {
-    VolumetricFlowResponseDto Calculate(VolumetricFlowRequestDto request);
+    Task<CustomResponseDto<VolumetricFlowResponseDto>> CalculateVolumetricFlowAsync(VolumetricFlowRequestDto request);
 }

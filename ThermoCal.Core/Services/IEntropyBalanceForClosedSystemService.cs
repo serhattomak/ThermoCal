@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyBalanceForClosedSystemService
 {
-    EntropyBalanceForClosedSystemResponseDto CalculateEntropyBalanceForClosedSystem(EntropyBalanceForClosedSystemRequestDto request);
+    Task<CustomResponseDto<EntropyBalanceForClosedSystemResponseDto>> CalculateEntropyBalanceForClosedSystemAsync(EntropyBalanceForClosedSystemRequestDto request);
 }

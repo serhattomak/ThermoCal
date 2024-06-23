@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IIsentropicPhaseChangeOfPerfectGasesExactService
 {
-    IsentropicPhaseChangeOfPerfectGasesExactResponseDto CalculateIsentropicPhaseChangeOfPerfectGasesExact(IsentropicPhaseChangeOfPerfectGasesExactRequestDto request);
+    Task<CustomResponseDto<IsentropicPhaseChangeOfPerfectGasesExactResponseDto>> CalculateIsentropicPhaseChangeOfPerfectGasesExactAsync(IsentropicPhaseChangeOfPerfectGasesExactRequestDto request);
 }

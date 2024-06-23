@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IConstantVolumePhaseChangeService
 {
-    ConstantVolumePhaseChangeResponseDto CalculateConstantVolumePhaseChange(ConstantVolumePhaseChangeRequestDto request);
+    Task<CustomResponseDto<ConstantVolumePhaseChangeResponseDto>> CalculateConstantVolumePhaseChangeAsync(ConstantVolumePhaseChangeRequestDto request);
 }

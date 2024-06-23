@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IExergyCalculationService
 {
-    ExergyCalculationResponseDto CalculateExergy(ExergyCalculationRequestDto request);
+    Task<CustomResponseDto<ExergyCalculationResponseDto>> CalculateExergyAsync(ExergyCalculationRequestDto request);
 }

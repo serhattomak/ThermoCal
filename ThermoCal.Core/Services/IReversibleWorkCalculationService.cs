@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IReversibleWorkCalculationService
 {
-    ReversibleWorkCalculationResponseDto CalculateReversibleWork(ReversibleWorkCalculationRequestDto reversibleWorkCalculationRequestDto);
+    Task<CustomResponseDto<ReversibleWorkCalculationResponseDto>> CalculateReversibleWorkAsync(ReversibleWorkCalculationRequestDto reversibleWorkCalculationRequestDto);
 }

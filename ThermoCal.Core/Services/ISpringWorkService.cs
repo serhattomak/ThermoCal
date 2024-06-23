@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface ISpringWorkService
 {
-    SpringWorkResponseDto CalculateSpringWork(SpringWorkRequestDto springWorkRequestDto);
+    Task<CustomResponseDto<SpringWorkResponseDto>> CalculateSpringWorkAsync(SpringWorkRequestDto springWorkRequestDto);
 }

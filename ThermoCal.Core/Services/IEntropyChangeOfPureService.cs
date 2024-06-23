@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyChangeOfPureService
 {
-    EntropyChangeOfPureResponseDto CalculateEntropyChangeOfPure(EntropyChangeOfPureRequestDto request);
+    Task<CustomResponseDto<EntropyChangeOfPureResponseDto>> CalculateEntropyChangeOfPureAsync(EntropyChangeOfPureRequestDto request);
 }

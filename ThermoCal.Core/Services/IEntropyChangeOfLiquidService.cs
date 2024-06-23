@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyChangeOfLiquidService
 {
-    EntropyChangeOfLiquidResponseDto CalculateEntropyChangeOfLiquid(EntropyChangeOfLiquidRequestDto request);
+    Task<CustomResponseDto<EntropyChangeOfLiquidResponseDto>> CalculateEntropyChangeOfLiquidAsync(EntropyChangeOfLiquidRequestDto request);
 }

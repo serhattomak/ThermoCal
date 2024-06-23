@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IThrottleValveCalculationService
 {
-    ThrottleValveCalculationResponseDto Calculate(ThrottleValveCalculationRequestDto request);
+    Task<CustomResponseDto<ThrottleValveCalculationResponseDto>> CalculateThrottleValveAsync(ThrottleValveCalculationRequestDto request);
 }

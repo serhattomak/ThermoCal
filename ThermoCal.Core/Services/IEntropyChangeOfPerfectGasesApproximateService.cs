@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyChangeOfPerfectGasesApproximateService
 {
-    EntropyChangeOfPerfectGasesApproximateResponseDto CalculateEntropyChangeOfPerfectGasesApproximate(EntropyChangeOfPerfectGasesApproximateRequestDto request);
+    Task<CustomResponseDto<EntropyChangeOfPerfectGasesApproximateResponseDto>> CalculateEntropyChangeOfPerfectGasesApproximateAsync(EntropyChangeOfPerfectGasesApproximateRequestDto request);
 }

@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IStressCalculationOfLiquidSurfaceService
 {
-    StressCalculationOfLiquidSurfaceResponseDto Calculate(StressCalculationOfLiquidSurfaceRequestDto request);
+    Task<CustomResponseDto<StressCalculationOfLiquidSurfaceResponseDto>> CalculateStressOfLiquidSurfaceAsync(StressCalculationOfLiquidSurfaceRequestDto request);
 }

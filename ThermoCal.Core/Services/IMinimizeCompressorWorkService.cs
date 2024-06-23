@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IMinimizeCompressorWorkService
 {
-    MinimizeCompressorWorkResponseDto CalculateMinimizeCompressorWork(MinimizeCompressorWorkRequestDto request);
+    Task<CustomResponseDto<MinimizeCompressorWorkResponseDto>> CalculateMinimizeCompressorWorkAsync(MinimizeCompressorWorkRequestDto request);
 }

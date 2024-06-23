@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IRefrigeratorEfficiencyService
 {
-    RefrigeratorEfficiencyResponseDto Calculate(RefrigeratorEfficiencyRequestDto request);
+    Task<CustomResponseDto<RefrigeratorEfficiencyResponseDto>> CalculateRefrigeratorEfficiencyAsync(RefrigeratorEfficiencyRequestDto request);
 }

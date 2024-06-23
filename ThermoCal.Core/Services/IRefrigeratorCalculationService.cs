@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IRefrigeratorCalculationService
 {
-    RefrigeratorCalculationResponseDto Calculate(RefrigeratorCalculationRequestDto request);
+    Task<CustomResponseDto<RefrigeratorCalculationResponseDto>> CalculateRefrigeratorAsync(RefrigeratorCalculationRequestDto request);
 }

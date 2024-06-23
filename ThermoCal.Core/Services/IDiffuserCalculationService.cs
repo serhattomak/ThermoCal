@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IDiffuserCalculationService
 {
-    DiffuserCalculationResponseDto CalculateDiffuser(DiffuserCalculationRequestDto request);
+    Task<CustomResponseDto<DiffuserCalculationResponseDto>> CalculateDiffuserAsync(DiffuserCalculationRequestDto request);
 }

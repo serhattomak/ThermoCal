@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IEntropyCalculationForSteadyFlowOpenSystemService
 {
-    EntropyCalculationForSteadyFlowOpenSystemResponseDto CalculateEntropyCalculationForSteadyFlowOpenSystem(EntropyCalculationForSteadyFlowOpenSystemRequestDto request);
+    Task<CustomResponseDto<EntropyCalculationForSteadyFlowOpenSystemResponseDto>> CalculateEntropyCalculationForSteadyFlowOpenSystemAsync(EntropyCalculationForSteadyFlowOpenSystemRequestDto request);
 }

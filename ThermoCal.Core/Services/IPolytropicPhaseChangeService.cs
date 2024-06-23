@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IPolytropicPhaseChangeService
 {
-    PolytropicPhaseChangeResponseDto Calculate(PolytropicPhaseChangeRequestDto request);
+    Task<CustomResponseDto<PolytropicPhaseChangeResponseDto>> CalculatePolytropicPhaseChangeAsync(PolytropicPhaseChangeRequestDto request);
 }

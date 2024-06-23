@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IGibbsEquationCalculationService
 {
-    GibbsEquationCalculationResponseDto CalculateGibbsEquationCalculation(GibbsEquationCalculationRequestDto request);
+    Task<CustomResponseDto<GibbsEquationCalculationResponseDto>> CalculateGibbsEquationCalculationAsync(GibbsEquationCalculationRequestDto request);
 }

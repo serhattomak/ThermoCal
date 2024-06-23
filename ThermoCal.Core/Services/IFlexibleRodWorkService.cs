@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IFlexibleRodWorkService
 {
-    FlexibleRodWorkResponseDto CalculateFlexibleRodWork(FlexibleRodWorkRequestDto request);
+    Task<CustomResponseDto<FlexibleRodWorkResponseDto>> CalculateFlexibleRodWorkAsync(FlexibleRodWorkRequestDto request);
 }

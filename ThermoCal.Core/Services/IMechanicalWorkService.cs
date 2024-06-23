@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IMechanicalWorkService
 {
-    MechanicalWorkResponseDto CalculateMechanicalWork(MechanicalWorkRequestDto request);
+    Task<CustomResponseDto<MechanicalWorkResponseDto>> CalculateMechanicalWorkAsync(MechanicalWorkRequestDto request);
 }

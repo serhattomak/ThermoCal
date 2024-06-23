@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IReversibleContinuousFlowCalculationService
 {
-    ReversibleContinuousFlowCalculationResponseDto Calculate(ReversibleContinuousFlowCalculationRequestDto request);
+    Task<CustomResponseDto<ReversibleContinuousFlowCalculationResponseDto>> CalculateReversibleContinuousFlowAsync(ReversibleContinuousFlowCalculationRequestDto request);
 }

@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IAdiabaticExponentService
 {
-    AdiabaticExponentResponseDto CalculateAdiabaticExponent(AdiabaticExponentRequestDto request);
+    Task<CustomResponseDto<AdiabaticExponentResponseDto>> CalculateAdiabaticExponentAsync(AdiabaticExponentRequestDto request);
 }

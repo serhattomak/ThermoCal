@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IUsefulWorkCalculationService
 {
-    UsefulWorkCalculationResponseDto Calculate(UsefulWorkCalculationRequestDto request);
+    Task<CustomResponseDto<UsefulWorkCalculationResponseDto>> CalculateUsefulWorkAsync(UsefulWorkCalculationRequestDto request);
 }

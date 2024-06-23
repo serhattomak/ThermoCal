@@ -4,5 +4,5 @@ namespace ThermoCal.Core.Services;
 
 public interface IHeatAndHeatTransferService
 {
-    HeatAndHeatTransferResponseDto CalculateHeatAndHeatTransfer(HeatAndHeatTransferRequestDto request);
+    Task<CustomResponseDto<HeatAndHeatTransferResponseDto>> CalculateHeatAndHeatTransferAsync(HeatAndHeatTransferRequestDto request);
 }
