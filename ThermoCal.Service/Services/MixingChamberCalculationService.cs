@@ -5,14 +5,36 @@ namespace ThermoCal.Service.Services;
 
 public class MixingChamberCalculationService: IMixingChamberCalculationService
 {
-    public MixingChamberCalculationResponseDto Calculate(MixingChamberCalculationRequestDto request)
+    public Task<CustomResponseDto<MixingChamberCalculationResponseDto>> CalculateMixingChamberAsync(MixingChamberCalculationRequestDto request)
     {
-        var result = new MixingChamberCalculationResponseDto();
-        result.MDotOut = request.MDotFirst + request.MDotSecond + request.MDotThird;
-        result.HOut = (request.MDotFirst * request.HIn + request.MDotSecond * request.HIn + request.MDotThird * request.HIn) / result.MDotOut;
-        result.VOut = (request.MDotFirst * request.VIn + request.MDotSecond * request.VIn + request.MDotThird * request.VIn) / result.MDotOut;
-        result.ZOut = (request.MDotFirst * request.ZIn + request.MDotSecond * request.ZIn + request.MDotThird * request.ZIn) / result.MDotOut;
-        result.G = request.G;
-        return result;
+        var response = CalculateMixingChamber(request);
+
+        return Task.FromResult(CustomResponseDto<MixingChamberCalculationResponseDto>.Success(200, response));
+    }
+
+    private MixingChamberCalculationResponseDto CalculateMixingChamber(MixingChamberCalculationRequestDto request)
+    {
+        double mDotFirst = request.MDotFirst;
+        double mDotSecond = request.MDotSecond;
+        double mDotIn = request.MDotIn;
+        double mDotOut = request.MDotOut;
+        double hIn = request.HIn;
+        double hOut = request.HOut;
+
+        mDotIn = mDotFirst + mDotSecond;
+
+        mDotOut = mDotIn;
+
+        mDotIn=mDotOut*hOut/hIn;
+
+        return new MixingChamberCalculationResponseDto
+        {
+            MDotFirst = mDotFirst,
+            MDotSecond = mDotSecond,
+            MDotIn = mDotIn,
+            MDotOut = mDotOut,
+            HIn = hIn,
+            HOut = hOut
+        };
     }
 }

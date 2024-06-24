@@ -5,8 +5,26 @@ namespace ThermoCal.Service.Services;
 
 public class UsefulWorkCalculationService: IUsefulWorkCalculationService
 {
-    public UsefulWorkCalculationResponseDto Calculate(UsefulWorkCalculationRequestDto request)
+    public Task<CustomResponseDto<UsefulWorkCalculationResponseDto>> CalculateUsefulWorkAsync(UsefulWorkCalculationRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var response = CalculateUsefulWork(request);
+
+        return Task.FromResult(CustomResponseDto<UsefulWorkCalculationResponseDto>.Success(200, response));
+    }
+
+    private UsefulWorkCalculationResponseDto CalculateUsefulWork(UsefulWorkCalculationRequestDto request)
+    {
+        double w=request.W;
+        double wUseful=request.WUseful;
+        double wSurround=request.WSur;
+
+        wUseful=w-wSurround;
+
+        return new UsefulWorkCalculationResponseDto
+        {
+            W = w,
+            WUseful = wUseful,
+            WSur = wSurround
+        };
     }
 }

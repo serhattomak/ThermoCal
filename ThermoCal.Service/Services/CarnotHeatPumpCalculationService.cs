@@ -5,8 +5,26 @@ namespace ThermoCal.Service.Services;
 
 public class CarnotHeatPumpCalculationService: ICarnotHeatPumpCalculationService
 {
-    public CarnotHeatPumpCalculationResponseDto CalculateCarnotHeatPump(CarnotHeatPumpCalculationRequestDto request)
+    public Task<CustomResponseDto<CarnotHeatPumpCalculationResponseDto>> CalculateCarnotHeatPumpAsync(CarnotHeatPumpCalculationRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var copHeatRev = CalculateCarnotHeatPump(request);
+
+        var responseDto = new CarnotHeatPumpCalculationResponseDto
+        {
+            Th = request.Th,
+            Tl = request.Tl,
+            COPHeatRev = copHeatRev
+        };
+
+        return Task.FromResult(CustomResponseDto<CarnotHeatPumpCalculationResponseDto>.Success(200, responseDto));
+    }
+
+    private double CalculateCarnotHeatPump(CarnotHeatPumpCalculationRequestDto request)
+    {
+        double tHigh = request.Th;
+        double tLow = request.Tl;
+        double efficiency = 1/(1-(tLow/tHigh));
+
+        return efficiency;
     }
 }

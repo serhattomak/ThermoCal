@@ -5,12 +5,24 @@ namespace ThermoCal.Service.Services;
 
 public class WorkProducingDeviceEfficiencyService: IWorkProducingDeviceEfficiencyService
 {
-    public WorkProducingDeviceEfficiencyResponseDto CalculateEfficiency(WorkProducingDeviceEfficiencyRequestDto request)
+    public Task<CustomResponseDto<WorkProducingDeviceEfficiencyResponseDto>> CalculateWorkProducingDeviceEfficiencyAsync(WorkProducingDeviceEfficiencyRequestDto request)
     {
-        var efficiency = request.WSur / request.WRev;
+        var response = CalculateWorkProducingDeviceEfficiency(request);
+
+        return Task.FromResult(CustomResponseDto<WorkProducingDeviceEfficiencyResponseDto>.Success(200, response));
+    }
+
+    private WorkProducingDeviceEfficiencyResponseDto CalculateWorkProducingDeviceEfficiency(WorkProducingDeviceEfficiencyRequestDto request)
+    {
+        double efficiency = 0;
+        double wUseful = request.WSur;
+        double wRev = request.WRev;
+
+        efficiency = wRev / wUseful;
+
         return new WorkProducingDeviceEfficiencyResponseDto
         {
-            Efficiency = efficiency,
+            Efficiency = efficiency
         };
     }
 }

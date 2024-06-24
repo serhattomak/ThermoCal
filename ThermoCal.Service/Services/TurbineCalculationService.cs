@@ -3,10 +3,38 @@ using ThermoCal.Core.Services;
 
 namespace ThermoCal.Service.Services;
 
-public class TurbineCalculationService: ITurbineCalculationService
+public class TurbineCalculationService : ITurbineCalculationService
 {
-    public TurbineCalculationResponseDto Calculate(TurbineCalculationRequestDto request)
+    public Task<CustomResponseDto<TurbineCalculationResponseDto>> CalculateTurbineAsync(TurbineCalculationRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var response = CalculateTurbine(request);
+
+        return Task.FromResult(CustomResponseDto<TurbineCalculationResponseDto>.Success(200, response));
+    }
+
+    private TurbineCalculationResponseDto CalculateTurbine(TurbineCalculationRequestDto request)
+    {
+        double wmDot = request.WMDot;
+        double mDot = request.MDot;
+        double density = request.Density;
+        double a = request.A;
+        double v = request.V;
+        double hFirst = request.HFirst;
+        double hSecond = request.HSecond;
+
+        mDot = density * a * v;
+        wmDot = mDot * (hFirst - hSecond);
+
+
+        return new TurbineCalculationResponseDto
+        {
+            WMDot = wmDot,
+            MDot = mDot,
+            Density = density,
+            A = a,
+            V = v,
+            HFirst = hFirst,
+            HSecond = hSecond
+        };
     }
 }

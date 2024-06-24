@@ -5,8 +5,26 @@ namespace ThermoCal.Service.Services;
 
 public class HeatPumpEfficiencyService: IHeatPumpEfficiencyService
 {
-    public HeatPumpEfficiencyResponseDto CalculateHeatPumpEfficiency(HeatPumpEfficiencyRequestDto request)
+    public Task<CustomResponseDto<HeatPumpEfficiencyResponseDto>> CalculateHeatPumpEfficiencyAsync(HeatPumpEfficiencyRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var response = CalculateHeatPumpEfficiency(request);
+
+        return Task.FromResult(CustomResponseDto<HeatPumpEfficiencyResponseDto>.Success(200, response));
+    }
+
+    private HeatPumpEfficiencyResponseDto CalculateHeatPumpEfficiency(HeatPumpEfficiencyRequestDto request)
+    {
+        double efficiency = 0;
+        double cop = request.COP;
+        double copRev = request.COPRev;
+
+        efficiency = cop / copRev;
+
+        return new HeatPumpEfficiencyResponseDto
+        {
+            Efficiency = efficiency,
+            COP = cop,
+            COPRev = copRev
+        };
     }
 }

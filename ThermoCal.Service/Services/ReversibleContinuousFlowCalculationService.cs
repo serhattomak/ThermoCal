@@ -5,8 +5,28 @@ namespace ThermoCal.Service.Services;
 
 public class ReversibleContinuousFlowCalculationService: IReversibleContinuousFlowCalculationService
 {
-    public ReversibleContinuousFlowCalculationResponseDto Calculate(ReversibleContinuousFlowCalculationRequestDto request)
+    public Task<CustomResponseDto<ReversibleContinuousFlowCalculationResponseDto>> CalculateReversibleContinuousFlowAsync(ReversibleContinuousFlowCalculationRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var response = CalculateReversibleContinuousFlow(request);
+
+        return Task.FromResult(CustomResponseDto<ReversibleContinuousFlowCalculationResponseDto>.Success(200, response));
+    }
+
+    private ReversibleContinuousFlowCalculationResponseDto CalculateReversibleContinuousFlow(ReversibleContinuousFlowCalculationRequestDto request)
+    {
+        double wTr= request.WTr;
+        double vSpecific = request.VSpecific;
+        double pFirst = request.PFirst;
+        double pSecond = request.PSecond;
+
+        wTr = vSpecific*(pFirst-pSecond);
+
+        return new ReversibleContinuousFlowCalculationResponseDto
+        {
+            WTr = wTr,
+            VSpecific = vSpecific,
+            PFirst = pFirst,
+            PSecond = pSecond
+        };
     }
 }

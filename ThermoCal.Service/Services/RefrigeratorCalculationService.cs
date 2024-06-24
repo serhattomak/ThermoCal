@@ -5,43 +5,32 @@ namespace ThermoCal.Service.Services;
 
 public class RefrigeratorCalculationService: IRefrigeratorCalculationService
 {
-    public RefrigeratorCalculationResponseDto Calculate(RefrigeratorCalculationRequestDto request)
+    public Task<CustomResponseDto<RefrigeratorCalculationResponseDto>> CalculateRefrigeratorAsync(RefrigeratorCalculationRequestDto request)
     {
-        var efficiency = request.Efficiency;
-        var copHeat = request.COPHeat;
-        var copRef = request.COPRef;
-        var q = request.Q;
-        var w = request.W;
-        var qh = request.Qh;
-        var ql = request.Ql;
-        var th = request.Th;
-        var tl = request.Tl;
-        var wIn = request.WIn;
-        var wOut = request.WOut;
-        var wNet = request.WNet;
-        var qIn = request.QIn;
-        var qOut = request.QOut;
-        var qNet = request.QNet;
+        var response = CalculateRefrigerator(request);
 
-        // Calculation logic here
+        return Task.FromResult(CustomResponseDto<RefrigeratorCalculationResponseDto>.Success(200, response));
+    }
+
+    private RefrigeratorCalculationResponseDto CalculateRefrigerator(RefrigeratorCalculationRequestDto request)
+    {
+        double q = request.Q;
+        double w = request.W;
+        double qL = request.Ql;
+        double qH = request.Qh;
+        double wNet = request.WNet;
+        double copRef = request.COPRef;
+        
+        wNet = qH-qL;
+
+        copRef = qL/wNet;
 
         return new RefrigeratorCalculationResponseDto
         {
-            Efficiency = efficiency,
-            COPHeat = copHeat,
-            COPRef = copRef,
             Q = q,
             W = w,
-            Qh = qh,
-            Ql = ql,
-            Th = th,
-            Tl = tl,
-            WIn = wIn,
-            WOut = wOut,
             WNet = wNet,
-            QIn = qIn,
-            QOut = qOut,
-            QNet = qNet
+            COPRef = copRef,
         };
     }
 }

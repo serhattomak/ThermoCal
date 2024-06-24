@@ -5,8 +5,21 @@ namespace ThermoCal.Service.Services;
 
 public class DegreeOfDrynessCalculationService: IDegreeOfDrynessCalculationService
 {
-    public DegreeOfDrynessCalculationResponseDto CalculateDegreeOfDryness(DegreeOfDrynessCalculationRequestDto request)
+    public Task<CustomResponseDto<DegreeOfDrynessCalculationResponseDto>> CalculateDegreeOfDrynessAsync(DegreeOfDrynessCalculationRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var X = CalculateDegreeOfDryness(request);
+
+        var response = new DegreeOfDrynessCalculationResponseDto
+        {
+            DegreeOfDryness = X
+        };
+
+        return Task.FromResult(CustomResponseDto<DegreeOfDrynessCalculationResponseDto>.Success(200, response));
+    }
+
+    private double CalculateDegreeOfDryness(DegreeOfDrynessCalculationRequestDto request)
+    {
+        var X = (request.MGas) / (request.MGas+request.MFluid);
+        return X;
     }
 }

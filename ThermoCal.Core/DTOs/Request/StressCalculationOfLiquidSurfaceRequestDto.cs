@@ -7,4 +7,6 @@ public class StressCalculationOfLiquidSurfaceRequestDto
     public double L { get; set; }
     public double X { get; set; }
     public double A { get; set; }
+    public double AFirst { get; set; }
+    public double ASecond { get; set; }
 }

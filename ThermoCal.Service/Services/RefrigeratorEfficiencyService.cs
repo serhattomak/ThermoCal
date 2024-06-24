@@ -5,13 +5,20 @@ namespace ThermoCal.Service.Services;
 
 public class RefrigeratorEfficiencyService: IRefrigeratorEfficiencyService
 {
-    public RefrigeratorEfficiencyResponseDto Calculate(RefrigeratorEfficiencyRequestDto request)
+    public Task<CustomResponseDto<RefrigeratorEfficiencyResponseDto>> CalculateRefrigeratorEfficiencyAsync(RefrigeratorEfficiencyRequestDto request)
     {
-        var efficiency = request.Efficiency;
-        var cop = request.COP;
-        var copRev = request.COPRev;
+        var response = CalculateRefrigeratorEfficiency(request);
 
-        // Calculation logic here
+        return Task.FromResult(CustomResponseDto<RefrigeratorEfficiencyResponseDto>.Success(200, response));
+    }
+
+    private RefrigeratorEfficiencyResponseDto CalculateRefrigeratorEfficiency(RefrigeratorEfficiencyRequestDto request)
+    {
+        double efficiency = 0;
+        double cop = request.COP;
+        double copRev = request.COPRev;
+
+        efficiency = cop / copRev;
 
         return new RefrigeratorEfficiencyResponseDto
         {

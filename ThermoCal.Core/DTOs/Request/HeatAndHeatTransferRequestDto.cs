@@ -12,6 +12,7 @@ public class HeatAndHeatTransferRequestDto
     public double QDot { get; set; }
     public double M { get; set; }
     public double K { get; set; }
+    public double H { get; set; }
     public double Sigma { get; set; }
     public double Epsilon { get; set; }
     public double A { get; set; }

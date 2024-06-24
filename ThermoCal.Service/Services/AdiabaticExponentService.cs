@@ -3,10 +3,28 @@ using ThermoCal.Core.Services;
 
 namespace ThermoCal.Service.Services;
 
-public class AdiabaticExponentService: IAdiabaticExponentService
+public class AdiabaticExponentService : IAdiabaticExponentService
 {
-    public AdiabaticExponentResponseDto CalculateAdiabaticExponent(AdiabaticExponentRequestDto request)
+    public Task<CustomResponseDto<AdiabaticExponentResponseDto>> CalculateAdiabaticExponentAsync(AdiabaticExponentRequestDto request)
     {
-        throw new System.NotImplementedException();
+        var exponent = CalculateAdiabaticExponent(request);
+
+        var responseDto = new AdiabaticExponentResponseDto
+        {
+            K = exponent,
+            Cp = request.Cp,
+            Cv = request.Cv
+        };
+
+        return Task.FromResult(CustomResponseDto<AdiabaticExponentResponseDto>.Success(200, responseDto));
+    }
+
+    private double CalculateAdiabaticExponent(AdiabaticExponentRequestDto request)
+    {
+        double cp = request.Cp;
+        double cv = request.Cv;
+        double exponent = cp / cv;
+
+        return exponent;
     }
 }
