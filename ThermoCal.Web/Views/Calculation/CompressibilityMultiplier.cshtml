@@ -71,9 +71,68 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="compressibilityMultiplier" class="form-label">Sıkıştırılabilme Çarpanı (Z)</label>
+                            <input type="text" class="form-control" id="compressibilityMultiplier" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            Z: parseFloat(document.getElementById("z").value),
+            P: parseFloat(document.getElementById("pressure").value),
+            T: parseFloat(document.getElementById("T").value),
+            R: parseFloat(document.getElementById("R").value),
+            V: parseFloat(document.getElementById("V").value),
+            VSpecific: parseFloat(document.getElementById("v").value),
+            VSpecificActual: parseFloat(document.getElementById("vA").value),
+            VSpecificIdeal: parseFloat(document.getElementById("vI").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/CompressibilityMultiplier', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.z !== undefined) {
+                document.getElementById("compressibilityMultiplier").value = result.data.z;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

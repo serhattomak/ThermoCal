@@ -8,6 +8,8 @@ public class PumpCalculationService : IPumpCalculationService
     public Task<CustomResponseDto<PumpCalculationResponseDto>> CalculatePumpAsync(PumpCalculationRequestDto request)
     {
         var response = CalculatePump(request);
+
+        return Task.FromResult(CustomResponseDto<PumpCalculationResponseDto>.Success(200, response));
     }
 
     private PumpCalculationResponseDto CalculatePump(PumpCalculationRequestDto request)
@@ -34,13 +36,14 @@ public class PumpCalculationService : IPumpCalculationService
         if (pFirst != 0 && pSecond != 0)
         {
             wmDot = mDot * (g * (zSecond - zFirst) + ((pSecond - pFirst) * density));
-        } else if (c != 0)
+        }
+        else if (c != 0)
         {
-            wmDot=mDot*(c*(tSecond-tFirst)+((pSecond-pFirst)*vSpecific)+(g*(zSecond-zFirst)));
+            wmDot = mDot * (c * (tSecond - tFirst) + ((pSecond - pFirst) * vSpecific) + (g * (zSecond - zFirst)));
         }
         else
         {
-            wmDot = mDot * ((hSecond - hFirst) * g(zSecond - zFirst));
+            wmDot = mDot * ((hSecond - hFirst) * g * (zSecond - zFirst));
         }
 
         return new PumpCalculationResponseDto

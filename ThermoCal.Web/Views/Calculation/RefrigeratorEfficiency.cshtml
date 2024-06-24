@@ -20,12 +20,6 @@
                         <form class="row g-3" id="refrigeratorEfficiencyForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik (Efficiency)">
-                                    <label for="efficiency">Verimlilik (Efficiency)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="cop" name="COP" placeholder="Soğutma COP (COP)">
                                     <label for="cop">Soğutma COP (COP)</label>
                                 </div>
@@ -41,9 +35,62 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="refrigeratorEfficiencyResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="refrigeratorEfficiencyResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            COP: parseFloat(document.getElementById("cop").value),
+            COPRev: parseFloat(document.getElementById("copRev").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/RefrigeratorEfficiency', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("refrigeratorEfficiencyResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

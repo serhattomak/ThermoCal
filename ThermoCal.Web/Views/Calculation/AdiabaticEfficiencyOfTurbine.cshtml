@@ -20,12 +20,6 @@
                         <form class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" placeholder="Verimlilik">
-                                    <label for="work">Verimlilik</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="wActual" placeholder="Gerçek İş">
                                     <label for="wActual">Gerçek İş (Wgerçek)</label>
                                 </div>
@@ -39,19 +33,19 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="hFirst" placeholder="İlk Entalpi">
-                                    <label for="hFirst">İlk Entalpi(h1)</label>
+                                    <label for="hFirst">İlk Entalpi (h1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="hSecond" placeholder="Son Entalpi">
-                                    <label for="hSecond">Son Entalpi(h2s)</label>
+                                    <label for="hSecond">Son Entalpi (h2)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="hSeconds" placeholder="Son Entalpi">
-                                    <label for="hSeconds">Son Entalpi(h2s)</label>
+                                    <input type="text" class="form-control" id="hSecondS" placeholder="Son Entalpi">
+                                    <label for="hSecondS">Son Entalpi (h2s)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -59,9 +53,65 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="efficiency" class="form-label">Verimlilik</label>
+                            <input type="text" class="form-control" id="efficiency" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            WActual: parseFloat(document.getElementById("wActual").value),
+            WIsentropic: parseFloat(document.getElementById("wIsentropic").value),
+            HFirst: parseFloat(document.getElementById("hFirst").value),
+            HSecond: parseFloat(document.getElementById("hSecond").value),
+            HSecondS: parseFloat(document.getElementById("hSecondS").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/AdiabaticEfficiencyOfTurbine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.efficiency !== undefined) {
+                document.getElementById("efficiency").value = result.data.efficiency;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

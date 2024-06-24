@@ -18,6 +18,8 @@ public class AdiabaticEfficiencyOfTurbineService: IAdiabaticEfficiencyOfTurbineS
             WActual = request.WActual,
             WIsentropic = request.WIsentropic
         };
+
+        return Task.FromResult(CustomResponseDto<AdiabaticEfficiencyOfTurbineResponseDto>.Success(200, responseDto));
     }
 
     private double CalculateAdiabaticEfficiencyOfTurbine(AdiabaticEfficiencyOfTurbineRequestDto request)

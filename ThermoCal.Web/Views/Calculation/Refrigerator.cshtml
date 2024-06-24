@@ -113,9 +113,75 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="refrigeratorCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="refrigeratorCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            Efficiency: parseFloat(document.getElementById("efficiency").value),
+            COPHeat: parseFloat(document.getElementById("copHeat").value),
+            COPRef: parseFloat(document.getElementById("copRef").value),
+            Q: parseFloat(document.getElementById("q").value),
+            W: parseFloat(document.getElementById("w").value),
+            Qh: parseFloat(document.getElementById("qh").value),
+            Ql: parseFloat(document.getElementById("ql").value),
+            Th: parseFloat(document.getElementById("th").value),
+            Tl: parseFloat(document.getElementById("tl").value),
+            WIn: parseFloat(document.getElementById("wIn").value),
+            WOut: parseFloat(document.getElementById("wOut").value),
+            WNet: parseFloat(document.getElementById("wNet").value),
+            QIn: parseFloat(document.getElementById("qIn").value),
+            QOut: parseFloat(document.getElementById("qOut").value),
+            QNet: parseFloat(document.getElementById("qNet").value),
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/Refrigerator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("refrigeratorCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

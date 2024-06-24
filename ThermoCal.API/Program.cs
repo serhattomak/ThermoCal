@@ -37,10 +37,10 @@ builder.Services.AddScoped(typeof(IEntropyChangeOfPerfectGasesExactService), typ
 builder.Services.AddScoped(typeof(IEntropyChangeOfPureService), typeof(EntropyChangeOfPureService));
 builder.Services.AddScoped(typeof(IEntropyChangeOfSolidService), typeof(EntropyChangeOfSolidService));
 builder.Services.AddScoped(typeof(IFlexibleRodWorkService), typeof(FlexibleRodWorkService));
+builder.Services.AddScoped(typeof(IExergyCalculationService), typeof(ExergyCalculationService));
 builder.Services.AddScoped(typeof(IFlowCalculationInDuctService), typeof(FlowCalculationInDuctService));
 builder.Services.AddScoped(typeof(IFlowCalculationInPipeService), typeof(FlowCalculationInPipeService));
 builder.Services.AddScoped(typeof(IFlowWorkService), typeof(FlowWorkService));
-builder.Services.AddScoped(typeof(IGibbsEquationCalculationService), typeof(GibbsEquationCalculationService));
 builder.Services.AddScoped(typeof(IGravityWorkService), typeof(GravityWorkService));
 builder.Services.AddScoped(typeof(IHeatAndHeatTransferService), typeof(HeatAndHeatTransferService));
 builder.Services.AddScoped(typeof(IHeatEngineCalculationService), typeof(HeatEngineCalculationService));
@@ -52,6 +52,7 @@ builder.Services.AddScoped(typeof(IIsentropicPhaseChangeOfPerfectGasesApproximat
 builder.Services.AddScoped(typeof(IIsentropicPhaseChangeOfPerfectGasesExactService), typeof(IsentropicPhaseChangeOfPerfectGasesExactService));
 builder.Services.AddScoped(typeof(IIsothermalPhaseChangeService), typeof(IsothermalPhaseChangeService));
 builder.Services.AddScoped(typeof(IMassFlowService), typeof(MassFlowService));
+builder.Services.AddScoped(typeof(IMechanicalWorkService), typeof(MechanicalWorkService));
 builder.Services.AddScoped(typeof(IMinimizeCompressorWorkService), typeof(MinimizeCompressorWorkService));
 builder.Services.AddScoped(typeof(IMixingChamberCalculationService), typeof(MixingChamberCalculationService));
 builder.Services.AddScoped(typeof(INozzleCalculationService), typeof(NozzleCalculationService));
@@ -67,7 +68,6 @@ builder.Services.AddScoped(typeof(ISpindleWorkService), typeof(SpindleWorkServic
 builder.Services.AddScoped(typeof(ISpringWorkService), typeof(SpringWorkService));
 builder.Services.AddScoped(typeof(ISteadyFlowCalculationService), typeof(SteadyFlowCalculationService));
 builder.Services.AddScoped(typeof(IStressCalculationOfLiquidSurfaceService), typeof(StressCalculationOfLiquidSurfaceService));
-builder.Services.AddScoped(typeof(ISurroundWorkCalculationService), typeof(SurroundWorkCalculationService));
 builder.Services.AddScoped(typeof(IThrottleValveCalculationService), typeof(ThrottleValveCalculationService));
 builder.Services.AddScoped(typeof(ITurbineCalculationService), typeof(TurbineCalculationService));
 builder.Services.AddScoped(typeof(IUsefulWorkCalculationService), typeof(UsefulWorkCalculationService));

@@ -77,9 +77,53 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="usefulWorkCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="usefulWorkCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            W: parseFloat(document.getElementById("w").value),
+            WUseful: parseFloat(document.getElementById("wUseful").value),
+            WSur: parseFloat(document.getElementById("wSur").value),
+            M: parseFloat(document.getElementById("m").value),
+            P0: parseFloat(document.getElementById("p0").value),
+            VFirst: parseFloat(document.getElementById("vFirst").value),
+            VSecond: parseFloat(document.getElementById("vSecond").value),
+            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value),
+            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/UsefulWork', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            console.log("API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("usefulWorkCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

@@ -20,32 +20,14 @@
                         <form class="row g-3" id="entropyBalanceForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="qDot" name="QDot" placeholder="Isı Transferi Oranı (Q̇)">
-                                    <label for="qDot">Isı Transferi Oranı (Q̇)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qkDot" name="QkDot" placeholder="Isı (Q̇k)">
-                                    <label for="qkDot">Isı (Q̇k)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qrDot" name="QrDot" placeholder="Isı (Q̇r)">
-                                    <label for="qrDot">Isı (Q̇r)</label>
+                                    <input type="text" class="form-control" id="qkDot" name="QkDot" placeholder="Isı Transferi Oranı (Q̇k)">
+                                    <label for="qkDot">Isı Transferi Oranı (Q̇k)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="tk" name="Tk" placeholder="Sıcaklık (Tk)">
                                     <label for="tk">Sıcaklık (Tk)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="tr" name="Tr" placeholder="Sıcaklık (Tr)">
-                                    <label for="tr">Sıcaklık (Tr)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -74,44 +56,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenCV" name="SGenCV" placeholder="Entropi Jenerasyonu (SGenCV)">
-                                    <label for="sGenCV">Entropi Jenerasyonu (SGenCV)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="density" name="Density" placeholder="Yoğunluk (ρ)">
-                                    <label for="density">Yoğunluk (ρ)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="volume" name="Volume" placeholder="Hacim (V)">
-                                    <label for="volume">Hacim (V)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="a" name="A" placeholder="Alan (A)">
-                                    <label for="a">Alan (A)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenCVDot" name="SGenCVDot" placeholder="Entropi Jenerasyonu Oranı (SGenCV)">
-                                    <label for="sGenCVDot">Entropi Üretim Oranı (SGenCV)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenDot" name="SGenDot" placeholder="Entropi Jenerasyonu Oranı (SGen)">
-                                    <label for="sGenDot">Entropi Üretim Oranı (SGen)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="sGen" name="SGen" placeholder="Entropi Jenerasyonu (SGen)">
-                                    <label for="sGen">Entropi Üretimi (SGen)</label>
+                                    <label for="sGen">Entropi Jenerasyonu (SGen)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -119,9 +65,67 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="entropyResult" class="form-label">Sonuç Entropi Dengesi (S)</label>
+                            <input type="text" class="form-control" id="entropyResult" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            QkDot: parseFloat(document.getElementById("qkDot").value),
+            Tk: parseFloat(document.getElementById("tk").value),
+            MDotIn: parseFloat(document.getElementById("mDotIn").value),
+            MDotOut: parseFloat(document.getElementById("mDotOut").value),
+            SIn: parseFloat(document.getElementById("sIn").value),
+            SOut: parseFloat(document.getElementById("sOut").value),
+            SGen: parseFloat(document.getElementById("sGen").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/EntropyBalanceForControlVolume', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.s !== undefined) {
+                document.getElementById("entropyResult").value = result.data.s;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

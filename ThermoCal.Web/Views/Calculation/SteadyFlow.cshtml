@@ -20,18 +20,6 @@
                         <form class="row g-3" id="steadyFlowCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
-                                    <label for="q">Isı (Q)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="eFirst" name="EFirst" placeholder="İlk Enerji (E1)">
                                     <label for="eFirst">İlk Enerji (E1)</label>
                                 </div>
@@ -68,36 +56,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vIn" name="VIn" placeholder="Giriş Hacmi (Vin)">
-                                    <label for="vIn">Giriş Hacmi (Vin)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vOut" name="VOut" placeholder="Çıkış Hacmi (Vout)">
-                                    <label for="vOut">Çıkış Hacmi (Vout)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="zIn" name="ZIn" placeholder="Giriş Yüksekliği (Zin)">
-                                    <label for="zIn">Giriş Yüksekliği (Zin)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="zOut" name="ZOut" placeholder="Çıkış Yüksekliği (Zout)">
-                                    <label for="zOut">Çıkış Yüksekliği (Zout)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="g" name="G" placeholder="Yerçekimi İvmesi (G)">
-                                    <label for="g">Yerçekimi İvmesi (G)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="mIn" name="MIn" placeholder="Giriş Kütlesi (Min)">
                                     <label for="mIn">Giriş Kütlesi (Min)</label>
                                 </div>
@@ -113,9 +71,52 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="steadyFlowCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="steadyFlowCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            EFirst: parseFloat(document.getElementById("eFirst").value),
+            ESecond: parseFloat(document.getElementById("eSecond").value),
+            MFirst: parseFloat(document.getElementById("mFirst").value),
+            MSecond: parseFloat(document.getElementById("mSecond").value),
+            HIn: parseFloat(document.getElementById("hIn").value),
+            HOut: parseFloat(document.getElementById("hOut").value),
+            MIn: parseFloat(document.getElementById("mIn").value),
+            MOut: parseFloat(document.getElementById("mOut").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/SteadyFlow', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            console.log("API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("steadyFlowCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

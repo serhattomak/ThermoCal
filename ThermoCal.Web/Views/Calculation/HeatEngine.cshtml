@@ -26,18 +26,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="copHeat" name="COPHeat" placeholder="Isı Pompası COP">
-                                    <label for="copHeat">Isı Pompası COP</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="copRef" name="COPRef" placeholder="Soğutucu COP">
-                                    <label for="copRef">Soğutucu COP</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
                                     <label for="q">Isı (Q)</label>
                                 </div>
@@ -62,14 +50,20 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="th" name="Th" placeholder="Yüksek Sıcaklık (Th)">
-                                    <label for="th">Yüksek Sıcaklık (Th)</label>
+                                    <input type="text" class="form-control" id="qIn" name="QIn" placeholder="Giriş Isı (Qin)">
+                                    <label for="qIn">Giriş Isı (Qin)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="tl" name="Tl" placeholder="Düşük Sıcaklık (Tl)">
-                                    <label for="tl">Düşük Sıcaklık (Tl)</label>
+                                    <input type="text" class="form-control" id="qOut" name="QOut" placeholder="Çıkış Isı (Qout)">
+                                    <label for="qOut">Çıkış Isı (Qout)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="qNet" name="QNet" placeholder="Net Isı (Qnet)">
+                                    <label for="qNet">Net Isı (Qnet)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -90,32 +84,76 @@
                                     <label for="wNet">Net İş (Wnet)</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qIn" name="QIn" placeholder="Giriş Isı (Qin)">
-                                    <label for="qIn">Giriş Isı (Qin)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qOut" name="QOut" placeholder="Çıkış Isı (Qout)">
-                                    <label for="qOut">Çıkış Isı (Qout)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qNet" name="QNet" placeholder="Net Isı (Qnet)">
-                                    <label for="qNet">Net Isı (Qnet)</label>
-                                </div>
-                            </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="heatEngineCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="heatEngineCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            Efficiency: parseFloat(document.getElementById("efficiency").value),
+            Q: parseFloat(document.getElementById("q").value),
+            W: parseFloat(document.getElementById("w").value),
+            Qh: parseFloat(document.getElementById("qh").value),
+            Ql: parseFloat(document.getElementById("ql").value),
+            QIn: parseFloat(document.getElementById("qIn").value),
+            QOut: parseFloat(document.getElementById("qOut").value),
+            QNet: parseFloat(document.getElementById("qNet").value),
+            WIn: parseFloat(document.getElementById("wIn").value),
+            WOut: parseFloat(document.getElementById("wOut").value),
+            WNet: parseFloat(document.getElementById("wNet").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/HeatEngine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("heatEngineCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

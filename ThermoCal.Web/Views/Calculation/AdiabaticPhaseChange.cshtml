@@ -20,86 +20,38 @@
                         <form class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="heat" placeholder="Isı">
-                                    <label for="heat">Isı (Q)</label>
+                                    <input type="text" class="form-control" id="w" placeholder="İş (W)">
+                                    <label for="w">İş (W)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="cV" placeholder="Özgül Isı (Cv)">
-                                    <label for="cV">Özgül Isı (Cv)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="cP" placeholder="Özgül Isı (Cp)">
-                                    <label for="cP">Özgül Isı (Cp)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="mass" placeholder="Kütle">
-                                    <label for="mass">Kütle (m)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="r" placeholder="Gaz Sabiti">
-                                    <label for="R">Gaz Sabiti (R)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="k" placeholder="Adyabatik Üs">
+                                    <input type="text" class="form-control" id="k" placeholder="Adyabatik Üs (k)">
                                     <label for="k">Adyabatik Üs (k)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pressure" placeholder="Basınç">
-                                    <label for="pressure">Basınç (P)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="pFirst" placeholder="İlk Basınç">
+                                    <input type="text" class="form-control" id="pFirst" placeholder="İlk Basınç (P1)">
                                     <label for="pFirst">İlk Basınç (P1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pSecond" placeholder="Son Basınç">
+                                    <input type="text" class="form-control" id="pSecond" placeholder="Son Basınç (P2)">
                                     <label for="pSecond">Son Basınç (P2)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="volume" placeholder="Hacim">
-                                    <label for="pressure">Hacim (V)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vFirst" placeholder="İlk Hacim">
+                                    <input type="text" class="form-control" id="vFirst" placeholder="İlk Hacim (V1)">
                                     <label for="vFirst">İlk Hacim (V1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSecond" placeholder="Son Hacim">
+                                    <input type="text" class="form-control" id="vSecond" placeholder="Son Hacim (V2)">
                                     <label for="vSecond">Son Hacim (V2)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="tFirst" placeholder="İlk Sıcaklık">
-                                    <label for="tFirst">İlk Sıcaklık (T1)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="tSecond" placeholder="Son Sıcaklık">
-                                    <label for="tSecond">Son Sıcaklık (T2)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -107,9 +59,66 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="calculatedW" class="form-label">Hesaplanan İş (W)</label>
+                            <input type="text" class="form-control" id="calculatedW" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            W: parseFloat(document.getElementById("w").value),
+            K: parseFloat(document.getElementById("k").value),
+            PFirst: parseFloat(document.getElementById("pFirst").value),
+            PSecond: parseFloat(document.getElementById("pSecond").value),
+            VFirst: parseFloat(document.getElementById("vFirst").value),
+            VSecond: parseFloat(document.getElementById("vSecond").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/AdiabaticPhaseChange', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.w !== undefined) {
+                document.getElementById("calculatedW").value = result.data.w;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

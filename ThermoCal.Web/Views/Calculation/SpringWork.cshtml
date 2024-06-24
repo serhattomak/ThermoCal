@@ -20,18 +20,6 @@
                         <form class="row g-3" id="springWorkForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="f" name="F" placeholder="Kuvvet (F)">
-                                    <label for="f">Kuvvet (F)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="x" name="X" placeholder="Yer Değiştirme (X)">
                                     <label for="x">Yer Değiştirme (X)</label>
                                 </div>
@@ -47,9 +35,46 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="springWorkCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="springWorkCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            X: parseFloat(document.getElementById("x").value),
+            K: parseFloat(document.getElementById("k").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/SpringWork', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            console.log("API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("springWorkCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

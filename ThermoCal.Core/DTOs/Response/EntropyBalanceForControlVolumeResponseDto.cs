@@ -15,7 +15,7 @@ public class EntropyBalanceForControlVolumeResponseDto
     public double Volume { get; set; }
     public double A { get; set; }
     public double QDot { get; set; }
-    public double SGenCVDot { get; set; }
+    public double S { get; set; }
     public double SGenDot { get; set; }
     public double SGen { get; set; }
 }

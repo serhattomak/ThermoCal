@@ -589,7 +589,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateEntropyCalculationForSteadyFlowOpenSystem(request);
+                var response = await _calculationApiService.CalculateEntropyForSteadyFlowOpenSystem(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -651,7 +651,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateEntropyCalculation(request);
+                var response = await _calculationApiService.CalculateEntropy(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -775,7 +775,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateEntropyChangeOfPureSubstance(request);
+                var response = await _calculationApiService.CalculateEntropyChangeOfPure(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -806,7 +806,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateEntropyChangeOfSolidSubstance(request);
+                var response = await _calculationApiService.CalculateEntropyChangeOfSolid(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -837,7 +837,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateExergyCalculation(request);
+                var response = await _calculationApiService.CalculateExergy(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -977,37 +977,6 @@ namespace ThermoCal.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> GibbsEquation()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> GibbsEquation([FromBody] GibbsEquationCalculationRequestDto request)
-        {
-            if (request == null)
-            {
-                _logger.LogError("Request is null.");
-                return BadRequest("Request cannot be null.");
-            }
-
-            try
-            {
-                var response = await _calculationApiService.CalculateGibbsEquationCalculation(request);
-
-                if (response.StatusCode == 200)
-                {
-                    return Ok(response);
-                }
-
-                return StatusCode(response.StatusCode, response.Errors);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "An error occurred while calculating gibbs equation calculation.");
-                return StatusCode(500, e.Message);
-            }
-        }
-
         public async Task<IActionResult> GravityWork()
         {
             return View();
@@ -1054,7 +1023,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateHeatAndHeatTransferCalculation(request);
+                var response = await _calculationApiService.CalculateHeatAndHeatTransfer(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1085,7 +1054,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateHeatEngineCalculation(request);
+                var response = await _calculationApiService.CalculateHeatEngine(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1116,7 +1085,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateHeatExchangersCalculation(request);
+                var response = await _calculationApiService.CalculateHeatExchangers(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1147,7 +1116,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateHeatPumpEfficiencyCalculation(request);
+                var response = await _calculationApiService.CalculateHeatPumpEfficiency(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1178,7 +1147,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateIdealGasCalculation(request);
+                var response = await _calculationApiService.CalculateIdealGas(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1209,7 +1178,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateIrreversibilityCalculation(request);
+                var response = await _calculationApiService.CalculateIrreversibility(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1240,7 +1209,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateIsentropicPhaseChangeOfPerfectGasesApproximateCalculation(request);
+                var response = await _calculationApiService.CalculateIsentropicPhaseChangeOfPerfectGasesApproximate(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1271,7 +1240,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateIsentropicPhaseChangeOfPerfectGasesExactCalculation(request);
+                var response = await _calculationApiService.CalculateIsentropicPhaseChangeOfPerfectGasesExact(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1302,7 +1271,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateIsothermalPhaseChangeCalculation(request);
+                var response = await _calculationApiService.CalculateIsothermalPhaseChange(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1333,7 +1302,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateMassFlowCalculation(request);
+                var response = await _calculationApiService.CalculateMassFlow(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1364,7 +1333,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateMechanicalWorkCalculation(request);
+                var response = await _calculationApiService.CalculateMechanicalWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1395,7 +1364,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateMinimizeCompressorWorkCalculation(request);
+                var response = await _calculationApiService.CalculateMinimizeCompressorWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1426,7 +1395,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateMixingChamberCalculation(request);
+                var response = await _calculationApiService.CalculateMixingChamber(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1457,7 +1426,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateNozzleCalculation(request);
+                var response = await _calculationApiService.CalculateNozzle(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1488,7 +1457,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculatePolytropicPhaseChangeCalculation(request);
+                var response = await _calculationApiService.CalculatePolytropicPhaseChange(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1519,7 +1488,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculatePressureCalculation(request);
+                var response = await _calculationApiService.CalculatePressure(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1550,7 +1519,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculatePumpCalculation(request);
+                var response = await _calculationApiService.CalculatePump(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1581,7 +1550,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateReducedPressureAndTemperatureCalculation(request);
+                var response = await _calculationApiService.CalculateReducedPressureAndTemperature(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1612,7 +1581,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateRefrigeratorCalculation(request);
+                var response = await _calculationApiService.CalculateRefrigerator(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1643,7 +1612,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateRefrigeratorEfficiencyCalculation(request);
+                var response = await _calculationApiService.CalculateRefrigeratorEfficiency(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1674,7 +1643,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateReversibleContinuousFlowCalculation(request);
+                var response = await _calculationApiService.CalculateReversibleContinuousFlow(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1705,7 +1674,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateReversibleWorkCalculation(request);
+                var response = await _calculationApiService.CalculateReversibleWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1736,7 +1705,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateSpindleWorkCalculation(request);
+                var response = await _calculationApiService.CalculateSpindleWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1767,7 +1736,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateSpringWorkCalculation(request);
+                var response = await _calculationApiService.CalculateSpringWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1798,7 +1767,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateSteadyFlowCalculation(request);
+                var response = await _calculationApiService.CalculateSteadyFlow(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1829,7 +1798,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateStressCalculationOfLiquidSurface(request);
+                var response = await _calculationApiService.CalculateStressOfLiquidSurface(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1841,37 +1810,6 @@ namespace ThermoCal.Web.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, "An error occurred while calculating stress calculation of liquid surface.");
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        public async Task<IActionResult> SurroundWork()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> SurroundWork([FromBody] SurroundWorkCalculationRequestDto request)
-        {
-            if (request == null)
-            {
-                _logger.LogError("Request is null.");
-                return BadRequest("Request cannot be null.");
-            }
-
-            try
-            {
-                var response = await _calculationApiService.CalculateSurroundWorkCalculation(request);
-
-                if (response.StatusCode == 200)
-                {
-                    return Ok(response);
-                }
-
-                return StatusCode(response.StatusCode, response.Errors);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "An error occurred while calculating surround work calculation.");
                 return StatusCode(500, e.Message);
             }
         }
@@ -1891,7 +1829,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateThrottleValveCalculation(request);
+                var response = await _calculationApiService.CalculateThrottleValve(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1922,7 +1860,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateTurbineCalculation(request);
+                var response = await _calculationApiService.CalculateTurbine(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1953,7 +1891,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateUsefulWorkCalculation(request);
+                var response = await _calculationApiService.CalculateUsefulWork(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -1984,7 +1922,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateVolumetricFlowCalculation(request);
+                var response = await _calculationApiService.CalculateVolumetricFlow(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -2015,7 +1953,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateWorkConsumingDeviceEfficiencyCalculation(request);
+                var response = await _calculationApiService.CalculateWorkConsumingDeviceEfficiency(request);
 
                 if (response.StatusCode == 200)
                 {
@@ -2046,7 +1984,7 @@ namespace ThermoCal.Web.Controllers
 
             try
             {
-                var response = await _calculationApiService.CalculateWorkProducingDeviceEfficiencyCalculation(request);
+                var response = await _calculationApiService.CalculateWorkProducingDeviceEfficiency(request);
 
                 if (response.StatusCode == 200)
                 {

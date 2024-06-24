@@ -35,12 +35,11 @@ namespace ThermoCal.API.Controllers
         private readonly IEntropyChangeOfPerfectGasesExactService _entropyChangeOfPerfectGasesExactService;
         private readonly IEntropyChangeOfPureService _entropyChangeOfPureService;
         private readonly IEntropyChangeOfSolidService _entropyChangeOfSolidService;
-        //private readonly IExergyCalculationService _exergyCalculationService;
+        private readonly IExergyCalculationService _exergyCalculationService;
         private readonly IFlexibleRodWorkService _flexibleRodWorkService;
         private readonly IFlowCalculationInDuctService _flowCalculationInDuctService;
         private readonly IFlowCalculationInPipeService _flowCalculationInPipeService;
         private readonly IFlowWorkService _flowWorkService;
-        private readonly IGibbsEquationCalculationService _gibbsEquationCalculationService;
         private readonly IGravityWorkService _gravityWorkService;
         private readonly IHeatAndHeatTransferService _heatAndHeatTransferService;
         private readonly IHeatEngineCalculationService _heatEngineCalculationService;
@@ -52,7 +51,7 @@ namespace ThermoCal.API.Controllers
         private readonly IIsentropicPhaseChangeOfPerfectGasesExactService _isentropicPhaseChangeOfPerfectGasesExactService;
         private readonly IIsothermalPhaseChangeService _isothermalPhaseChangeService;
         private readonly IMassFlowService _massFlowService;
-        //private readonly IMechanicalWorkService _mechanicalWorkService;
+        private readonly IMechanicalWorkService _mechanicalWorkService;
         private readonly IMinimizeCompressorWorkService _minimizeCompressorWorkService;
         private readonly IMixingChamberCalculationService _mixingChamberCalculationService;
         private readonly INozzleCalculationService _nozzleCalculationService;
@@ -68,7 +67,6 @@ namespace ThermoCal.API.Controllers
         private readonly ISpringWorkService _springWorkService;
         private readonly ISteadyFlowCalculationService _steadyFlowCalculationService;
         private readonly IStressCalculationOfLiquidSurfaceService _stressCalculationOfLiquidSurfaceService;
-        private readonly ISurroundWorkCalculationService _surroundWorkCalculationService;
         private readonly IThrottleValveCalculationService _throttleValveCalculationService;
         private readonly ITurbineCalculationService _turbineCalculationService;
         private readonly IUsefulWorkCalculationService _usefulWorkCalculationService;
@@ -103,11 +101,10 @@ IEntropyChangeOfLiquidService entropyChangeOfLiquidService,
 IEntropyChangeOfPerfectGasesApproximateService entropyChangeOfPerfectGasesApproximateService,
 IEntropyChangeOfPerfectGasesExactService entropyChangeOfPerfectGasesExactService,
 IEntropyChangeOfPureService entropyChangeOfPureService,
-IEntropyChangeOfSolidService entropyChangeOfSolidService,
+IEntropyChangeOfSolidService entropyChangeOfSolidService, IExergyCalculationService exergyCalculationService,
  IFlexibleRodWorkService flexibleRodWorkService,
 IFlowCalculationInDuctService flowCalculationInDuctService,
-IFlowCalculationInPipeService flowCalculationInPipeService, IFlowWorkService flowWorkService,
-IGibbsEquationCalculationService gibbsEquationCalculationService, IGravityWorkService gravityWorkService,
+IFlowCalculationInPipeService flowCalculationInPipeService, IFlowWorkService flowWorkService, IGravityWorkService gravityWorkService,
 IHeatAndHeatTransferService heatAndHeatTransferService,
 IHeatEngineCalculationService heatEngineCalculationService,
 IHeatExchangersCalculationService heatExchangersCalculationService,
@@ -115,7 +112,7 @@ IHeatPumpEfficiencyService heatPumpEfficiencyService, IIdealGasService idealGasS
 IIrreversibilityCalculationService irreversibilityCalculationService,
 IIsentropicPhaseChangeOfPerfectGasesApproximateService
     isentropicPhaseChangeOfPerfectGasesApproximateService,
-IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService,  IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinuousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, ISurroundWorkCalculationService surroundWorkCalculationService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService)
+IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectGasesExactService, IIsothermalPhaseChangeService isothermalPhaseChangeService, IMassFlowService massFlowService, IMechanicalWorkService mechanicalWorkService, IMinimizeCompressorWorkService minimizeCompressorWorkService, IMixingChamberCalculationService mixingChamberCalculationService, INozzleCalculationService nozzleCalculationService, IPolytropicPhaseChangeService polytropicPhaseChangeService, IPressureCalculationService pressureCalculationService, IPumpCalculationService pumpCalculationService, IReducedPressureAndTemperatureService reducedPressureAndTemperatureService, IRefrigeratorCalculationService refrigeratorCalculationService, IRefrigeratorEfficiencyService refrigeratorEfficiencyService, IReversibleContinuousFlowCalculationService reversibleContinousFlowCalculationService, IReversibleWorkCalculationService reversibleWorkCalculationService, ISpindleWorkService spindleWorkService, ISpringWorkService springWorkService, ISteadyFlowCalculationService steadyFlowCalculationService, IStressCalculationOfLiquidSurfaceService stressCalculationOfLiquidSurfaceService, IThrottleValveCalculationService throttleValveCalculationService, ITurbineCalculationService turbineCalculationService, IUsefulWorkCalculationService usefulWorkCalculationService, IVolumetricFlowService volumetricFlowService, IWorkConsumingDeviceEfficiencyService workConsumingDeviceEfficiencyService, IWorkProducingDeviceEfficiencyService workProducingDeviceEfficiencyService)
         {
             _accelerationWorkService = accelerationWorkService;
             _logger = logger;
@@ -145,12 +142,11 @@ IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectG
             _entropyChangeOfPerfectGasesExactService = entropyChangeOfPerfectGasesExactService;
             _entropyChangeOfPureService = entropyChangeOfPureService;
             _entropyChangeOfSolidService = entropyChangeOfSolidService;
-            //_exergyCalculationService = exergyCalculationService;
+            _exergyCalculationService = exergyCalculationService;
             _flexibleRodWorkService = flexibleRodWorkService;
             _flowCalculationInDuctService = flowCalculationInDuctService;
             _flowCalculationInPipeService = flowCalculationInPipeService;
             _flowWorkService = flowWorkService;
-            _gibbsEquationCalculationService = gibbsEquationCalculationService;
             _gravityWorkService = gravityWorkService;
             _heatAndHeatTransferService = heatAndHeatTransferService;
             _heatEngineCalculationService = heatEngineCalculationService;
@@ -163,7 +159,7 @@ IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectG
             _isentropicPhaseChangeOfPerfectGasesExactService = isentropicPhaseChangeOfPerfectGasesExactService;
             _isothermalPhaseChangeService = isothermalPhaseChangeService;
             _massFlowService = massFlowService;
-            //_mechanicalWorkService = mechanicalWorkService;
+            _mechanicalWorkService = mechanicalWorkService;
             _minimizeCompressorWorkService = minimizeCompressorWorkService;
             _mixingChamberCalculationService = mixingChamberCalculationService;
             _nozzleCalculationService = nozzleCalculationService;
@@ -179,7 +175,6 @@ IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectG
             _springWorkService = springWorkService;
             _steadyFlowCalculationService = steadyFlowCalculationService;
             _stressCalculationOfLiquidSurfaceService = stressCalculationOfLiquidSurfaceService;
-            _surroundWorkCalculationService = surroundWorkCalculationService;
             _throttleValveCalculationService = throttleValveCalculationService;
             _turbineCalculationService = turbineCalculationService;
             _usefulWorkCalculationService = usefulWorkCalculationService;
@@ -212,398 +207,387 @@ IIsentropicPhaseChangeOfPerfectGasesExactService isentropicPhaseChangeOfPerfectG
             return StatusCode(response.StatusCode, response);
         }
         [HttpPost("AdiabaticEfficiencyNozzle")]
-        public IActionResult CalculateAdiabaticEfficiencyNozzle([FromBody] AdiabaticEfficiencyNozzleRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticEfficiencyNozzle([FromBody] AdiabaticEfficiencyNozzleRequestDto request)
         {
-            var response = _adiabaticEfficiencyNozzleService.CalculateAdiabaticEfficiencyNozzleAsync(request);
+            var response = await _adiabaticEfficiencyNozzleService.CalculateAdiabaticEfficiencyNozzleAsync(request);
             return Ok(response);
         }
         [HttpPost("AdiabaticEfficiencyOfCompressor")]
-        public IActionResult CalculateAdiabaticEfficiencyOfCompressor([FromBody] AdiabaticEfficiencyOfCompressorRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticEfficiencyOfCompressor([FromBody] AdiabaticEfficiencyOfCompressorRequestDto request)
         {
-            var response = _adiabaticEfficiencyOfCompressorService.CalculateAdiabaticEfficiencyOfCompressor(request);
+            var response = await _adiabaticEfficiencyOfCompressorService.CalculateAdiabaticEfficiencyOfCompressorAsync(request);
             return Ok(response);
         }
         [HttpPost("AdiabaticEfficiencyOfPump")]
-        public IActionResult CalculateAdiabaticEfficiencyOfPump([FromBody] AdiabaticEfficiencyOfPumpRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticEfficiencyOfPump([FromBody] AdiabaticEfficiencyOfPumpRequestDto request)
         {
-            var response = _adiabaticEfficiencyOfPumpService.CalculateAdiabaticEfficiencyOfPump(request);
+            var response = await _adiabaticEfficiencyOfPumpService.CalculateAdiabaticEfficiencyOfPumpAsync(request);
             return Ok(response);
         }
         [HttpPost("AdiabaticEfficiencyOfTurbine")]
-        public IActionResult CalculateAdiabaticEfficiencyOfTurbine([FromBody] AdiabaticEfficiencyOfTurbineRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticEfficiencyOfTurbine([FromBody] AdiabaticEfficiencyOfTurbineRequestDto request)
         {
-            var response = _adiabaticEfficiencyOfTurbineService.CalculateAdiabaticEfficiencyOfTurbine(request);
+            var response = await _adiabaticEfficiencyOfTurbineService.CalculateAdiabaticEfficiencyOfTurbineAsync(request);
             return Ok(response);
         }
         [HttpPost("AdiabaticExponent")]
-        public IActionResult CalculateAdiabaticExponent([FromBody] AdiabaticExponentRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticExponent([FromBody] AdiabaticExponentRequestDto request)
         {
-            var response = _adiabaticExponentService.CalculateAdiabaticExponent(request);
+            var response = await _adiabaticExponentService.CalculateAdiabaticExponentAsync(request);
             return Ok(response);
         }
         [HttpPost("AdiabaticPhaseChange")]
-        public IActionResult CalculateAdiabaticPhaseChange([FromBody] AdiabaticPhaseChangeRequestDto request)
+        public async Task<IActionResult> CalculateAdiabaticPhaseChange([FromBody] AdiabaticPhaseChangeRequestDto request)
         {
-            var response = _adiabaticPhaseChangeService.CalculateAdiabaticPhaseChange(request);
+            var response = await _adiabaticPhaseChangeService.CalculateAdiabaticPhaseChangeAsync(request);
             return Ok(response);
         }
         [HttpPost("CarnotHeatPump")]
-        public IActionResult CalculateCarnotHeatPump([FromBody] CarnotHeatPumpCalculationRequestDto request)
+        public async Task<IActionResult> CalculateCarnotHeatPump([FromBody] CarnotHeatPumpCalculationRequestDto request)
         {
-            var response = _carnotHeatPumpCalculationService.CalculateCarnotHeatPump(request);
+            var response = await _carnotHeatPumpCalculationService.CalculateCarnotHeatPumpAsync(request);
             return Ok(response);
         }
         [HttpPost("CarnotRefrigerator")]
-        public IActionResult CalculateCarnotRefrigerator([FromBody] CarnotRefrigeratorCalculationRequestDto request)
+        public async Task<IActionResult> CalculateCarnotRefrigerator([FromBody] CarnotRefrigeratorCalculationRequestDto request)
         {
-            var response = _carnotRefrigeratorCalculationService.CalculateCarnotRefrigerator(request);
+            var response = await _carnotRefrigeratorCalculationService.CalculateCarnotRefrigeratorAsync(request);
             return Ok(response);
         }
         [HttpPost("CompressibilityMultiplier")]
-        public IActionResult CalculateCompressibilityMultiplier([FromBody] CompressibilityMultiplierCalculationRequestDto request)
+        public async Task<IActionResult> CalculateCompressibilityMultiplier([FromBody] CompressibilityMultiplierCalculationRequestDto request)
         {
-            var response = _compressibilityMultiplierCalculationService.CalculateCompressibilityMultiplier(request);
+            var response = await _compressibilityMultiplierCalculationService.CalculateCompressibilityMultiplierAsync(request);
             return Ok(response);
         }
         [HttpPost("Compressor")]
-        public IActionResult CalculateCompressorCalculation([FromBody] CompressorCalculationRequestDto request)
+        public async Task<IActionResult> CalculateCompressorCalculation([FromBody] CompressorCalculationRequestDto request)
         {
-            var response = _compressorCalculationService.CalculateCompressorCalculation(request);
+            var response = await _compressorCalculationService.CalculateCompressorCalculationAsync(request);
             return Ok(response);
         }
         [HttpPost("ConstantPressurePhaseChange")]
-        public IActionResult CalculateConstantPressurePhaseChange([FromBody] ConstantPressurePhaseChangeRequestDto request)
+        public async Task<IActionResult> CalculateConstantPressurePhaseChange([FromBody] ConstantPressurePhaseChangeRequestDto request)
         {
-            var response = _constantPressurePhaseChangeService.CalculateConstantPressurePhaseChange(request);
+            var response = await _constantPressurePhaseChangeService.CalculateConstantPressurePhaseChangeAsync(request);
             return Ok(response);
         }
         [HttpPost("ConstantVolumePhaseChange")]
-        public IActionResult CalculateConstantVolumePhaseChange([FromBody] ConstantVolumePhaseChangeRequestDto request)
+        public async Task<IActionResult> CalculateConstantVolumePhaseChange([FromBody] ConstantVolumePhaseChangeRequestDto request)
         {
-            var response = _constantVolumePhaseChangeService.CalculateConstantVolumePhaseChange(request);
+            var response = await _constantVolumePhaseChangeService.CalculateConstantVolumePhaseChangeAsync(request);
             return Ok(response);
         }
         [HttpPost("DegreeOfDryness")]
-        public IActionResult CalculateDegreeOfDryness([FromBody] DegreeOfDrynessCalculationRequestDto request)
+        public async Task<IActionResult> CalculateDegreeOfDryness([FromBody] DegreeOfDrynessCalculationRequestDto request)
         {
-            var response = _degreeOfDrynessCalculationService.CalculateDegreeOfDryness(request);
+            var response = await _degreeOfDrynessCalculationService.CalculateDegreeOfDrynessAsync(request);
             return Ok(response);
         }
         [HttpPost("Diffuser")]
-        public IActionResult CalculateDiffuser([FromBody] DiffuserCalculationRequestDto request)
+        public async Task<IActionResult> CalculateDiffuser([FromBody] DiffuserCalculationRequestDto request)
         {
-            var response = _diffuserCalculationService.CalculateDiffuser(request);
+            var response = await _diffuserCalculationService.CalculateDiffuserAsync(request);
             return Ok(response);
         }
         [HttpPost("ElectricalWork")]
-        public IActionResult CalculateElectricalWork([FromBody] ElectricalWorkRequestDto request)
+        public async Task<IActionResult> CalculateElectricalWork([FromBody] ElectricalWorkRequestDto request)
         {
-            var response = _electricalWorkService.CalculateElectricalWork(request);
+            var response = await _electricalWorkService.CalculateElectricalWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyBalanceForClosedSystem")]
-        public IActionResult CalculateEntropyBalanceForClosedSystem([FromBody] EntropyBalanceForClosedSystemRequestDto request)
+        public async Task<IActionResult> CalculateEntropyBalanceForClosedSystem([FromBody] EntropyBalanceForClosedSystemRequestDto request)
         {
-            var response = _entropyBalanceForClosedSystemService.CalculateEntropyBalanceForClosedSystem(request);
+            var response = await _entropyBalanceForClosedSystemService.CalculateEntropyBalanceForClosedSystemAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyBalanceForControlVolume")]
-        public IActionResult CalculateEntropyBalanceForControlVolume([FromBody] EntropyBalanceForControlVolumeRequestDto request)
+        public async Task<IActionResult> CalculateEntropyBalanceForControlVolume([FromBody] EntropyBalanceForControlVolumeRequestDto request)
         {
-            var response = _entropyBalanceForControlVolumeService.CalculateEntropyBalanceForControlVolume(request);
+            var response = await _entropyBalanceForControlVolumeService.CalculateEntropyBalanceForControlVolumeAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyCalculationForSteadyFlowOpenSystem")]
-        public IActionResult CalculateEntropyCalculationForSteadyFlowOpenSystem([FromBody] EntropyCalculationForSteadyFlowOpenSystemRequestDto request)
+        public async Task<IActionResult> CalculateEntropyCalculationForSteadyFlowOpenSystem([FromBody] EntropyCalculationForSteadyFlowOpenSystemRequestDto request)
         {
-            var response = _entropyCalculationForSteadyFlowOpenSystemService
-                .CalculateEntropyCalculationForSteadyFlowOpenSystem(request);
+            var response = await _entropyCalculationForSteadyFlowOpenSystemService
+                .CalculateEntropyCalculationForSteadyFlowOpenSystemAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyCalculationForUniformFlowBalancedOpenSystem")]
-        public IActionResult CalculateEntropyCalculationForUniformFlowBalancedOpenSystem([FromBody] EntropyCalculationForUniformFlowBalancedOpenSystemRequestDto request)
+        public async Task<IActionResult> CalculateEntropyCalculationForUniformFlowBalancedOpenSystem([FromBody] EntropyCalculationForUniformFlowBalancedOpenSystemRequestDto request)
         {
-            var response = _entropyCalculationForUniformFlowBalancedOpenSystemService
-                .CalculateEntropyCalculationForUniformFlowBalancedOpenSystem(request);
+            var response = await _entropyCalculationForUniformFlowBalancedOpenSystemService
+                .CalculateEntropyCalculationForUniformFlowBalancedOpenSystemAsync(request);
             return Ok(response);
         }
         [HttpPost("Entropy")]
-        public IActionResult CalculateEntropy([FromBody] EntropyCalculationRequestDto request)
+        public async Task<IActionResult> CalculateEntropy([FromBody] EntropyCalculationRequestDto request)
         {
-            var response = _entropyCalculationService.CalculateEntropy(request);
+            var response = await _entropyCalculationService.CalculateEntropyAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyChangeOfLiquid")]
-        public IActionResult CalculateEntropyChangeOfLiquid([FromBody] EntropyChangeOfLiquidRequestDto request)
+        public async Task<IActionResult> CalculateEntropyChangeOfLiquid([FromBody] EntropyChangeOfLiquidRequestDto request)
         {
-            var response = _entropyChangeOfLiquidService.CalculateEntropyChangeOfLiquid(request);
+            var response = await _entropyChangeOfLiquidService.CalculateEntropyChangeOfLiquidAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyChangeOfPerfectGasesApproximate")]
-        public IActionResult CalculateEntropyChangeOfPerfectGasesApproximate([FromBody] EntropyChangeOfPerfectGasesApproximateRequestDto request)
+        public async Task<IActionResult> CalculateEntropyChangeOfPerfectGasesApproximate([FromBody] EntropyChangeOfPerfectGasesApproximateRequestDto request)
         {
-            var response = _entropyChangeOfPerfectGasesApproximateService
-                .CalculateEntropyChangeOfPerfectGasesApproximate(request);
+            var response = await _entropyChangeOfPerfectGasesApproximateService
+                .CalculateEntropyChangeOfPerfectGasesApproximateAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyChangeOfPerfectGasesExact")]
-        public IActionResult CalculateEntropyChangeOfPerfectGasesExact([FromBody] EntropyChangeOfPerfectGasesExactRequestDto request)
+        public async Task<IActionResult> CalculateEntropyChangeOfPerfectGasesExact([FromBody] EntropyChangeOfPerfectGasesExactRequestDto request)
         {
-            var response = _entropyChangeOfPerfectGasesExactService.CalculateEntropyChangeOfPerfectGasesExact(request);
+            var response = await _entropyChangeOfPerfectGasesExactService.CalculateEntropyChangeOfPerfectGasesExactAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyChangeOfPure")]
-        public IActionResult CalculateEntropyChangeOfPure([FromBody] EntropyChangeOfPureRequestDto request)
+        public async Task<IActionResult> CalculateEntropyChangeOfPure([FromBody] EntropyChangeOfPureRequestDto request)
         {
-            var response = _entropyChangeOfPureService.CalculateEntropyChangeOfPure(request);
+            var response = await _entropyChangeOfPureService.CalculateEntropyChangeOfPureAsync(request);
             return Ok(response);
         }
         [HttpPost("EntropyChangeOfSolid")]
-        public IActionResult CalculateEntropyChangeOfSolid([FromBody] EntropyChangeOfSolidRequestDto request)
+        public async Task<IActionResult> CalculateEntropyChangeOfSolid([FromBody] EntropyChangeOfSolidRequestDto request)
         {
-            var response = _entropyChangeOfSolidService.CalculateEntropyChangeOfSolid(request);
+            var response = await _entropyChangeOfSolidService.CalculateEntropyChangeOfSolidAsync(request);
             return Ok(response);
         }
-        //[HttpPost("Exergy")]
-        //public IActionResult CalculateExergy([FromBody] ExergyCalculationRequestDto request)
-        //{
-        //    var response = _exergyCalculationService.CalculateExergy(request);
-        //    return Ok(response);
-        //}
-        [HttpPost("FlexibleRodWork")]
-        public IActionResult CalculateFlexibleRodWork([FromBody] FlexibleRodWorkRequestDto request)
+        [HttpPost("Exergy")]
+        public async Task<IActionResult> CalculateExergy([FromBody] ExergyCalculationRequestDto request)
         {
-            var response = _flexibleRodWorkService.CalculateFlexibleRodWork(request);
+            var response = await _exergyCalculationService.CalculateExergyAsync(request);
+            return Ok(response);
+        }
+        [HttpPost("FlexibleRodWork")]
+        public async Task<IActionResult> CalculateFlexibleRodWork([FromBody] FlexibleRodWorkRequestDto request)
+        {
+            var response = await _flexibleRodWorkService.CalculateFlexibleRodWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("FlowCalculationInDuct")]
-        public IActionResult CalculateFlowCalculationInDuct([FromBody] FlowCalculationInDuctRequestDto request)
+        public async Task<IActionResult> CalculateFlowCalculationInDuct([FromBody] FlowCalculationInDuctRequestDto request)
         {
-            var response = _flowCalculationInDuctService.CalculateFlowCalculationInDuct(request);
+            var response = await _flowCalculationInDuctService.CalculateFlowCalculationInDuctAsync(request);
             return Ok(response);
         }
         [HttpPost("FlowCalculationInPipe")]
-        public IActionResult CalculateFlowCalculationInPipe([FromBody] FlowCalculationInPipeRequestDto request)
+        public async Task<IActionResult> CalculateFlowCalculationInPipe([FromBody] FlowCalculationInPipeRequestDto request)
         {
-            var response = _flowCalculationInPipeService.CalculateFlowCalculationInPipe(request);
+            var response = await _flowCalculationInPipeService.CalculateFlowCalculationInPipeAsync(request);
             return Ok(response);
         }
         [HttpPost("FlowWork")]
-        public IActionResult CalculateFlowWork([FromBody] FlowWorkRequestDto request)
+        public async Task<IActionResult> CalculateFlowWork([FromBody] FlowWorkRequestDto request)
         {
-            var response = _flowWorkService.CalculateFlowWork(request);
-            return Ok(response);
-        }
-        [HttpPost("GibbsEquation")]
-        public IActionResult CalculateGibbsEquation([FromBody] GibbsEquationCalculationRequestDto request)
-        {
-            var response = _gibbsEquationCalculationService.CalculateGibbsEquationCalculation(request);
+            var response = await _flowWorkService.CalculateFlowWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("GravityWork")]
-        public IActionResult CalculateGravityWork([FromBody] GravityWorkRequestDto request)
+        public async Task<IActionResult> CalculateGravityWork([FromBody] GravityWorkRequestDto request)
         {
-            var response = _gravityWorkService.CalculateGravityWork(request);
+            var response = await _gravityWorkService.CalculateGravityWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("HeatAndHeatTransfer")]
-        public IActionResult CalculateHeatAndHeatTransfer([FromBody] HeatAndHeatTransferRequestDto request)
+        public async Task<IActionResult> CalculateHeatAndHeatTransfer([FromBody] HeatAndHeatTransferRequestDto request)
         {
-            var response = _heatAndHeatTransferService.CalculateHeatAndHeatTransfer(request);
+            var response = await _heatAndHeatTransferService.CalculateHeatAndHeatTransferAsync(request);
             return Ok(response);
         }
         [HttpPost("HeatEngine")]
-        public IActionResult CalculateHeatEngine([FromBody] HeatEngineCalculationRequestDto request)
+        public async Task<IActionResult> CalculateHeatEngine([FromBody] HeatEngineCalculationRequestDto request)
         {
-            var response = _heatEngineCalculationService.CalculateHeatEngine(request);
+            var response = await _heatEngineCalculationService.CalculateHeatEngineAsync(request);
             return Ok(response);
         }
         [HttpPost("HeatExchangers")]
-        public IActionResult CalculateHeatExchangers([FromBody] HeatExchangersCalculationRequestDto request)
+        public async Task<IActionResult> CalculateHeatExchangers([FromBody] HeatExchangersCalculationRequestDto request)
         {
-            var response = _heatExchangersCalculationService.CalculateHeatExchangers(request);
+            var response = await _heatExchangersCalculationService.CalculateHeatExchangersAsync(request);
             return Ok(response);
         }
         [HttpPost("HeatPumpEfficiency")]
-        public IActionResult CalculateHeatPumpEfficiency([FromBody] HeatPumpEfficiencyRequestDto request)
+        public async Task<IActionResult> CalculateHeatPumpEfficiency([FromBody] HeatPumpEfficiencyRequestDto request)
         {
-            var response = _heatPumpEfficiencyService.CalculateHeatPumpEfficiency(request);
+            var response = await _heatPumpEfficiencyService.CalculateHeatPumpEfficiencyAsync(request);
             return Ok(response);
         }
         [HttpPost("IdealGas")]
-        public IActionResult CalculateIdealGas([FromBody] IdealGasRequestDto request)
+        public async Task<IActionResult> CalculateIdealGas([FromBody] IdealGasRequestDto request)
         {
-            var response = _idealGasService.CalculateIdealGas(request);
+            var response = await _idealGasService.CalculateIdealGasAsync(request);
             return Ok(response);
         }
         [HttpPost("Irreversibility")]
-        public IActionResult CalculateIrreversibility([FromBody] IrreversibilityCalculationRequestDto request)
+        public async Task<IActionResult> CalculateIrreversibility([FromBody] IrreversibilityCalculationRequestDto request)
         {
-            var response = _irreversibilityCalculationService.CalculateIrreversibility(request);
+            var response = await _irreversibilityCalculationService.CalculateIrreversibilityAsync(request);
             return Ok(response);
         }
         [HttpPost("IsentropicPhaseChangeOfPerfectGasesApproximate")]
-        public IActionResult CalculateIsentropicPhaseChangeOfPerfectGasesApproximate([FromBody] IsentropicPhaseChangeOfPerfectGasesApproximateRequestDto request)
+        public async Task<IActionResult> CalculateIsentropicPhaseChangeOfPerfectGasesApproximate([FromBody] IsentropicPhaseChangeOfPerfectGasesApproximateRequestDto request)
         {
-            var response = _isentropicPhaseChangeOfPerfectGasesApproximateService
-                .CalculateIsentropicPhaseChangeOfPerfectGasesApproximate(request);
+            var response = await _isentropicPhaseChangeOfPerfectGasesApproximateService
+                .CalculateIsentropicPhaseChangeOfPerfectGasesApproximateAsync(request);
             return Ok(response);
         }
         [HttpPost("IsentropicPhaseChangeOfPerfectGasesExact")]
-        public IActionResult CalculateIsentropicPhaseChangeOfPerfectGasesExact([FromBody] IsentropicPhaseChangeOfPerfectGasesExactRequestDto request)
+        public async Task<IActionResult> CalculateIsentropicPhaseChangeOfPerfectGasesExact([FromBody] IsentropicPhaseChangeOfPerfectGasesExactRequestDto request)
         {
-            var response = _isentropicPhaseChangeOfPerfectGasesExactService
-                .CalculateIsentropicPhaseChangeOfPerfectGasesExact(request);
+            var response = await _isentropicPhaseChangeOfPerfectGasesExactService
+                .CalculateIsentropicPhaseChangeOfPerfectGasesExactAsync(request);
             return Ok(response);
         }
         [HttpPost("IsothermalPhaseChange")]
-        public IActionResult CalculateIsothermalPhaseChange([FromBody] IsothermalPhaseChangeRequestDto request)
+        public async Task<IActionResult> CalculateIsothermalPhaseChange([FromBody] IsothermalPhaseChangeRequestDto request)
         {
-            var response = _isothermalPhaseChangeService.CalculateIsothermalPhaseChange(request);
+            var response = await _isothermalPhaseChangeService.CalculateIsothermalPhaseChangeAsync(request);
             return Ok(response);
         }
         [HttpPost("MassFlow")]
-        public IActionResult CalculateMassFlow([FromBody] MassFlowRequestDto request)
+        public async Task<IActionResult> CalculateMassFlow([FromBody] MassFlowRequestDto request)
         {
-            var response = _massFlowService.CalculateMassFlow(request);
+            var response = await _massFlowService.CalculateMassFlowAsync(request);
             return Ok(response);
         }
-        //[HttpPost("MechanicalWork")]
-        //public IActionResult CalculateMechanicalWork([FromBody] MechanicalWorkRequestDto request)
-        //{
-        //    var response = _mechanicalWorkService.CalculateMechanicalWork(request);
-        //    return Ok(response);
-        //}
-        [HttpPost("MinimizeCompressorWork")]
-        public IActionResult CalculateMinimizeCompressorWork([FromBody] MinimizeCompressorWorkRequestDto request)
+        [HttpPost("MechanicalWork")]
+        public async Task<IActionResult> CalculateMechanicalWork([FromBody] MechanicalWorkRequestDto request)
         {
-            var response = _minimizeCompressorWorkService.CalculateMinimizeCompressorWork(request);
+            var response = await _mechanicalWorkService.CalculateMechanicalWorkAsync(request);
+            return Ok(response);
+        }
+        [HttpPost("MinimizeCompressorWork")]
+        public async Task<IActionResult> CalculateMinimizeCompressorWork([FromBody] MinimizeCompressorWorkRequestDto request)
+        {
+            var response = await _minimizeCompressorWorkService.CalculateMinimizeCompressorWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("MixingChamber")]
-        public IActionResult CalculateMixingChamber([FromBody] MixingChamberCalculationRequestDto request)
+        public async Task<IActionResult> CalculateMixingChamber([FromBody] MixingChamberCalculationRequestDto request)
         {
-            var response = _mixingChamberCalculationService.Calculate(request);
+            var response = await _mixingChamberCalculationService.CalculateMixingChamberAsync(request);
             return Ok(response);
         }
         [HttpPost("Nozzle")]
-        public IActionResult CalculateNozzle([FromBody] NozzleCalculationRequestDto request)
+        public async Task<IActionResult> CalculateNozzle([FromBody] NozzleCalculationRequestDto request)
         {
-            var response = _nozzleCalculationService.Calculate(request);
+            var response = await _nozzleCalculationService.CalculateNozzleAsync(request);
             return Ok(response);
         }
         [HttpPost("PolytropicPhaseChange")]
-        public IActionResult CalculatePolytropicPhaseChange([FromBody] PolytropicPhaseChangeRequestDto request)
+        public async Task<IActionResult> CalculatePolytropicPhaseChange([FromBody] PolytropicPhaseChangeRequestDto request)
         {
-            var response = _polytropicPhaseChangeService.Calculate(request);
+            var response = await _polytropicPhaseChangeService.CalculatePolytropicPhaseChangeAsync(request);
             return Ok(response);
         }
         [HttpPost("Pressure")]
-        public IActionResult CalculatePressure([FromBody] PressureCalculationRequestDto request)
+        public async Task<IActionResult> CalculatePressure([FromBody] PressureCalculationRequestDto request)
         {
-            var response = _pressureCalculationService.Calculate(request);
+            var response = await _pressureCalculationService.CalculatePressureAsync(request);
             return Ok(response);
         }
         [HttpPost("Pump")]
-        public IActionResult CalculatePump([FromBody] PumpCalculationRequestDto request)
+        public async Task<IActionResult> CalculatePump([FromBody] PumpCalculationRequestDto request)
         {
-            var response = _pumpCalculationService.Calculate(request);
+            var response = await _pumpCalculationService.CalculatePumpAsync(request);
             return Ok(response);
         }
         [HttpPost("ReducedPressureAndTemperature")]
-        public IActionResult CalculateReducedPressureAndTemperature([FromBody] ReducedPressureAndTemperatureRequestDto request)
+        public async Task<IActionResult> CalculateReducedPressureAndTemperature([FromBody] ReducedPressureAndTemperatureRequestDto request)
         {
-            var response = _reducedPressureAndTemperatureService.Calculate(request);
+            var response = await _reducedPressureAndTemperatureService.CalculateReducedPressureAndTemperatureAsync(request);
             return Ok(response);
         }
         [HttpPost("Refrigerator")]
-        public IActionResult CalculateRefrigerator([FromBody] RefrigeratorCalculationRequestDto request)
+        public async Task<IActionResult> CalculateRefrigerator([FromBody] RefrigeratorCalculationRequestDto request)
         {
-            var response = _refrigeratorCalculationService.Calculate(request);
+            var response = await _refrigeratorCalculationService.CalculateRefrigeratorAsync(request);
             return Ok(response);
         }
         [HttpPost("RefrigeratorEfficiency")]
-        public IActionResult CalculateRefrigeratorEfficiency([FromBody] RefrigeratorEfficiencyRequestDto request)
+        public async Task<IActionResult> CalculateRefrigeratorEfficiency([FromBody] RefrigeratorEfficiencyRequestDto request)
         {
-            var response = _refrigeratorEfficiencyService.Calculate(request);
+            var response = await _refrigeratorEfficiencyService.CalculateRefrigeratorEfficiencyAsync(request);
             return Ok(response);
         }
         [HttpPost("ReversibleContinuousFlow")]
-        public IActionResult CalculateReversibleContinousFlow([FromBody] ReversibleContinuousFlowCalculationRequestDto request)
+        public async Task<IActionResult> CalculateReversibleContinousFlow([FromBody] ReversibleContinuousFlowCalculationRequestDto request)
         {
-            var response = _reversibleContinousFlowCalculationService.Calculate(request);
+            var response = await _reversibleContinousFlowCalculationService.CalculateReversibleContinuousFlowAsync(request);
             return Ok(response);
         }
         [HttpPost("ReversibleWork")]
-        public IActionResult CalculateReversibleWork([FromBody] ReversibleWorkCalculationRequestDto request)
+        public async Task<IActionResult> CalculateReversibleWork([FromBody] ReversibleWorkCalculationRequestDto request)
         {
-            var response = _reversibleWorkCalculationService.CalculateReversibleWork(request);
+            var response = await _reversibleWorkCalculationService.CalculateReversibleWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("SpindleWork")]
-        public IActionResult CalculateSpindleWork([FromBody] SpindleWorkRequestDto request)
+        public async Task<IActionResult> CalculateSpindleWork([FromBody] SpindleWorkRequestDto request)
         {
-            var response = _spindleWorkService.CalculateSpindleWork(request);
+            var response = await _spindleWorkService.CalculateSpindleWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("SpringWork")]
-        public IActionResult CalculateSpringWork([FromBody] SpringWorkRequestDto request)
+        public async Task<IActionResult> CalculateSpringWork([FromBody] SpringWorkRequestDto request)
         {
-            var response = _springWorkService.CalculateSpringWork(request);
+            var response = await _springWorkService.CalculateSpringWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("SteadyFlow")]
-        public IActionResult CalculateSteadyFlow([FromBody] SteadyFlowCalculationRequestDto request)
+        public async Task<IActionResult> CalculateSteadyFlow([FromBody] SteadyFlowCalculationRequestDto request)
         {
-            var response = _steadyFlowCalculationService.Calculate(request);
+            var response = await _steadyFlowCalculationService.CalculateSteadyFlowAsync(request);
             return Ok(response);
         }
         [HttpPost("StressCalculationOfLiquidSurface")]
-        public IActionResult CalculateStressCalculationOfLiquidSurface([FromBody] StressCalculationOfLiquidSurfaceRequestDto request)
+        public async Task<IActionResult> CalculateStressCalculationOfLiquidSurface([FromBody] StressCalculationOfLiquidSurfaceRequestDto request)
         {
-            var response = _stressCalculationOfLiquidSurfaceService.Calculate(request);
+            var response = await _stressCalculationOfLiquidSurfaceService.CalculateStressOfLiquidSurfaceAsync(request);
             return Ok(response);
         }
-        [HttpPost("SurroundWork")]
-        public IActionResult CalculateSurroundWork([FromBody] SurroundWorkCalculationRequestDto request)
-        {
-            var response = _surroundWorkCalculationService.Calculate(request);
-            return Ok(response);
-        }
+
         [HttpPost("ThrottleValve")]
-        public IActionResult CalculateThrottleValve([FromBody] ThrottleValveCalculationRequestDto request)
+        public async Task<IActionResult> CalculateThrottleValve([FromBody] ThrottleValveCalculationRequestDto request)
         {
-            var response = _throttleValveCalculationService.Calculate(request);
+            var response = await _throttleValveCalculationService.CalculateThrottleValveAsync(request);
             return Ok(response);
         }
         [HttpPost("Turbine")]
-        public IActionResult CalculateTurbine([FromBody] TurbineCalculationRequestDto request)
+        public async Task<IActionResult> CalculateTurbine([FromBody] TurbineCalculationRequestDto request)
         {
-            var response = _turbineCalculationService.Calculate(request);
+            var response = await _turbineCalculationService.CalculateTurbineAsync(request);
             return Ok(response);
         }
         [HttpPost("UsefulWork")]
-        public IActionResult CalculateUsefulWork([FromBody] UsefulWorkCalculationRequestDto request)
+        public async Task<IActionResult> CalculateUsefulWork([FromBody] UsefulWorkCalculationRequestDto request)
         {
-            var response = _usefulWorkCalculationService.Calculate(request);
+            var response = await _usefulWorkCalculationService.CalculateUsefulWorkAsync(request);
             return Ok(response);
         }
         [HttpPost("VolumetricFlow")]
-        public IActionResult CalculateVolumetricFlow([FromBody] VolumetricFlowRequestDto request)
+        public async Task<IActionResult> CalculateVolumetricFlow([FromBody] VolumetricFlowRequestDto request)
         {
-            var response = _volumetricFlowService.Calculate(request);
+            var response = await _volumetricFlowService.CalculateVolumetricFlowAsync(request);
             return Ok(response);
         }
         [HttpPost("WorkConsumingDeviceEfficiency")]
-        public IActionResult CalculateWorkConsumingDeviceEfficiency([FromBody] WorkConsumingDeviceEfficiencyRequestDto request)
+        public async Task<IActionResult> CalculateWorkConsumingDeviceEfficiency([FromBody] WorkConsumingDeviceEfficiencyRequestDto request)
         {
-            var response = _workConsumingDeviceEfficiencyService.CalculateEfficiency(request);
+            var response = await _workConsumingDeviceEfficiencyService.CalculateWorkConsumingDeviceEfficiencyAsync(request);
             return Ok(response);
         }
         [HttpPost("WorkProducingDeviceEfficiency")]
-        public IActionResult CalculateWorkProducingDeviceEfficiency([FromBody] WorkProducingDeviceEfficiencyRequestDto request)
+        public async Task<IActionResult> CalculateWorkProducingDeviceEfficiency([FromBody] WorkProducingDeviceEfficiencyRequestDto request)
         {
-            var response = _workProducingDeviceEfficiencyService.CalculateEfficiency(request);
+            var response = await _workProducingDeviceEfficiencyService.CalculateWorkProducingDeviceEfficiencyAsync(request);
             return Ok(response);
         }
     }

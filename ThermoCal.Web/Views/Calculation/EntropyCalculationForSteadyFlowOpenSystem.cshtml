@@ -18,29 +18,28 @@
 
                         <!-- Floating Labels Form -->
                         <form class="row g-3" id="calculationForm">
-                            <!-- Common Fields -->
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenDot" name="SGenDot" placeholder="Entropi Jenerasyonu Oranı (ṠGen)">
-                                    <label for="sGenDot">Entropi Jenerasyonu Oranı (ṠGen)</label>
+                                    <input type="text" class="form-control" id="mDotIn" name="MInDot" placeholder="Kütlesel Debi Giriş (ṁ,in)">
+                                    <label for="mDotIn">Kütlesel Debi Giriş (ṁ,in)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGen" name="SGen" placeholder="Entropi Jenerasyonu (SGen)">
-                                    <label for="sGen">Entropi Jenerasyonu (SGen)</label>
+                                    <input type="text" class="form-control" id="mDotOut" name="MOutDot" placeholder="Kütlesel Debi Çıkış (ṁ,out)">
+                                    <label for="mDotOut">Kütlesel Debi Çıkış (ṁ,out)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenCV" name="SGenCV" placeholder="Entropi Jenerasyonu (SGenCV)">
-                                    <label for="sGenCV">Entropi Jenerasyonu (SGenCV)</label>
+                                    <input type="text" class="form-control" id="qrDot" name="QrDot" placeholder="Isı (Q̇r)">
+                                    <label for="qrDot">Isı (Q̇r)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sGenCVDot" name="SGenCVDot" placeholder="Entropi Jenerasyonu Oranı (ṠGenCV)">
-                                    <label for="sGenCVDot">Entropi Jenerasyonu Oranı (ṠGenCV)</label>
+                                    <input type="text" class="form-control" id="tr" name="Tr" placeholder="Sıcaklık (Tr)">
+                                    <label for="tr">Sıcaklık (Tr)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -51,77 +50,75 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="sOut" name="SOut" placeholder="Entropi (S,çıkan)">
-                                    <label for="sOut">Entropi (S,çıkan)</label>
+                                    <input type="text" class="form-control" id="sOut" name="SOut" placeholder="Entropi (S, çıkan)">
+                                    <label for="sOut">Entropi (S, çıkan)</label>
                                 </div>
                             </div>
-
-                            <!-- Fields Specific to EntropyCalculationForSteadyFlowOpenSystemRequestDto -->
-                            <div class="entropy-steady-flow-fields">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="mdot" name="MDot" placeholder="Kütlesel Debi (ṁ)">
-                                        <label for="mdot">Kütlesel Debi (ṁ)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="minDot" name="MInDot" placeholder="Kütlesel Debi Giriş (ṁ,in)">
-                                        <label for="minDot">Kütlesel Debi Giriş (ṁ,in)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="moutDot" name="MOutDot" placeholder="Kütlesel Debi Çıkış (ṁ,out)">
-                                        <label for="moutDot">Kütlesel Debi Çıkış (ṁ,out)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="qrDot" name="QrDot" placeholder="Isı (Q̇r)">
-                                        <label for="qrDot">Isı (Q̇r)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="qinDot" name="QInDot" placeholder="Isı Giriş (Q̇in)">
-                                        <label for="qinDot">Isı Giriş (Q̇in)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="qoutDot" name="QOutDot" placeholder="Isı Çıkış (Q̇out)">
-                                        <label for="qoutDot">Isı Çıkış (Q̇out)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="tr" name="Tr" placeholder="Sıcaklık (Tr)">
-                                        <label for="tr">Sıcaklık (Tr)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="tout" name="TOut" placeholder="Sıcaklık Çıkış (Tout)">
-                                        <label for="tout">Sıcaklık Çıkış (Tout)</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="tsur" name="TSur" placeholder="Sıcaklık Çevre (Tsur)">
-                                        <label for="tsur">Sıcaklık Çevre (Tsur)</label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="entropyResult" class="form-label">Sonuç Entropi Jenerasyonu Oranı (ṠGen)</label>
+                            <input type="text" class="form-control" id="entropyResult" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            MInDot: parseFloat(document.getElementById("mDotIn").value),
+            MOutDot: parseFloat(document.getElementById("mDotOut").value),
+            QrDot: parseFloat(document.getElementById("qrDot").value),
+            Tr: parseFloat(document.getElementById("tr").value),
+            SIn: parseFloat(document.getElementById("sIn").value),
+            SOut: parseFloat(document.getElementById("sOut").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/EntropyCalculationForSteadyFlowOpenSystem', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.sGenDot !== undefined) {
+                document.getElementById("entropyResult").value = result.data.sGenDot;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

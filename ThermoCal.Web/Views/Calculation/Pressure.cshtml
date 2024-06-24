@@ -50,32 +50,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="n" name="N" placeholder="Mol Sayısı (n)">
-                                    <label for="n">Mol Sayısı (n)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="l" name="L" placeholder="Uzunluk (L)">
-                                    <label for="l">Uzunluk (L)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="sigma" name="Sigma" placeholder="Yüzey Gerilimi (σ)">
-                                    <label for="sigma">Yüzey Gerilimi (σ)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="a" name="A" placeholder="Alan (A)">
-                                    <label for="a">Alan (A)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
-                                    <label for="m">Kütle (M)</label>
+                                    <input type="text" class="form-control" id="density" name="Density" placeholder="Yoğunluk (ρ)">
+                                    <label for="density">Yoğunluk (ρ)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -90,20 +66,73 @@
                                     <label for="h">Yükseklik (H)</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="density" name="Density" placeholder="Yoğunluk (ρ)">
-                                    <label for="density">Yoğunluk (ρ)</label>
-                                </div>
-                            </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="calculate">Hesapla</button>
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="pressureCalculationResult" class="form-label">Hesaplama Sonucu</label>
+                            <textarea class="form-control" id="pressureCalculationResult" rows="4" readonly></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            P: parseFloat(document.getElementById("p").value),
+            PAbsolute: parseFloat(document.getElementById("pAbsolute").value),
+            PAtm: parseFloat(document.getElementById("pAtm").value),
+            PVacuum: parseFloat(document.getElementById("pVacuum").value),
+            PGauge: parseFloat(document.getElementById("pGauge").value),
+            Density: parseFloat(document.getElementById("density").value),
+            G: parseFloat(document.getElementById("g").value),
+            H: parseFloat(document.getElementById("h").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/Pressure', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data) {
+                document.getElementById("pressureCalculationResult").value = JSON.stringify(result.data, null, 2);
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>

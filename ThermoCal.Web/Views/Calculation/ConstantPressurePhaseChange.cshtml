@@ -20,14 +20,8 @@
                         <form class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="heat" placeholder="Isı">
-                                    <label for="heat">Isı (Q)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="work" placeholder="İş">
-                                    <label for="work">İş (W)</label>
+                                    <input type="text" class="form-control" id="q" placeholder="Isı">
+                                    <label for="q">Isı (Q)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -89,9 +83,69 @@
                                 <button type="reset" class="btn btn-secondary">Sıfırla</button>
                             </div>
                         </form><!-- End floating Labels Form -->
+
+                        <div class="mt-3">
+                            <label for="qResult" class="form-label">Isı (Q)</label>
+                            <input type="text" class="form-control" id="qResult" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
+<script type="module">
+    document.getElementById("calculate").addEventListener("click", async function () {
+        var formData = {
+            M: parseFloat(document.getElementById("mass").value),
+            Cp: parseFloat(document.getElementById("cP").value),
+            Cv: parseFloat(document.getElementById("cV").value),
+            R: parseFloat(document.getElementById("r").value),
+            TFirst: parseFloat(document.getElementById("tFirst").value),
+            TSecond: parseFloat(document.getElementById("tSecond").value),
+            P: parseFloat(document.getElementById("pressure").value),
+            VFirst: parseFloat(document.getElementById("vFirst").value),
+            VSecond: parseFloat(document.getElementById("vSecond").value)
+        };
+
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await fetch('/Calculation/ConstantPressurePhaseChange', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.q !== undefined) {
+                document.getElementById("qResult").value = result.data.q;
+            } else {
+                console.error('API returned unexpected response:', result);
+                alert('Error: API returned unexpected response');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    });
+</script>
