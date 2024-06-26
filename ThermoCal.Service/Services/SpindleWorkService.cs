@@ -21,8 +21,14 @@ public class SpindleWorkService : ISpindleWorkService
         double r = request.R;
         double t = request.Torque;
 
-        s = (Math.PI * r * n * 2);
-        t = (f * r);
+        if (s == 0)
+        {
+            s = (Math.PI * r * n * 2);
+        }
+        if (t == 0)
+        {
+            t = (f * r);
+        }
         if (f!=0)
         {
             work = f * s;

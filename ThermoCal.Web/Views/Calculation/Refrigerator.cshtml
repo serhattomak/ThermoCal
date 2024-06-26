@@ -20,92 +20,14 @@
                         <form class="row g-3" id="refrigeratorCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik (Efficiency)">
-                                    <label for="efficiency">Verimlilik (Efficiency)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="copHeat" name="COPHeat" placeholder="Isı Pompası COP (COPHeat)">
-                                    <label for="copHeat">Isı Pompası COP (COPHeat)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="copRef" name="COPRef" placeholder="Soğutma COP (COPRef)">
-                                    <label for="copRef">Soğutma COP (COPRef)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
-                                    <label for="q">Isı (Q)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qh" name="Qh" placeholder="Yüksek Sıcaklıktaki Isı (Qh)">
-                                    <label for="qh">Yüksek Sıcaklıktaki Isı (Qh)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="ql" name="Ql" placeholder="Düşük Sıcaklıktaki Isı (Ql)">
+                                    <input type="number" step="any" class="form-control" id="ql" name="Ql" placeholder="Düşük Sıcaklıktaki Isı (Ql)">
                                     <label for="ql">Düşük Sıcaklıktaki Isı (Ql)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="th" name="Th" placeholder="Yüksek Sıcaklık (Th)">
-                                    <label for="th">Yüksek Sıcaklık (Th)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="tl" name="Tl" placeholder="Düşük Sıcaklık (Tl)">
-                                    <label for="tl">Düşük Sıcaklık (Tl)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wIn" name="WIn" placeholder="Giren İş (WIn)">
-                                    <label for="wIn">Giren İş (WIn)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wOut" name="WOut" placeholder="Çıkan İş (WOut)">
-                                    <label for="wOut">Çıkan İş (WOut)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wNet" name="WNet" placeholder="Net İş (WNet)">
-                                    <label for="wNet">Net İş (WNet)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qIn" name="QIn" placeholder="Giren Isı (QIn)">
-                                    <label for="qIn">Giren Isı (QIn)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qOut" name="QOut" placeholder="Çıkan Isı (QOut)">
-                                    <label for="qOut">Çıkan Isı (QOut)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qNet" name="QNet" placeholder="Net Isı (QNet)">
-                                    <label for="qNet">Net Isı (QNet)</label>
+                                    <input type="number" step="any" class="form-control" id="qh" name="Qh" placeholder="Yüksek Sıcaklıktaki Isı (Qh)">
+                                    <label for="qh">Yüksek Sıcaklıktaki Isı (Qh)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -115,9 +37,15 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="refrigeratorCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="refrigeratorCalculationResult" rows="4" readonly></textarea>
+                            <label for="wNet" class="form-label">Net İş (WNet)</label>
+                            <input type="text" class="form-control" id="wNet" readonly>
                         </div>
+                        <div class="mt-3">
+                            <label for="copRef" class="form-label">Soğutma COP (COPRef)</label>
+                            <input type="text" class="form-control" id="copRef" readonly>
+                        </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -128,21 +56,8 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Efficiency: parseFloat(document.getElementById("efficiency").value),
-            COPHeat: parseFloat(document.getElementById("copHeat").value),
-            COPRef: parseFloat(document.getElementById("copRef").value),
-            Q: parseFloat(document.getElementById("q").value),
-            W: parseFloat(document.getElementById("w").value),
-            Qh: parseFloat(document.getElementById("qh").value),
             Ql: parseFloat(document.getElementById("ql").value),
-            Th: parseFloat(document.getElementById("th").value),
-            Tl: parseFloat(document.getElementById("tl").value),
-            WIn: parseFloat(document.getElementById("wIn").value),
-            WOut: parseFloat(document.getElementById("wOut").value),
-            WNet: parseFloat(document.getElementById("wNet").value),
-            QIn: parseFloat(document.getElementById("qIn").value),
-            QOut: parseFloat(document.getElementById("qOut").value),
-            QNet: parseFloat(document.getElementById("qNet").value),
+            Qh: parseFloat(document.getElementById("qh").value)
         };
 
         console.log("Form Data:", formData);
@@ -156,13 +71,13 @@
                 body: JSON.stringify(formData)
             });
 
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error('API returned error: ' + errorText);
+            }
+
             const responseText = await response.text();
             console.log("Raw API Response:", responseText);
-
-            if (!response.ok) {
-                console.error('API returned error:', responseText);
-                throw new Error('API returned error: ' + responseText);
-            }
 
             let result;
             try {
@@ -175,13 +90,18 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("refrigeratorCalculationResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("wNet").value = result.data.wNet.toFixed(2);
+                document.getElementById("copRef").value = result.data.copRef.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
                 console.error('API returned unexpected response:', result);
-                alert('Error: API returned unexpected response');
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response';
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

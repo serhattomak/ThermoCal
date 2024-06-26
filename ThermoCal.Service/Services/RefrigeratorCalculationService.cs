@@ -20,8 +20,11 @@ public class RefrigeratorCalculationService: IRefrigeratorCalculationService
         double qH = request.Qh;
         double wNet = request.WNet;
         double copRef = request.COPRef;
-        
-        wNet = qH-qL;
+
+        if (wNet==0)
+        {
+            wNet = qH-qL;
+        }
 
         copRef = qL/wNet;
 

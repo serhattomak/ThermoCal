@@ -91,7 +91,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("gravityWorkResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("gravityWorkResult").value = `Work: ${result.data.w}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

@@ -20,12 +20,6 @@
                         <form class="row g-3" id="heatPumpEfficiencyForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik">
-                                    <label for="efficiency">Verimlilik</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="cop" name="COP" placeholder="COP">
                                     <label for="cop">COP</label>
                                 </div>
@@ -56,9 +50,8 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Efficiency: parseFloat(document.getElementById("efficiency").value),
-            COP: parseFloat(document.getElementById("cop").value),
-            COPRev: parseFloat(document.getElementById("copRev").value)
+            COP: parseFloat(document.getElementById("cop").value) || 0,
+            COPRev: parseFloat(document.getElementById("copRev").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -91,7 +84,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("heatPumpEfficiencyResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("heatPumpEfficiencyResult").value = result.data.efficiency;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

@@ -20,56 +20,14 @@
                         <form class="row g-3" id="usefulWorkCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
+                                    <input type="number" step="any" class="form-control" id="w" name="W" placeholder="İş (W)">
                                     <label for="w">İş (W)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="wUseful" name="WUseful" placeholder="Yararlı İş (WUseful)">
-                                    <label for="wUseful">Yararlı İş (WUseful)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wSur" name="WSur" placeholder="Çevre İşi (WSur)">
+                                    <input type="number" step="any" class="form-control" id="wSur" name="WSur" placeholder="Çevre İşi (WSur)">
                                     <label for="wSur">Çevre İşi (WSur)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
-                                    <label for="m">Kütle (M)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="p0" name="P0" placeholder="Başlangıç Basıncı (P0)">
-                                    <label for="p0">Başlangıç Basıncı (P0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (VFirst)">
-                                    <label for="vFirst">İlk Hacim (VFirst)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (VSecond)">
-                                    <label for="vSecond">İkinci Hacim (VSecond)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
-                                    <label for="vSpecificFirst">İlk Özgül Hacim (VSpecificFirst)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
-                                    <label for="vSpecificSecond">İkinci Özgül Hacim (VSpecificSecond)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -79,9 +37,11 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="usefulWorkCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="usefulWorkCalculationResult" rows="4" readonly></textarea>
+                            <label for="wUseful" class="form-label">Yararlı İş</label>
+                            <input type="text" class="form-control" id="wUseful" readonly>
                         </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -93,14 +53,7 @@
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
             W: parseFloat(document.getElementById("w").value),
-            WUseful: parseFloat(document.getElementById("wUseful").value),
-            WSur: parseFloat(document.getElementById("wSur").value),
-            M: parseFloat(document.getElementById("m").value),
-            P0: parseFloat(document.getElementById("p0").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value),
-            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value),
-            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value)
+            WSur: parseFloat(document.getElementById("wSur").value)
         };
 
         console.log("Form Data:", formData);
@@ -114,16 +67,36 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
 
-            if (result && result.data) {
-                document.getElementById("usefulWorkCalculationResult").value = JSON.stringify(result.data, null, 2);
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.wUseful !== undefined) {
+                document.getElementById("wUseful").value = result.data.wUseful.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response: ' + JSON.stringify(result);
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

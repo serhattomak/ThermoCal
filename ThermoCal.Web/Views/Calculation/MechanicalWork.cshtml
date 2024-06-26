@@ -20,37 +20,25 @@
                         <form class="row g-3" id="mechanicalWorkForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="f" name="F" placeholder="Kuvvet (F)">
-                                    <label for="f">Kuvvet (F)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="p" name="P" placeholder="Basınç (P)">
+                                    <input type="number" step="any" class="form-control" id="p" name="P" placeholder="Basınç (P)">
                                     <label for="p">Basınç (P)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="a" name="A" placeholder="Alan (A)">
+                                    <input type="number" step="any" class="form-control" id="a" name="A" placeholder="Alan (A)">
                                     <label for="a">Alan (A)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
+                                    <input type="number" step="any" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
                                     <label for="vFirst">İlk Hacim (V1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
+                                    <input type="number" step="any" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
                                     <label for="vSecond">İkinci Hacim (V2)</label>
                                 </div>
                             </div>
@@ -61,8 +49,12 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="mechanicalWorkResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="mechanicalWorkResult" rows="4" readonly></textarea>
+                            <label for="mechanicalWorkResultF" class="form-label">Kuvvet (F)</label>
+                            <input type="text" class="form-control" id="mechanicalWorkResultF" readonly>
+                        </div>
+                        <div class="mt-3">
+                            <label for="mechanicalWorkResultW" class="form-label">İş (W)</label>
+                            <input type="text" class="form-control" id="mechanicalWorkResultW" readonly>
                         </div>
                     </div>
                 </div>
@@ -74,12 +66,10 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            W: parseFloat(document.getElementById("w").value),
-            F: parseFloat(document.getElementById("f").value),
-            P: parseFloat(document.getElementById("p").value),
-            A: parseFloat(document.getElementById("a").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value)
+            P: parseFloat(document.getElementById("p").value) || 0,
+            A: parseFloat(document.getElementById("a").value) || 0,
+            VFirst: parseFloat(document.getElementById("vFirst").value) || 0,
+            VSecond: parseFloat(document.getElementById("vSecond").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -112,13 +102,15 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("mechanicalWorkResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("mechanicalWorkResultF").value = result.data.f.toFixed(2);
+                document.getElementById("mechanicalWorkResultW").value = result.data.w.toFixed(2);
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            alert('An error occurred: ' + error.message);
         }
     });
 </script>

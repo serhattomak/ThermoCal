@@ -122,20 +122,20 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            P: parseFloat(document.getElementById("p").value),
-            V: parseFloat(document.getElementById("v").value),
-            T: parseFloat(document.getElementById("t").value),
-            R: parseFloat(document.getElementById("r").value),
-            M: parseFloat(document.getElementById("m").value),
-            N: parseFloat(document.getElementById("n").value),
-            Ru: parseFloat(document.getElementById("ru").value),
-            VSpecific: parseFloat(document.getElementById("vSpecific").value),
-            PFirst: parseFloat(document.getElementById("pFirst").value),
-            PSecond: parseFloat(document.getElementById("pSecond").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value),
-            TFirst: parseFloat(document.getElementById("tFirst").value),
-            TSecond: parseFloat(document.getElementById("tSecond").value)
+            P: parseFloat(document.getElementById("p").value) || 0,
+            V: parseFloat(document.getElementById("v").value) || 0,
+            T: parseFloat(document.getElementById("t").value) || 0,
+            R: parseFloat(document.getElementById("r").value) || 0,
+            M: parseFloat(document.getElementById("m").value) || 0,
+            N: parseFloat(document.getElementById("n").value) || 0,
+            Ru: parseFloat(document.getElementById("ru").value) || 0,
+            VSpecific: parseFloat(document.getElementById("vSpecific").value) || 0,
+            PFirst: parseFloat(document.getElementById("pFirst").value) || 0,
+            PSecond: parseFloat(document.getElementById("pSecond").value) || 0,
+            VFirst: parseFloat(document.getElementById("vFirst").value) || 0,
+            VSecond: parseFloat(document.getElementById("vSecond").value) || 0,
+            TFirst: parseFloat(document.getElementById("tFirst").value) || 0,
+            TSecond: parseFloat(document.getElementById("tSecond").value) || 0
         };
 
         console.log("Form Data:", formData);

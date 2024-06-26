@@ -20,31 +20,31 @@
                         <form class="row g-3" id="polytropicPhaseChangeForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="n" name="N" placeholder="Mol Sayısı (n)">
+                                    <input type="number" step="any" class="form-control" id="n" name="N" placeholder="Mol Sayısı (n)">
                                     <label for="n">Mol Sayısı (n)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (P1)">
+                                    <input type="number" step="any" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (P1)">
                                     <label for="pFirst">İlk Basınç (P1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (P2)">
+                                    <input type="number" step="any" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (P2)">
                                     <label for="pSecond">İkinci Basınç (P2)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
+                                    <input type="number" step="any" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (V1)">
                                     <label for="vFirst">İlk Hacim (V1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
+                                    <input type="number" step="any" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (V2)">
                                     <label for="vSecond">İkinci Hacim (V2)</label>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
 
                         <div class="mt-3">
                             <label for="polytropicPhaseChangeResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="polytropicPhaseChangeResult" rows="4" readonly></textarea>
+                            <input type="text" class="form-control" id="polytropicPhaseChangeResult" readonly>
                         </div>
                     </div>
                 </div>
@@ -68,11 +68,11 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            N: parseFloat(document.getElementById("n").value),
-            PFirst: parseFloat(document.getElementById("pFirst").value),
-            PSecond: parseFloat(document.getElementById("pSecond").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value)
+            N: parseFloat(document.getElementById("n").value) || 0,
+            PFirst: parseFloat(document.getElementById("pFirst").value) || 0,
+            PSecond: parseFloat(document.getElementById("pSecond").value) || 0,
+            VFirst: parseFloat(document.getElementById("vFirst").value) || 0,
+            VSecond: parseFloat(document.getElementById("vSecond").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -105,7 +105,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("polytropicPhaseChangeResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("polytropicPhaseChangeResult").value = result.data.w.toFixed(2);
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

@@ -20,43 +20,37 @@
                         <form class="row g-3" id="turbineCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="wmDot" name="WMDot" placeholder="Kütlesel Akış İş Oranı (Ẇ/ṁ)">
-                                    <label for="wmDot">Kütlesel Akış İş Oranı (Ẇ/ṁ)</label>
+                                    <input type="number" step="any" class="form-control" id="mDot" name="MDot" placeholder="Kütlesel Akış Oranı (ṁ)">
+                                    <label for="mDot">Kütlesel Akış Oranı (ṁ) (Opsiyonel)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="mDot" name="MDot" placeholder="Kütlesel Akış Oranı (ṁ)">
-                                    <label for="mDot">Kütlesel Akış Oranı (ṁ)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="density" name="Density" placeholder="Yoğunluk (ρ)">
+                                    <input type="number" step="any" class="form-control" id="density" name="Density" placeholder="Yoğunluk (ρ)">
                                     <label for="density">Yoğunluk (ρ)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="a" name="A" placeholder="Alan (A)">
+                                    <input type="number" step="any" class="form-control" id="a" name="A" placeholder="Alan (A)">
                                     <label for="a">Alan (A)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="v" name="V" placeholder="Hacim (V)">
+                                    <input type="number" step="any" class="form-control" id="v" name="V" placeholder="Hacim (V)">
                                     <label for="v">Hacim (V)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (H1)">
+                                    <input type="number" step="any" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (H1)">
                                     <label for="hFirst">İlk Entalpi (H1)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (H2)">
+                                    <input type="number" step="any" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (H2)">
                                     <label for="hSecond">İkinci Entalpi (H2)</label>
                                 </div>
                             </div>
@@ -67,9 +61,16 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="turbineCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="turbineCalculationResult" rows="4" readonly></textarea>
+                            <label for="wmDotResult" class="form-label">Kütlesel Akış İş Oranı (Ẇ/ṁ)</label>
+                            <input type="text" class="form-control" id="wmDotResult" readonly>
                         </div>
+
+                        <div class="mt-3">
+                            <label for="mDotResult" class="form-label">Kütlesel Akış Oranı (ṁ)</label>
+                            <input type="text" class="form-control" id="mDotResult" readonly>
+                        </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -79,9 +80,9 @@
 
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
+        var mDotValue = document.getElementById("mDot").value;
         var formData = {
-            WMDot: parseFloat(document.getElementById("wmDot").value),
-            MDot: parseFloat(document.getElementById("mDot").value),
+            MDot: mDotValue ? parseFloat(mDotValue) : 0,  // Set MDot to 0 if null or empty
             Density: parseFloat(document.getElementById("density").value),
             A: parseFloat(document.getElementById("a").value),
             V: parseFloat(document.getElementById("v").value),
@@ -100,16 +101,37 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
 
-            if (result && result.data) {
-                document.getElementById("turbineCalculationResult").value = JSON.stringify(result.data, null, 2);
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.wmDot !== undefined && result.data.mDot !== undefined) {
+                document.getElementById("wmDotResult").value = result.data.wmDot.toFixed(2);
+                document.getElementById("mDotResult").value = result.data.mDot.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response: ' + JSON.stringify(result);
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

@@ -159,7 +159,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("flowCalculationResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("flowCalculationResult").value = `Q̇: ${result.data.qDot}, Ẇ: ${result.data.wDot}, ṁ: ${result.data.mDot}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

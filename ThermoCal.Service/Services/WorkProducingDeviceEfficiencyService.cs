@@ -22,7 +22,9 @@ public class WorkProducingDeviceEfficiencyService: IWorkProducingDeviceEfficienc
 
         return new WorkProducingDeviceEfficiencyResponseDto
         {
-            Efficiency = efficiency
+            Efficiency = efficiency,
+            WRev = wRev,
+            WSur = wUseful
         };
     }
 }

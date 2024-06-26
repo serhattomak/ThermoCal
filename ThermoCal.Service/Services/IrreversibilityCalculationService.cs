@@ -14,18 +14,12 @@ public class IrreversibilityCalculationService: IIrreversibilityCalculationServi
 
     private IrreversibilityCalculationResponseDto CalculateIrreversibility(IrreversibilityCalculationRequestDto request)
     {
-        double i = request.I;
-        double iDot=request.IDot;
+        double i = 0;
         double wRev=request.WRev;
         double wSur=0;
         double P0=request.P0;
         double V=request.V;
         double V0=request.V0;
-        double V1 = request.VFirst;
-        double V2 = request.VSecond;
-        double vSpecific1=request.VSpecificFirst;
-        double vSpecific2=request.VSpecificSecond;
-        double m=request.M;
         double U=request.U;
         double U0=request.U0;
         double T0=request.T0;
@@ -37,7 +31,6 @@ public class IrreversibilityCalculationService: IIrreversibilityCalculationServi
         return new IrreversibilityCalculationResponseDto
         {
             I = i,
-            IDot = iDot,
             WRev = wRev,
             WSur = wSur
         };

@@ -20,18 +20,6 @@
                         <form class="row g-3" id="irreversibilityCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="i" name="I" placeholder="Geri Dönüşsüzlük (I)">
-                                    <label for="i">Geri Dönüşsüzlük (I)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="iDot" name="IDot" placeholder="Geri Dönüşsüzlük Oranı (Į)">
-                                    <label for="iDot">Geri Dönüşsüzlük Oranı (Į)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="wRev" name="WRev" placeholder="Reversible Work (WRev)">
                                     <label for="wRev">Reversible Work (WRev)</label>
                                 </div>
@@ -145,25 +133,28 @@
 
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
+        function getValueOrDefault(id) {
+            const value = parseFloat(document.getElementById(id).value);
+            return isNaN(value) ? 0 : value;
+        }
+
         var formData = {
-            I: parseFloat(document.getElementById("i").value),
-            IDot: parseFloat(document.getElementById("iDot").value),
-            WRev: parseFloat(document.getElementById("wRev").value),
-            WSur: parseFloat(document.getElementById("wSur").value),
-            Exergy: parseFloat(document.getElementById("exergy").value),
-            U: parseFloat(document.getElementById("u").value),
-            U0: parseFloat(document.getElementById("u0").value),
-            T0: parseFloat(document.getElementById("t0").value),
-            S: parseFloat(document.getElementById("s").value),
-            S0: parseFloat(document.getElementById("s0").value),
-            P0: parseFloat(document.getElementById("p0").value),
-            V: parseFloat(document.getElementById("v").value),
-            V0: parseFloat(document.getElementById("v0").value),
-            M: parseFloat(document.getElementById("m").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value),
-            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value),
-            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value)
+            WRev: getValueOrDefault("wRev"),
+            WSur: getValueOrDefault("wSur"),
+            Exergy: getValueOrDefault("exergy"),
+            U: getValueOrDefault("u"),
+            U0: getValueOrDefault("u0"),
+            T0: getValueOrDefault("t0"),
+            S: getValueOrDefault("s"),
+            S0: getValueOrDefault("s0"),
+            P0: getValueOrDefault("p0"),
+            V: getValueOrDefault("v"),
+            V0: getValueOrDefault("v0"),
+            M: getValueOrDefault("m"),
+            VFirst: getValueOrDefault("vFirst"),
+            VSecond: getValueOrDefault("vSecond"),
+            VSpecificFirst: getValueOrDefault("vSpecificFirst"),
+            VSpecificSecond: getValueOrDefault("vSpecificSecond")
         };
 
         console.log("Form Data:", formData);
@@ -195,8 +186,8 @@
 
             console.log("Parsed API Response:", result);
 
-            if (result && result.data) {
-                document.getElementById("irreversibilityCalculationResult").value = JSON.stringify(result.data, null, 2);
+            if (result && result.data && result.data.i !== undefined) {
+                document.getElementById("irreversibilityCalculationResult").value = result.data.i;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

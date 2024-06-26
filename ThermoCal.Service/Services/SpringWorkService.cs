@@ -19,7 +19,10 @@ public class SpringWorkService : ISpringWorkService
         double x = request.X;
         double k = request.K;
 
-        f = k * x;
+        if (f==0)
+        {
+            f = k * x;
+        }
         work = 0.5 * k * x * x;
 
         return new SpringWorkResponseDto

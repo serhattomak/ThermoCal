@@ -20,24 +20,6 @@
                         <form class="row g-3" id="heatEngineCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik">
-                                    <label for="efficiency">Verimlilik</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
-                                    <label for="q">Isı (Q)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="qh" name="Qh" placeholder="Yüksek Sıcaklıkta Isı (Qh)">
                                     <label for="qh">Yüksek Sıcaklıkta Isı (Qh)</label>
                                 </div>
@@ -104,17 +86,14 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Efficiency: parseFloat(document.getElementById("efficiency").value),
-            Q: parseFloat(document.getElementById("q").value),
-            W: parseFloat(document.getElementById("w").value),
-            Qh: parseFloat(document.getElementById("qh").value),
-            Ql: parseFloat(document.getElementById("ql").value),
-            QIn: parseFloat(document.getElementById("qIn").value),
-            QOut: parseFloat(document.getElementById("qOut").value),
-            QNet: parseFloat(document.getElementById("qNet").value),
-            WIn: parseFloat(document.getElementById("wIn").value),
-            WOut: parseFloat(document.getElementById("wOut").value),
-            WNet: parseFloat(document.getElementById("wNet").value)
+            Qh: parseFloat(document.getElementById("qh").value) || 0,
+            Ql: parseFloat(document.getElementById("ql").value) || 0,
+            QIn: parseFloat(document.getElementById("qIn").value) || 0,
+            QOut: parseFloat(document.getElementById("qOut").value) || 0,
+            QNet: parseFloat(document.getElementById("qNet").value) || 0,
+            WIn: parseFloat(document.getElementById("wIn").value) || 0,
+            WOut: parseFloat(document.getElementById("wOut").value) || 0,
+            WNet: parseFloat(document.getElementById("wNet").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -147,7 +126,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("heatEngineCalculationResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("heatEngineCalculationResult").value = `Q: ${result.data.q}\nW: ${result.data.w}\nEfficiency: ${result.data.efficiency}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

@@ -20,104 +20,14 @@
                         <form class="row g-3" id="workProducingDeviceEfficiencyForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="efficiency" name="Efficiency" placeholder="Verimlilik (Efficiency)">
-                                    <label for="efficiency">Verimlilik (Efficiency)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wSur" name="WSur" placeholder="Çevre İşi (WSur)">
-                                    <label for="wSur">Çevre İşi (WSur)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="wRev" name="WRev" placeholder="Tersinir İş (WRev)">
+                                    <input type="number" step="any" class="form-control" id="wRev" name="WRev" placeholder="Tersinir İş (WRev)">
                                     <label for="wRev">Tersinir İş (WRev)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="i" name="I" placeholder="İrreversibilite (I)">
-                                    <label for="i">İrreversibilite (I)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="u" name="U" placeholder="İç Enerji (U)">
-                                    <label for="u">İç Enerji (U)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="u0" name="U0" placeholder="Başlangıç İç Enerji (U0)">
-                                    <label for="u0">Başlangıç İç Enerji (U0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="t0" name="T0" placeholder="Başlangıç Sıcaklık (T0)">
-                                    <label for="t0">Başlangıç Sıcaklık (T0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="s" name="S" placeholder="Entropi (S)">
-                                    <label for="s">Entropi (S)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="s0" name="S0" placeholder="Başlangıç Entropi (S0)">
-                                    <label for="s0">Başlangıç Entropi (S0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="p0" name="P0" placeholder="Başlangıç Basınç (P0)">
-                                    <label for="p0">Başlangıç Basınç (P0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="v" name="V" placeholder="Hacim (V)">
-                                    <label for="v">Hacim (V)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="v0" name="V0" placeholder="Başlangıç Hacim (V0)">
-                                    <label for="v0">Başlangıç Hacim (V0)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
-                                    <label for="m">Kütle (M)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vFirst" name="VFirst" placeholder="İlk Hacim (VFirst)">
-                                    <label for="vFirst">İlk Hacim (VFirst)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSecond" name="VSecond" placeholder="İkinci Hacim (VSecond)">
-                                    <label for="vSecond">İkinci Hacim (VSecond)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
-                                    <label for="vSpecificFirst">İlk Özgül Hacim (VSpecificFirst)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
-                                    <label for="vSpecificSecond">İkinci Özgül Hacim (VSpecificSecond)</label>
+                                    <input type="number" step="any" class="form-control" id="wSur" name="WSur" placeholder="Çevre İşi (WSur)">
+                                    <label for="wSur">Çevre İşi (WSur)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -127,9 +37,11 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="workProducingDeviceEfficiencyResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="workProducingDeviceEfficiencyResult" rows="4" readonly></textarea>
+                            <label for="efficiency" class="form-label">Verimlilik</label>
+                            <input type="text" class="form-control" id="efficiency" readonly>
                         </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -140,26 +52,9 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Efficiency: parseFloat(document.getElementById("efficiency").value),
-            WSur: parseFloat(document.getElementById("wSur").value),
             WRev: parseFloat(document.getElementById("wRev").value),
-            I: parseFloat(document.getElementById("i").value),
-            U: parseFloat(document.getElementById("u").value),
-            U0: parseFloat(document.getElementById("u0").value),
-            T0: parseFloat(document.getElementById("t0").value),
-            S: parseFloat(document.getElementById("s").value),
-            S0: parseFloat(document.getElementById("s0").value),
-            P0: parseFloat(document.getElementById("p0").value),
-            V: parseFloat(document.getElementById("v").value),
-            V0: parseFloat(document.getElementById("v0").value),
-            M: parseFloat(document.getElementById("m").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value),
-            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value),
-            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value)
+            WSur: parseFloat(document.getElementById("wSur").value)
         };
-
-        console.log("Form Data:", formData);
 
         try {
             const response = await fetch('/Calculation/WorkProducingDeviceEfficiency', {
@@ -170,16 +65,36 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
 
-            if (result && result.data) {
-                document.getElementById("workProducingDeviceEfficiencyResult").value = JSON.stringify(result.data, null, 2);
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.efficiency !== undefined) {
+                document.getElementById("efficiency").value = result.data.efficiency.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response';
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

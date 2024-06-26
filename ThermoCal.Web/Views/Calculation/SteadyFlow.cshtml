@@ -20,50 +20,20 @@
                         <form class="row g-3" id="steadyFlowCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="eFirst" name="EFirst" placeholder="İlk Enerji (E1)">
-                                    <label for="eFirst">İlk Enerji (E1)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="eSecond" name="ESecond" placeholder="İkinci Enerji (E2)">
-                                    <label for="eSecond">İkinci Enerji (E2)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="mFirst" name="MFirst" placeholder="İlk Kütle (M1)">
-                                    <label for="mFirst">İlk Kütle (M1)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="mSecond" name="MSecond" placeholder="İkinci Kütle (M2)">
-                                    <label for="mSecond">İkinci Kütle (M2)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="hIn" name="HIn" placeholder="Giriş Entalpisi (Hin)">
-                                    <label for="hIn">Giriş Entalpisi (Hin)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="hOut" name="HOut" placeholder="Çıkış Entalpisi (Hout)">
-                                    <label for="hOut">Çıkış Entalpisi (Hout)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="mIn" name="MIn" placeholder="Giriş Kütlesi (Min)">
+                                    <input type="number" step="any" class="form-control" id="mIn" name="MIn" placeholder="Giriş Kütlesi (Min)">
                                     <label for="mIn">Giriş Kütlesi (Min)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="mOut" name="MOut" placeholder="Çıkış Kütlesi (Mout)">
-                                    <label for="mOut">Çıkış Kütlesi (Mout)</label>
+                                    <input type="number" step="any" class="form-control" id="mSecond" name="MSecond" placeholder="İkinci Kütle (M2)">
+                                    <label for="mSecond">İkinci Kütle (M2)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" step="any" class="form-control" id="eSecond" name="ESecond" placeholder="İkinci Enerji (E2)">
+                                    <label for="eSecond">İkinci Enerji (E2)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -73,9 +43,11 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="steadyFlowCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="steadyFlowCalculationResult" rows="4" readonly></textarea>
+                            <label for="steadyFlowCalculationResult" class="form-label">Giriş Entalpisi (Hin)</label>
+                            <input type="text" class="form-control" id="steadyFlowCalculationResult" readonly>
                         </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -86,14 +58,9 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            EFirst: parseFloat(document.getElementById("eFirst").value),
-            ESecond: parseFloat(document.getElementById("eSecond").value),
-            MFirst: parseFloat(document.getElementById("mFirst").value),
-            MSecond: parseFloat(document.getElementById("mSecond").value),
-            HIn: parseFloat(document.getElementById("hIn").value),
-            HOut: parseFloat(document.getElementById("hOut").value),
             MIn: parseFloat(document.getElementById("mIn").value),
-            MOut: parseFloat(document.getElementById("mOut").value)
+            MSecond: parseFloat(document.getElementById("mSecond").value),
+            ESecond: parseFloat(document.getElementById("eSecond").value)
         };
 
         console.log("Form Data:", formData);
@@ -107,16 +74,36 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error('API returned error: ' + errorText);
+            }
 
-            if (result && result.data) {
-                document.getElementById("steadyFlowCalculationResult").value = JSON.stringify(result.data, null, 2);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.hIn !== undefined) {
+                document.getElementById("steadyFlowCalculationResult").value = result.data.hIn.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response';
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

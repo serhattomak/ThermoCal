@@ -14,7 +14,7 @@ public class TurbineCalculationService : ITurbineCalculationService
 
     private TurbineCalculationResponseDto CalculateTurbine(TurbineCalculationRequestDto request)
     {
-        double wmDot = request.WMDot;
+        double wmDot = 0;
         double mDot = request.MDot;
         double density = request.Density;
         double a = request.A;
@@ -22,7 +22,12 @@ public class TurbineCalculationService : ITurbineCalculationService
         double hFirst = request.HFirst;
         double hSecond = request.HSecond;
 
-        mDot = density * a * v;
+
+        if (mDot==0)
+        {
+            mDot = density * a * v;
+        }
+        
         wmDot = mDot * (hFirst - hSecond);
 
 

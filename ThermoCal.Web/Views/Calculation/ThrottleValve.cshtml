@@ -20,49 +20,43 @@
                         <form class="row g-3" id="throttleValveCalculationForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="uFirst" name="UFirst" placeholder="İlk İç Enerji (UFirst)">
-                                    <label for="uFirst">İlk İç Enerji (UFirst)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="uSecond" name="USecond" placeholder="İkinci İç Enerji (USecond)">
+                                    <input type="number" step="any" class="form-control" id="uSecond" name="USecond" placeholder="İkinci İç Enerji (USecond)">
                                     <label for="uSecond">İkinci İç Enerji (USecond)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (PFirst)">
+                                    <input type="number" step="any" class="form-control" id="pFirst" name="PFirst" placeholder="İlk Basınç (PFirst)">
                                     <label for="pFirst">İlk Basınç (PFirst)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (PSecond)">
+                                    <input type="number" step="any" class="form-control" id="pSecond" name="PSecond" placeholder="İkinci Basınç (PSecond)">
                                     <label for="pSecond">İkinci Basınç (PSecond)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
+                                    <input type="number" step="any" class="form-control" id="vSpecificFirst" name="VSpecificFirst" placeholder="İlk Özgül Hacim (VSpecificFirst)">
                                     <label for="vSpecificFirst">İlk Özgül Hacim (VSpecificFirst)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
+                                    <input type="number" step="any" class="form-control" id="vSpecificSecond" name="VSpecificSecond" placeholder="İkinci Özgül Hacim (VSpecificSecond)">
                                     <label for="vSpecificSecond">İkinci Özgül Hacim (VSpecificSecond)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (HFirst)">
+                                    <input type="number" step="any" class="form-control" id="hFirst" name="HFirst" placeholder="İlk Entalpi (HFirst)">
                                     <label for="hFirst">İlk Entalpi (HFirst)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (HSecond)">
+                                    <input type="number" step="any" class="form-control" id="hSecond" name="HSecond" placeholder="İkinci Entalpi (HSecond)">
                                     <label for="hSecond">İkinci Entalpi (HSecond)</label>
                                 </div>
                             </div>
@@ -73,9 +67,16 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="throttleValveCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="throttleValveCalculationResult" rows="4" readonly></textarea>
+                            <label for="uFirstResult" class="form-label">İlk İç Enerji (UFirst)</label>
+                            <input type="text" class="form-control" id="uFirstResult" readonly>
                         </div>
+
+                        <div class="mt-3">
+                            <label for="hFirstResult" class="form-label">İlk Entalpi (HFirst)</label>
+                            <input type="text" class="form-control" id="hFirstResult" readonly>
+                        </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -86,7 +87,6 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            UFirst: parseFloat(document.getElementById("uFirst").value),
             USecond: parseFloat(document.getElementById("uSecond").value),
             PFirst: parseFloat(document.getElementById("pFirst").value),
             PSecond: parseFloat(document.getElementById("pSecond").value),
@@ -107,16 +107,37 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
 
-            if (result && result.data) {
-                document.getElementById("throttleValveCalculationResult").value = JSON.stringify(result.data, null, 2);
+            if (!response.ok) {
+                console.error('API returned error:', responseText);
+                throw new Error('API returned error: ' + responseText);
+            }
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.uFirst !== undefined && result.data.hFirst !== undefined) {
+                document.getElementById("uFirstResult").value = result.data.uFirst.toFixed(2);
+                document.getElementById("hFirstResult").value = result.data.hFirst.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response: ' + JSON.stringify(result);
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

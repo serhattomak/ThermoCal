@@ -20,50 +20,26 @@
                         <form class="row g-3" id="reducedPressureAndTemperatureForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="p" name="P" placeholder="Basınç (P)">
+                                    <input type="number" step="any" class="form-control" id="p" name="P" placeholder="Basınç (P)">
                                     <label for="p">Basınç (P)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="pr" name="Pr" placeholder="İndirgenmiş Basınç (Pr)">
-                                    <label for="pr">İndirgenmiş Basınç (Pr)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="pCr" name="PCr" placeholder="Kritik Basınç (PCr)">
+                                    <input type="number" step="any" class="form-control" id="pCr" name="PCr" placeholder="Kritik Basınç (PCr)">
                                     <label for="pCr">Kritik Basınç (PCr)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
+                                    <input type="number" step="any" class="form-control" id="t" name="T" placeholder="Sıcaklık (T)">
                                     <label for="t">Sıcaklık (T)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="tr" name="Tr" placeholder="İndirgenmiş Sıcaklık (Tr)">
-                                    <label for="tr">İndirgenmiş Sıcaklık (Tr)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="tCr" name="TCr" placeholder="Kritik Sıcaklık (TCr)">
+                                    <input type="number" step="any" class="form-control" id="tCr" name="TCr" placeholder="Kritik Sıcaklık (TCr)">
                                     <label for="tCr">Kritik Sıcaklık (TCr)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificR" name="VSpecificR" placeholder="İndirgenmiş Özgül Hacim (vR)">
-                                    <label for="vSpecificR">İndirgenmiş Özgül Hacim (vR)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="vSpecificActual" name="VSpecificActual" placeholder="Gerçek Özgül Hacim (v)">
-                                    <label for="vSpecificActual">Gerçek Özgül Hacim (v)</label>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -73,9 +49,15 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="reducedPressureAndTemperatureResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="reducedPressureAndTemperatureResult" rows="4" readonly></textarea>
+                            <label for="pr" class="form-label">İndirgenmiş Basınç (Pr)</label>
+                            <input type="text" class="form-control" id="pr" readonly>
                         </div>
+                        <div class="mt-3">
+                            <label for="tr" class="form-label">İndirgenmiş Sıcaklık (Tr)</label>
+                            <input type="text" class="form-control" id="tr" readonly>
+                        </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -87,13 +69,9 @@
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
             P: parseFloat(document.getElementById("p").value),
-            Pr: parseFloat(document.getElementById("pr").value),
             PCr: parseFloat(document.getElementById("pCr").value),
             T: parseFloat(document.getElementById("t").value),
-            Tr: parseFloat(document.getElementById("tr").value),
-            TCr: parseFloat(document.getElementById("tCr").value),
-            VSpecificR: parseFloat(document.getElementById("vSpecificR").value),
-            VSpecificActual: parseFloat(document.getElementById("vSpecificActual").value)
+            TCr: parseFloat(document.getElementById("tCr").value)
         };
 
         console.log("Form Data:", formData);
@@ -107,13 +85,13 @@
                 body: JSON.stringify(formData)
             });
 
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error('API returned error: ' + errorText);
+            }
+
             const responseText = await response.text();
             console.log("Raw API Response:", responseText);
-
-            if (!response.ok) {
-                console.error('API returned error:', responseText);
-                throw new Error('API returned error: ' + responseText);
-            }
 
             let result;
             try {
@@ -126,13 +104,18 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("reducedPressureAndTemperatureResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("pr").value = result.data.pr.toFixed(2);
+                document.getElementById("tr").value = result.data.tr.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
                 console.error('API returned unexpected response:', result);
-                alert('Error: API returned unexpected response');
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response';
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

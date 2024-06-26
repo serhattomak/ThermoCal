@@ -3,7 +3,7 @@ using ThermoCal.Core.Services;
 
 namespace ThermoCal.Service.Services;
 
-public class MixingChamberCalculationService: IMixingChamberCalculationService
+public class MixingChamberCalculationService : IMixingChamberCalculationService
 {
     public Task<CustomResponseDto<MixingChamberCalculationResponseDto>> CalculateMixingChamberAsync(MixingChamberCalculationRequestDto request)
     {
@@ -21,11 +21,15 @@ public class MixingChamberCalculationService: IMixingChamberCalculationService
         double hIn = request.HIn;
         double hOut = request.HOut;
 
-        mDotIn = mDotFirst + mDotSecond;
+        if (mDotFirst != 0 && mDotSecond != 0)
+        {
+            mDotIn = mDotFirst + mDotSecond;
+        }
 
-        mDotOut = mDotIn;
-
-        mDotIn=mDotOut*hOut/hIn;
+        if (mDotOut != 0 && hOut != 0 && hIn != 0)
+        {
+            mDotIn = mDotOut * hOut / hIn;
+        }
 
         return new MixingChamberCalculationResponseDto
         {

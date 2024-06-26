@@ -56,9 +56,9 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            MDot: parseFloat(document.getElementById("mDot").value),
-            HIn: parseFloat(document.getElementById("hIn").value),
-            HOut: parseFloat(document.getElementById("hOut").value)
+            MDot: parseFloat(document.getElementById("mDot").value) || 0,
+            HIn: parseFloat(document.getElementById("hIn").value) || 0,
+            HOut: parseFloat(document.getElementById("hOut").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -91,7 +91,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("heatExchangersCalculationResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("heatExchangersCalculationResult").value = result.data.qDot;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

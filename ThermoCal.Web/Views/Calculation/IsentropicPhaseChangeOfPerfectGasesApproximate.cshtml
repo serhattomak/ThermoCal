@@ -80,13 +80,13 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            TFirst: parseFloat(document.getElementById("tFirst").value),
-            TSecond: parseFloat(document.getElementById("tSecond").value),
-            PFirst: parseFloat(document.getElementById("pFirst").value),
-            PSecond: parseFloat(document.getElementById("pSecond").value),
-            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value),
-            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value),
-            K: parseFloat(document.getElementById("k").value)
+            TFirst: parseFloat(document.getElementById("tFirst").value) || 0,
+            TSecond: parseFloat(document.getElementById("tSecond").value) || 0,
+            PFirst: parseFloat(document.getElementById("pFirst").value) || 0,
+            PSecond: parseFloat(document.getElementById("pSecond").value) || 0,
+            VSpecificFirst: parseFloat(document.getElementById("vSpecificFirst").value) || 0,
+            VSpecificSecond: parseFloat(document.getElementById("vSpecificSecond").value) || 0,
+            K: parseFloat(document.getElementById("k").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -119,13 +119,15 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("isentropicPhaseChangeApproximateResult").value = JSON.stringify(result.data, null, 2);
+                let resultText = `İlk Sıcaklık (T1): ${result.data.tFirst.toFixed(2)}\nİkinci Sıcaklık (T2): ${result.data.tSecond.toFixed(2)}\nİlk Basınç (P1): ${result.data.pFirst.toFixed(2)}\nİkinci Basınç (P2): ${result.data.pSecond.toFixed(2)}\nİlk Özgül Hacim (v1): ${result.data.vSpecificFirst.toFixed(2)}\nİkinci Özgül Hacim (v2): ${result.data.vSpecificSecond.toFixed(2)}`;
+                document.getElementById("isentropicPhaseChangeApproximateResult").value = resultText;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            alert('An error occurred: ' + error.message);
         }
     });
 </script>

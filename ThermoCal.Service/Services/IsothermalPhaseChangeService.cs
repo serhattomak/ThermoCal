@@ -14,8 +14,8 @@ public class IsothermalPhaseChangeService: IIsothermalPhaseChangeService
 
     private IsothermalPhaseChangeResponseDto CalculateIsothermalPhaseChange(IsothermalPhaseChangeRequestDto request)
     {
-        double q = request.Q;
-        double w = request.W;
+        double q = 0;
+        double w = 0;
         double m = request.M;
         double r = request.R;
         double t = request.T;
@@ -23,7 +23,10 @@ public class IsothermalPhaseChangeService: IIsothermalPhaseChangeService
         double vFirst = request.VFirst;
         double vSecond = request.VSecond;
 
-        c=m*r*t;
+        if (c==0)
+        {
+            c=m*r*t;
+        }
         w=c*Math.Log(vSecond/vFirst);
         q = w;
 

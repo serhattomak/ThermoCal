@@ -20,18 +20,6 @@
                         <form class="row g-3" id="isothermalPhaseChangeForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="q" name="Q" placeholder="Isı (Q)">
-                                    <label for="q">Isı (Q)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="w" name="W" placeholder="İş (W)">
-                                    <label for="w">İş (W)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="m" name="M" placeholder="Kütle (M)">
                                     <label for="m">Kütle (M)</label>
                                 </div>
@@ -86,14 +74,12 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Q: parseFloat(document.getElementById("q").value),
-            W: parseFloat(document.getElementById("w").value),
-            M: parseFloat(document.getElementById("m").value),
-            R: parseFloat(document.getElementById("r").value),
-            T: parseFloat(document.getElementById("t").value),
-            C: parseFloat(document.getElementById("c").value),
-            VFirst: parseFloat(document.getElementById("vFirst").value),
-            VSecond: parseFloat(document.getElementById("vSecond").value)
+            M: parseFloat(document.getElementById("m").value) || 0,
+            R: parseFloat(document.getElementById("r").value) || 0,
+            T: parseFloat(document.getElementById("t").value) || 0,
+            C: parseFloat(document.getElementById("c").value) || 0,
+            VFirst: parseFloat(document.getElementById("vFirst").value) || 0,
+            VSecond: parseFloat(document.getElementById("vSecond").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -126,13 +112,14 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("isothermalPhaseChangeResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("isothermalPhaseChangeResult").value = `Isı (Q): ${result.data.q.toFixed(2)}\nİş (W): ${result.data.w.toFixed(2)}\nIsı Kapasitesi (C): ${result.data.c.toFixed(2)}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            alert('An error occurred: ' + error.message);
         }
     });
 </script>

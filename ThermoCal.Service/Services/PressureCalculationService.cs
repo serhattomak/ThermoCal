@@ -17,7 +17,7 @@ public class PressureCalculationService : IPressureCalculationService
         double p = request.P;
         double pAbsolute = request.PAbsolute;
         double pGauge = request.PGauge;
-        double pAtm = request.PAtm;
+        double pAtm = 0;
         double pVacuum = request.PVacuum;
         double density = request.Density;
         double g = request.G;
@@ -28,9 +28,20 @@ public class PressureCalculationService : IPressureCalculationService
             pAtm = density * g * h;
         }
 
-        pAtm = pAbsolute + pVacuum;
-        pVacuum = pAtm - pAbsolute;
-        pGauge = pAbsolute - pAtm;
+        if (pAbsolute != 0 && pVacuum != 0)
+        {
+            pAtm = pAbsolute + pVacuum;
+        }
+
+        if (pAtm != 0 && pAbsolute != 0)
+        {
+            pVacuum = pAtm - pAbsolute;
+        }
+
+        if (pAtm != 0 && pAbsolute != 0)
+        {
+            pGauge = pAbsolute - pAtm;
+        }
 
 
         return new PressureCalculationResponseDto

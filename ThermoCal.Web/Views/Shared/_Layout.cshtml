@@ -217,12 +217,7 @@
                             <i class="bi bi-circle"></i><span>Akış İşi Hesaplama</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="Calculation" asp-action="GibbsEquation">
-                            <i class="bi bi-circle"></i><span>Gibbs Denklemlerinde Hesaplama</span>
-                        </a>
-                    </li>
-                    <li>
+                <li>
                         <a asp-controller="Calculation" asp-action="GravityWork">
                             <i class="bi bi-circle"></i><span>Yerçekimi İşi Hesaplama</span>
                         </a>
@@ -358,11 +353,6 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="Calculation" asp-action="SurroundWork">
-                            <i class="bi bi-circle"></i><span>Çevre İşi Hesaplama</span>
-                        </a>
-                    </li>
-                    <li>
                         <a asp-controller="Calculation" asp-action="ThrottleValve">
                             <i class="bi bi-circle"></i><span>Kısılma Vanası için Hesaplama</span>
                         </a>
@@ -395,7 +385,7 @@
                 </ul>
             </li><!-- End Calculations Nav -->
         </ul>
-        <ul class="sidebar-nav" id="sidebar-nav">
+        @* <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Tablolar</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -423,7 +413,7 @@
         </li>
         </ul>
         </li><!-- End Tables Nav -->
-        </ul>
+        </ul> *@
 
     </aside><!-- End Sidebar-->
 

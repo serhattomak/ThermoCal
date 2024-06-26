@@ -21,7 +21,10 @@ public class IsentropicPhaseChangeOfPerfectGasesExactService : IIsentropicPhaseC
         double r = request.R;
         double s = request.S;
 
-        pR = Math.Exp(s / r);
+        if (pR==0)
+        {
+            pR = Math.Exp(s / r);
+        }
 
         vSpecificR = T / pR;
 

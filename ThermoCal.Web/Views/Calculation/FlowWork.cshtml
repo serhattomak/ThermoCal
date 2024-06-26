@@ -26,12 +26,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="wDot" name="WDot" placeholder="İş Transfer Oranı (Ẇ)">
-                                    <label for="wDot">İş Transfer Oranı (Ẇ)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="mDotIn" name="MDotIn" placeholder="Giriş Kütlesel Debi (ṁin)">
                                     <label for="mDotIn">Giriş Kütlesel Debi (ṁin)</label>
                                 </div>
@@ -105,7 +99,6 @@
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
             QDot: parseFloat(document.getElementById("qDot").value),
-            WDot: parseFloat(document.getElementById("wDot").value),
             MDotIn: parseFloat(document.getElementById("mDotIn").value),
             MDotOut: parseFloat(document.getElementById("mDotOut").value),
             VelocityIn: parseFloat(document.getElementById("velocityIn").value),
@@ -147,7 +140,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("flowWorkResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("flowWorkResult").value = `Work: ${result.data.wDot}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

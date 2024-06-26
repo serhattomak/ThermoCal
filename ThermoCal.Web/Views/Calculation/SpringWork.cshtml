@@ -20,13 +20,13 @@
                         <form class="row g-3" id="springWorkForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="x" name="X" placeholder="Yer Değiştirme (X)">
+                                    <input type="number" step="any" class="form-control" id="x" name="X" placeholder="Yer Değiştirme (X)">
                                     <label for="x">Yer Değiştirme (X)</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="k" name="K" placeholder="Yay Sabiti (K)">
+                                    <input type="number" step="any" class="form-control" id="k" name="K" placeholder="Yay Sabiti (K)">
                                     <label for="k">Yay Sabiti (K)</label>
                                 </div>
                             </div>
@@ -37,9 +37,11 @@
                         </form><!-- End floating Labels Form -->
 
                         <div class="mt-3">
-                            <label for="springWorkCalculationResult" class="form-label">Hesaplama Sonucu</label>
-                            <textarea class="form-control" id="springWorkCalculationResult" rows="4" readonly></textarea>
+                            <label for="springWorkResult" class="form-label">Yapılan İş (W)</label>
+                            <input type="text" class="form-control" id="springWorkResult" readonly>
                         </div>
+
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert"></div>
                     </div>
                 </div>
             </div>
@@ -65,16 +67,36 @@
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-            console.log("API Response:", result);
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error('API returned error: ' + errorText);
+            }
 
-            if (result && result.data) {
-                document.getElementById("springWorkCalculationResult").value = JSON.stringify(result.data, null, 2);
+            const responseText = await response.text();
+            console.log("Raw API Response:", responseText);
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', responseText);
+                throw new Error('Failed to parse JSON response: ' + responseText);
+            }
+
+            console.log("Parsed API Response:", result);
+
+            if (result && result.data && result.data.w !== undefined) {
+                document.getElementById("springWorkResult").value = result.data.w.toFixed(2);
+                document.getElementById("errorAlert").classList.add('d-none');
             } else {
-                alert('Error: API returned unexpected response');
+                console.error('API returned unexpected response:', result);
+                document.getElementById("errorAlert").classList.remove('d-none');
+                document.getElementById("errorAlert").textContent = 'Error: API returned unexpected response';
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            document.getElementById("errorAlert").classList.remove('d-none');
+            document.getElementById("errorAlert").textContent = `Error: ${error.message}`;
         }
     });
 </script>

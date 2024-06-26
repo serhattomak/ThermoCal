@@ -20,24 +20,6 @@
                         <form class="row g-3" id="heatAndHeatTransferForm">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="qConductionDot" name="QConductionDot" placeholder="İletim Isısı Oranı (Q̇Conduction)">
-                                    <label for="qConductionDot">İletim Isısı Oranı (Q̇Conduction)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qConvectionDot" name="QConvectionDot" placeholder="Konveksiyon Isısı Oranı (Q̇Convection)">
-                                    <label for="qConvectionDot">Konveksiyon Isısı Oranı (Q̇Convection)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="qRadiationDot" name="QRadiationDot" placeholder="Radyasyon Isısı Oranı (Q̇Radiation)">
-                                    <label for="qRadiationDot">Radyasyon Isısı Oranı (Q̇Radiation)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="tFirst" name="TFirst" placeholder="İlk Sıcaklık (T1)">
                                     <label for="tFirst">İlk Sıcaklık (T1)</label>
                                 </div>
@@ -128,9 +110,6 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            QConductionDot: parseFloat(document.getElementById("qConductionDot").value),
-            QConvectionDot: parseFloat(document.getElementById("qConvectionDot").value),
-            QRadiationDot: parseFloat(document.getElementById("qRadiationDot").value),
             TFirst: parseFloat(document.getElementById("tFirst").value),
             TSecond: parseFloat(document.getElementById("tSecond").value),
             XFirst: parseFloat(document.getElementById("xFirst").value),
@@ -175,7 +154,7 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("heatAndHeatTransferResult").value = JSON.stringify(result.data, null, 2);
+                document.getElementById("heatAndHeatTransferResult").value = `QConvectionDot: ${result.data.qConvectionDot}\nQConductionDot: ${result.data.qConductionDot}\nQRadiationDot: ${result.data.qRadiationDot}`;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');

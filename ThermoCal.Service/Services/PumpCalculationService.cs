@@ -14,7 +14,7 @@ public class PumpCalculationService : IPumpCalculationService
 
     private PumpCalculationResponseDto CalculatePump(PumpCalculationRequestDto request)
     {
-        double wmDot = request.WMDot;
+        double wmDot = 0;
         double mDot = request.MDot;
         double hFirst = request.HFirst;
         double hSecond = request.HSecond;

@@ -68,11 +68,11 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            S: parseFloat(document.getElementById("s").value),
-            R: parseFloat(document.getElementById("r").value),
-            T: parseFloat(document.getElementById("t").value),
-            Pr: parseFloat(document.getElementById("pr").value),
-            VSpecificR: parseFloat(document.getElementById("vSpecificR").value)
+            S: parseFloat(document.getElementById("s").value) || 0,
+            R: parseFloat(document.getElementById("r").value) || 0,
+            T: parseFloat(document.getElementById("t").value) || 0,
+            Pr: parseFloat(document.getElementById("pr").value) || 0,
+            VSpecificR: parseFloat(document.getElementById("vSpecificR").value) || 0
         };
 
         console.log("Form Data:", formData);
@@ -105,13 +105,18 @@
             console.log("Parsed API Response:", result);
 
             if (result && result.data) {
-                document.getElementById("isentropicPhaseChangeExactResult").value = JSON.stringify(result.data, null, 2);
+                let resultText = `İndirgenmiş Özgül Hacim (vr): ${result.data.vSpecificR.toFixed(2)}`;
+                if (formData.pr === 0) {
+                    resultText += `\nİndirgenmiş Basınç (Pr): ${result.data.pr.toFixed(2)}`;
+                }
+                document.getElementById("isentropicPhaseChangeExactResult").value = resultText;
             } else {
                 console.error('API returned unexpected response:', result);
                 alert('Error: API returned unexpected response');
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            alert('An error occurred: ' + error.message);
         }
     });
 </script>

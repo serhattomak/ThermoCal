@@ -20,12 +20,6 @@
                         <form class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="z" placeholder="Sıkıştırılabilme Çarpanı">
-                                    <label for="z">Sıkıştırılabilme Çarpanı (Z)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
                                     <input type="text" class="form-control" id="pressure" placeholder="Basınç">
                                     <label for="pressure">Basınç (P)</label>
                                 </div>
@@ -86,7 +80,6 @@
 <script type="module">
     document.getElementById("calculate").addEventListener("click", async function () {
         var formData = {
-            Z: parseFloat(document.getElementById("z").value),
             P: parseFloat(document.getElementById("pressure").value),
             T: parseFloat(document.getElementById("T").value),
             R: parseFloat(document.getElementById("R").value),
